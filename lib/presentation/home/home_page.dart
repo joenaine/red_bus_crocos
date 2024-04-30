@@ -15,14 +15,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static const LatLng _pGooglePlex = LatLng(51.169392, 71.449074);
+  static const LatLng _pAstana = LatLng(51.169392, 71.449074);
+  static const LatLng _pAstanaAiland = LatLng(51.1480892, 71.4161325);
   @override
   Widget build(BuildContext context) {
     return CommonScaffoldWidget(
       appBarTitle: LocaleKeys.route.tr(),
-      child: const GoogleMap(
-          initialCameraPosition:
-              CameraPosition(target: _pGooglePlex, zoom: 13)),
+      child: GoogleMap(
+        initialCameraPosition: const CameraPosition(target: _pAstana, zoom: 13),
+        markers: {
+          const Marker(
+              markerId: MarkerId('_currentLocation'),
+              icon: BitmapDescriptor.defaultMarker,
+              position: _pAstana),
+          const Marker(
+              markerId: MarkerId('_ailand'),
+              icon: BitmapDescriptor.defaultMarker,
+              position: _pAstanaAiland)
+        },
+      ),
     );
   }
 }
