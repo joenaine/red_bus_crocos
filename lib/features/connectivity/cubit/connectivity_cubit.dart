@@ -12,16 +12,13 @@ part 'connectivity_cubit.freezed.dart';
 @injectable
 class ConnectivityCubit extends Cubit<ConnectivityState> {
   final IConnectivityRepository _connectivityRepository;
-  StreamSubscription<List<ConnectivityResult>>? _connectivitySubcription;
+  StreamSubscription<ConnectivityResult>? _connectivitySubcription;
 
   ConnectivityCubit(this._connectivityRepository)
       : super(const ConnectivityState(hasConnection: false)) {
     _connectivitySubcription =
         _connectivityRepository.getConnectivityInfo().listen((result) {
-      emit(ConnectivityState(
-          hasConnection: result !=
-              ConnectivityResult.values
-                  .where((element) => element != ConnectivityResult.none)));
+      emit(ConnectivityState(hasConnection: result != ConnectivityResult.none));
     });
   }
 

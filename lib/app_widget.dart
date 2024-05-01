@@ -18,6 +18,9 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<ConnectivityCubit>(
+          create: (context) => getIt<ConnectivityCubit>(),
+        ),
         BlocProvider<UserLocationBloc>(
           create: (context) => UserLocationBloc(
             getIt<IUserLocationRepository>(),

@@ -7,6 +7,7 @@ import 'package:red_bus_crocos_project/core/theme/colors.dart';
 import 'package:red_bus_crocos_project/core/utils/bloc_observer.dart';
 import 'package:red_bus_crocos_project/core/utils/translation.dart';
 import 'package:red_bus_crocos_project/generated/codegen_loader.g.dart';
+import 'package:red_bus_crocos_project/injection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:red_bus_crocos_project/core/theme/theme_global_var.dart'
     as global;
@@ -14,6 +15,7 @@ import 'package:red_bus_crocos_project/core/theme/theme_global_var.dart'
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  await configureInjection();
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: AppColors.red,

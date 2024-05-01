@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:injectable/injectable.dart';
 import 'package:red_bus_crocos_project/domain/location/i_user_location_repository.dart';
 import 'package:red_bus_crocos_project/domain/location/user_location.dart';
 import 'package:red_bus_crocos_project/domain/location/user_location_data_state.dart';
@@ -15,6 +17,7 @@ part 'user_location_event.dart';
 part 'user_location_state.dart';
 part 'user_location_bloc.freezed.dart';
 
+@injectable
 class UserLocationBloc extends Bloc<UserLocationEvent, UserLocationState> {
   final IUserLocationRepository _userLocationRepository;
   final ConnectivityCubit _connectivityCubit;
@@ -32,6 +35,8 @@ class UserLocationBloc extends Bloc<UserLocationEvent, UserLocationState> {
     _connectivitySubscription = _connectivityCubit.stream.listen((event) {
       add(const UserLocationEvent.getLocation(silent: true));
     });
+
+    setEventHandlers();
   }
 
   void setEventHandlers() {
@@ -65,9 +70,11 @@ class UserLocationBloc extends Bloc<UserLocationEvent, UserLocationState> {
           onTimeout: () => const UserLocationFailure.unableToGet(),
         );
 
-    if (location.data != null) {
+    if (location is UserLocation) {
+      log(location.toString());
       final isLocationDifferent =
-          await _userLocationRepository.isLocationDifferent(location.data!);
+          await _userLocationRepository.isLocationDifferent(location);
+
       if (isLocationDifferent) {
         add(
           UserLocationEvent.parseLocation(
@@ -75,8 +82,7 @@ class UserLocationBloc extends Bloc<UserLocationEvent, UserLocationState> {
             silent: false,
           ),
         );
-      }
-      {
+      } else {
         add(
           UserLocationEvent.parseLocation(
             failureOrUserLocation: location,
@@ -116,13 +122,14 @@ class UserLocationBloc extends Bloc<UserLocationEvent, UserLocationState> {
           );
         },
       );
-    } else if (event.failureOrUserLocation.data != null) {
-      var location = event.failureOrUserLocation.data;
+    } else {
+      log(event.failureOrUserLocation.toString());
+      var location = event.failureOrUserLocation as UserLocation;
       String userAddress = 'Unable to locate';
 
       //INFO: error when internet is not available
       final List<Placemark> placemarks = await placemarkFromCoordinates(
-        location!.latitude,
+        location.latitude,
         location.longitude,
       ).onError(
         (error, stackTrace) => [],
@@ -155,6 +162,7 @@ class UserLocationBloc extends Bloc<UserLocationEvent, UserLocationState> {
           const Duration(seconds: 60),
           onTimeout: () => const UserLocationFailure.unableToGet(),
         );
+    // log(location.data.toString());
 
     add(UserLocationEvent.parseLocation(failureOrUserLocation: location));
   }
