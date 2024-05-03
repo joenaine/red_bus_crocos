@@ -167,13 +167,13 @@ class Lmsg {
 //   }
 
 //   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['y'] = this.y;
-//     data['x'] = this.x;
-//     data['c'] = this.c;
-//     data['z'] = this.z;
-//     data['s'] = this.s;
-//     data['sc'] = this.sc;
+//     final Map<String, dynamic> data = <String, dynamic>{};
+//     data['y'] = y;
+//     data['x'] = x;
+//     data['c'] = c;
+//     data['z'] = z;
+//     data['s'] = s;
+//     data['sc'] = sc;
 //     return data;
 //   }
 // }

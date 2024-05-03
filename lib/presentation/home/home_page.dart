@@ -11,7 +11,7 @@ import 'package:red_bus_crocos_project/application/bus_location/bus_location_blo
 import 'package:red_bus_crocos_project/application/location/user_location_bloc.dart';
 import 'package:red_bus_crocos_project/features/connectivity/cubit/connectivity_cubit.dart';
 import 'package:red_bus_crocos_project/generated/locale_keys.g.dart';
-import 'package:red_bus_crocos_project/infrastructure/core/dio_repo.dart';
+import 'package:red_bus_crocos_project/infrastructure/bus_location/bus_location_repository.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffold_widget.dart';
 
 @RoutePage()
@@ -28,21 +28,17 @@ class _HomePageState extends State<HomePage> {
   // final LatLng _busLocation = const LatLng(51.1107, 71.5327233);
   late Timer _timer;
 
+  double zoomValue = 12;
+
   @override
   void initState() {
     super.initState();
 
-    // WidgetsBinding.instance.addPostFrameCallback((_) async {
-    //   await DioRepository().getBus();
-    // });
     _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
       context
           .read<BusLocationBloc>()
           .add(const BusLocationEvent.getBusLocation());
     });
-    // context
-    //     .read<BusLocationBloc>()
-    //     .add(const BusLocationEvent.getBusLocation());
   }
 
   @override
@@ -63,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                 initial: (_) => const SizedBox(),
                 loading: (_) => GoogleMap(
                   initialCameraPosition:
-                      const CameraPosition(target: _pAstana, zoom: 9),
+                      CameraPosition(target: _pAstana, zoom: zoomValue),
                   markers: {
                     const Marker(
                         markerId: MarkerId('_currentLocation'),
@@ -82,8 +78,8 @@ class _HomePageState extends State<HomePage> {
                       return busLocationState.map(
                         initial: (_) {
                           return GoogleMap(
-                            initialCameraPosition:
-                                const CameraPosition(target: _pAstana, zoom: 9),
+                            initialCameraPosition: CameraPosition(
+                                target: _pAstana, zoom: zoomValue),
                             markers: {
                               const Marker(
                                   markerId: MarkerId('_currentLocation'),
@@ -107,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                             initialCameraPosition: CameraPosition(
                                 target: LatLng(e.userLocation.latitude,
                                     e.userLocation.longitude),
-                                zoom: 9),
+                                zoom: zoomValue),
                             markers: {
                               const Marker(
                                   markerId: MarkerId('_currentLocation'),

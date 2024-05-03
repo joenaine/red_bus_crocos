@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:red_bus_crocos_project/domain/bus_location/bus_location_dto.dart';
 
-class DioRepository {
+class BusLocationRepository {
   static Future<String> getEid() async {
     String tok =
         'd610c5141811401bc0eef050fe19b6966A4F9085940B4FE383BF54910B3BB971D1A55EE7';
@@ -40,7 +40,7 @@ class DioRepository {
     }
   }
 
-  Future<TrackingModel?> getBus() async {
+  Future<Object?> getBus() async {
     String url =
         'https://hst-api.wialon.com/wialon/ajax.html?svc=core/search_item';
 
