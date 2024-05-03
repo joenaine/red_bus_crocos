@@ -136,7 +136,9 @@ class _SchedulePageState extends State<SchedulePage> {
                     },
                   ),
                 ),
-              )
+              ),
+              const SizedBox(height: 30),
+
             ],
           ),
         ),

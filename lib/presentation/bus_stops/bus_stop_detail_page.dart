@@ -31,8 +31,6 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
   int selectedIndex = 0;
 
   Future<ObjectModel> fetchThisOne() async {
-    int a=21;
-    double v =double.parse(a.toString());
 
     try {
       final client = Dio();
