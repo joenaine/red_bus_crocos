@@ -105,8 +105,8 @@ class _HomePageState extends State<HomePage> {
                         busLoaded: (busLocation) {
                           return GoogleMap(
                             initialCameraPosition: CameraPosition(
-                                target: LatLng(busLocation.latitude!,
-                                    busLocation.longitude!),
+                                target: LatLng(e.userLocation.latitude,
+                                    e.userLocation.longitude),
                                 zoom: 9),
                             markers: {
                               const Marker(
@@ -127,8 +127,8 @@ class _HomePageState extends State<HomePage> {
                                   markerId: const MarkerId('_busLocation'),
                                   icon: BitmapDescriptor.defaultMarkerWithHue(
                                       BitmapDescriptor.hueGreen),
-                                  position: LatLng(busLocation.latitude!,
-                                      busLocation.longitude!))
+                                  position: LatLng(busLocation.latitude ?? 0,
+                                      busLocation.longitude ?? 0))
                             },
                           );
                         },

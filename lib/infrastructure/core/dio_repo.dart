@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:red_bus_crocos_project/domain/bus_location/bus_location_dto.dart';
 
 class DioRepository {
-  static Future<String> getData() async {
+  static Future<String> getEid() async {
     String tok =
         'd610c5141811401bc0eef050fe19b6966A4F9085940B4FE383BF54910B3BB971D1A55EE7';
     String url = 'https://hst-api.wialon.com/wialon/ajax.html?svc=token/login';
@@ -28,9 +28,9 @@ class DioRepository {
           headers: {'Content-Type': 'application/json'},
         ),
       );
-      log(response.data.toString());
+      // log(response.data.toString());
       if (response.statusCode == 200 || response.statusCode == 201) {
-        var userRes = response.data as Map;
+        var userRes = response.data['eid'];
         return userRes.toString();
       } else {
         return 'false';
@@ -45,13 +45,14 @@ class DioRepository {
         'https://hst-api.wialon.com/wialon/ajax.html?svc=core/search_item';
 
     Dio dio = Dio();
+    String? eid = await getEid();
 
     try {
       Response response = await dio.get(
         url,
         queryParameters: {
           "params": "{\"id\": 28097339,\"flags\":1025}",
-          "sid": "060b94616d093f4dcdcdbe750523930f",
+          "sid": eid,
         },
         options: Options(
           headers: {'Content-Type': 'application/json'},
@@ -59,7 +60,8 @@ class DioRepository {
       );
 
       log('Status Code: ${response.statusCode}');
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 &&
+          response.data.toString() != '{error: 1}') {
         log('Response Data: ${response.data}');
         var userRes = TrackingModel.fromJson(response.data);
         log('Position X: ${userRes.item!.pos!.x}');

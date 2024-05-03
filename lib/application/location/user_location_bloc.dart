@@ -100,7 +100,8 @@ class UserLocationBloc extends Bloc<UserLocationEvent, UserLocationState> {
     Emitter<UserLocationState> emitter,
   ) async {
     if (event.failureOrUserLocation is UserLocationFailure) {
-      event.failureOrUserLocation.error?.map(
+      var failure = event.failureOrUserLocation as UserLocationFailure;
+      failure.map(
         unexpected: (failure) {
           emitter(
             UserLocationState.loadFailure(failure),

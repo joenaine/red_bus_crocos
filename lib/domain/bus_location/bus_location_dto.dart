@@ -57,6 +57,55 @@ class Item {
   }
 }
 
+class Pos {
+  int? t;
+  int? f;
+  int? lc;
+  double? y;
+  double? x;
+  int? c;
+  double? z;
+  int? s;
+  int? sc;
+
+  Pos(
+      {this.t,
+      this.f,
+      this.lc,
+      this.y,
+      this.x,
+      this.c,
+      this.z,
+      this.s,
+      this.sc});
+
+  Pos.fromJson(Map<String, dynamic> json) {
+    t = json['t'];
+    f = json['f'];
+    lc = json['lc'];
+    y = json['y'];
+    x = json['x'];
+    c = json['c'];
+    z = json['z'];
+    s = json['s'];
+    sc = json['sc'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['t'] = t;
+    data['f'] = f;
+    data['lc'] = lc;
+    data['y'] = y;
+    data['x'] = x;
+    data['c'] = c;
+    data['z'] = z;
+    data['s'] = s;
+    data['sc'] = sc;
+    return data;
+  }
+}
+
 class Lmsg {
   int? t;
   int? f;
@@ -98,39 +147,39 @@ class Lmsg {
   }
 }
 
-class Pos {
-  double? y;
-  double? x;
-  int? c;
-  double? z;
-  int? s;
-  int? sc;
+// class Pos {
+//   double? y;
+//   double? x;
+//   int? c;
+//   double? z;
+//   int? s;
+//   int? sc;
 
-  Pos({this.y, this.x, this.c, this.z, this.s, this.sc});
+//   Pos({this.y, this.x, this.c, this.z, this.s, this.sc});
 
-  Pos.fromJson(Map<String, dynamic> json) {
-    y = json['y'];
-    x = json['x'];
-    c = json['c'];
-    z = json['z'];
-    s = json['s'];
-    sc = json['sc'];
-  }
+//   Pos.fromJson(Map<String, dynamic> json) {
+//     y = json['y'];
+//     x = json['x'];
+//     c = json['c'];
+//     z = json['z'];
+//     s = json['s'];
+//     sc = json['sc'];
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['y'] = y;
-    data['x'] = x;
-    data['c'] = c;
-    data['z'] = z;
-    data['s'] = s;
-    data['sc'] = sc;
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['y'] = this.y;
+//     data['x'] = this.x;
+//     data['c'] = this.c;
+//     data['z'] = this.z;
+//     data['s'] = this.s;
+//     data['sc'] = this.sc;
+//     return data;
+//   }
+// }
 
 class P {
-  int? hdop;
+  double? hdop;
   int? ioCaused;
   int? movementSens;
   int? power;
