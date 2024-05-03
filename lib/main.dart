@@ -29,7 +29,7 @@ Future<void> main() async {
           (shared.get('locale')! as String).substring(0, 2),
     );
   }
-  Bloc.observer = RedBusBlocObserver();
+  // Bloc.observer = RedBusBlocObserver();
   runApp(
     EasyLocalization(
       supportedLocales: supportedLocales,

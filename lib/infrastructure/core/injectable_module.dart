@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,4 +9,6 @@ abstract class InjectableModule {
   Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
   @lazySingleton
   Connectivity get connectivity => Connectivity();
+  @lazySingleton
+  Dio get dio => Dio();
 }
