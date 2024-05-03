@@ -10,6 +10,8 @@ import 'package:red_bus_crocos_project/injection.dart';
 import 'package:red_bus_crocos_project/presentation/routes/route_observer.dart';
 import 'package:red_bus_crocos_project/presentation/routes/router.dart';
 
+import 'application/sight/sights_bloc.dart';
+
 class AppWidget extends StatelessWidget {
   final _appRouter = AppRouter();
 
@@ -30,6 +32,9 @@ class AppWidget extends StatelessWidget {
         ),
         BlocProvider<BusLocationBloc>(
             create: (context) => getIt<BusLocationBloc>()),
+
+        BlocProvider<SightsBloc>(
+            create: (context) => SightsBloc()..add(FetchSights()),lazy: false,),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

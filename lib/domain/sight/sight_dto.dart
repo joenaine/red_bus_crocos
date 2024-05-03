@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 class CategoriesModel {
   final String? name;
   final String? description;
-  final List<ObjectModel>? objects;
+  final List<SightModel>? objects;
   CategoriesModel({
     this.name,
     this.description,
@@ -18,11 +18,11 @@ class CategoriesModel {
       name: map['name'],
       description: map['description'],
       objects: isJson
-          ? List<ObjectModel>.from(
-          json.decode(map['objects'])?.map((x) => ObjectModel.fromMap(x)))
+          ? List<SightModel>.from(
+          json.decode(map['objects'])?.map((x) => SightModel.fromMap(x)))
           : map['objects'] != null
-          ? List<ObjectModel>.from(
-          map['objects']?.map((x) => ObjectModel.fromMap(x)))
+          ? List<SightModel>.from(
+          map['objects']?.map((x) => SightModel.fromMap(x)))
           : null,
     );
   }
@@ -50,7 +50,7 @@ class CategoriesModel {
 }
 
 
-class ObjectModel {
+class SightModel {
   String? obj_id;
   String? post_id;
   String? object_name;
@@ -69,7 +69,7 @@ class ObjectModel {
   String? how_use;
   String? how_reach;
 
-   String? popup_description;
+  String? popup_description;
   String? travel_time;
   String? obj_img;
   bool? nonresident;
@@ -78,7 +78,7 @@ class ObjectModel {
   String? description;
   List<String>? photos;
 
-  ObjectModel({
+  SightModel({
     this.obj_id,
     this.post_id,
     this.object_name,
@@ -108,8 +108,8 @@ class ObjectModel {
 
 
 
-  factory ObjectModel.fromMap(Map<String, dynamic> map) {
-    return ObjectModel(
+  factory SightModel.fromMap(Map<String, dynamic> map) {
+    return SightModel(
       obj_id: map['obj_id'].toString(),
       post_id: map['post_id'].toString(),
       object_name: map['object_name'].toString(),
@@ -147,8 +147,8 @@ class ObjectModel {
   }
 
 
-  factory ObjectModel.fromJson(String source) =>
-      ObjectModel.fromMap(json.decode(source));
+  factory SightModel.fromJson(String source) =>
+      SightModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -159,7 +159,7 @@ class ObjectModel {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is ObjectModel &&
+    return other is SightModel &&
         other.obj_id == obj_id &&
         other.post_id == post_id &&
         other.object_name == object_name &&

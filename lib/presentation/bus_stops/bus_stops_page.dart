@@ -1,53 +1,23 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:red_bus_crocos_project/core/theme/colors.dart';
 import 'package:red_bus_crocos_project/generated/locale_keys.g.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffold_widget.dart';
 import 'package:red_bus_crocos_project/presentation/routes/router.dart';
 
+import '../../application/sight/sights_bloc.dart';
 import '../../core/constants/app_assets.dart';
-import 'bus_stop_detail_page.dart';
-import 'models.dart';
+import '../../domain/sight/sight_dto.dart';
 
 @RoutePage()
 class BusStopsPage extends StatelessWidget {
   const BusStopsPage({super.key});
-
-  Future<List<CategoriesModel>> fetchCategories() async {
-    try {
-      final client = Dio();
-      final result = await client
-          .post('https://ais.citypass.kz/app/v1/objects/cat-list', data: {
-        "api_key": "rTD6psMNcuMfewz8YAv825X",
-        "project_id": "1",
-        "lang": "ru"
-      });
-
-      if (result.statusCode == 200) {
-        List sortedList = [];
-        sortedList
-            .addAll((result.data['data']['categories'] as List).getRange(0, 2));
-
-        sortedList
-            .addAll((result.data['data']['categories'] as List).getRange(3, 4));
-
-        return sortedList
-            .map((route) => CategoriesModel.fromMap(route))
-            .toList();
-      } else {
-        throw Exception('Error on fetchCategories: ${result.statusCode}');
-      }
-    } on Exception catch (e) {
-      print(e);
-      throw Exception('Error: $e');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,36 +28,43 @@ class BusStopsPage extends StatelessWidget {
           left: 20,
           right: 20,
         ),
-        child: FutureBuilder<List<CategoriesModel>>(
-            future: fetchCategories(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final CategoriesModel category = snapshot.data!.first;
-                return ListView.separated(
-                  itemBuilder: (context, index) {
-                    final data = category.objects![index];
-                    return BusStopItemWidget(
-                        onTap: () {
-                          context.router.push(const BusStopDetailRoute());
-                        },
-                        index: index,
-                        title: data.object_name ?? '',
-                        imageUrl: data.obj_img ?? '',
-                        subTitle: data.popup_description ?? '');
-                  },
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(
-                      height: 20,
-                    );
-                  },
-                  itemCount: category.objects?.length ?? 0,
-                );
-              } else {
+        child: BlocBuilder<SightsBloc, SightsState>(
+          builder: (context, state) {
+            switch (state) {
+              case SightsInitial():
                 return const Center(
-                  child: Text('Empty'),
+                  child: Text('Loading'),
                 );
-              }
-            }),
+              case SightsError():
+                return const Center(
+                  child: Text('Error'),
+                );
+              case SightsLoaded():
+                {
+                  final List<SightModel> sights = state.data;
+                  return ListView.separated(
+                    itemBuilder: (context, index) {
+                      final data = sights[index];
+                      return BusStopItemWidget(
+                          onTap: () {
+                            context.router.push(const BusStopDetailRoute());
+                          },
+                          index: index,
+                          title: data.object_name ?? '',
+                          imageUrl: data.obj_img ?? '',
+                          subTitle: data.popup_description ?? '');
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        height: 20,
+                      );
+                    },
+                    itemCount: sights.length ?? 0,
+                  );
+                }
+            }
+          },
+        ),
       ),
     );
   }
