@@ -40,7 +40,7 @@ class BusLocationRepository {
     }
   }
 
-  Future<Object?> getBus() async {
+  Future<Pos?> getBus() async {
     String url =
         'https://hst-api.wialon.com/wialon/ajax.html?svc=core/search_item';
 
@@ -63,8 +63,8 @@ class BusLocationRepository {
       if (response.statusCode == 200 &&
           response.data.toString() != '{error: 1}') {
         log('Response Data: ${response.data}');
-        var userRes = TrackingModel.fromJson(response.data);
-        log('Position X: ${userRes.item!.pos!.x}');
+        var userRes = Pos.fromJson(response.data['item']['pos']);
+        log('Position X: ${userRes.x}');
         return userRes;
       } else {
         log('Error: Received status code ${response.statusCode}');
