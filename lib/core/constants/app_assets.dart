@@ -5,6 +5,11 @@ abstract class AppAssets {
 
 class _Images {
   const _Images();
+
+  final String enGlobe = 'assets/icons/en_globe.png';
+  final String kzGlobe = 'assets/icons/kz_globe.png';
+  final String ruGlobe = 'assets/icons/ru_globe.png';
+
 }
 
 class _Svg {
@@ -15,4 +20,5 @@ class _Svg {
   final String shoppingCart = 'assets/icons/shopping_cart.svg';
   final String ticket = 'assets/icons/ticket.svg';
   final String timer = 'assets/icons/timer.svg';
+  final String arrowRight = 'assets/icons/arrow_right.svg';
 }

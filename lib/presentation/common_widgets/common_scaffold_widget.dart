@@ -7,6 +7,7 @@ import 'package:red_bus_crocos_project/presentation/common_widgets/text_sizes.da
 
 class CommonScaffoldWidget extends StatelessWidget {
   const CommonScaffoldWidget({super.key, this.appBarTitle = '', this.child});
+
   final String? appBarTitle;
   final Widget? child;
 
@@ -46,7 +47,7 @@ class CommonScaffoldWidget extends StatelessWidget {
           topLeft: Radius.circular(30.0),
           topRight: Radius.circular(30.0),
         ),
-        child: Container(
+        child: DecoratedBox(
           decoration: BoxDecoration(
             color: theme.scaffoldBackgroundColor,
           ),

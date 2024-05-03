@@ -81,7 +81,8 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
           children: _screens,
         ),
       ),
-      bottomSheet: SafeArea(
+      extendBody: true,
+      bottomNavigationBar: SafeArea(
         bottom: _isVisible,
         child: AnimatedContainer(
           height: _isVisible ? kBottomNavigationBarHeight + 30 : 0,
