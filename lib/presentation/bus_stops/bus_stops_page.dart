@@ -47,7 +47,8 @@ class BusStopsPage extends StatelessWidget {
                       final data = sights[index];
                       return BusStopItemWidget(
                           onTap: () {
-                            context.router.push(const BusStopDetailRoute());
+                            context.router
+                                .push(BusStopDetailRoute(id: data.obj_id!));
                           },
                           index: index,
                           title: data.object_name ?? '',

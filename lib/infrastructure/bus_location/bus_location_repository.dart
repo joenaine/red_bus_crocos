@@ -59,19 +59,19 @@ class BusLocationRepository {
         ),
       );
 
-      log('Status Code: ${response.statusCode}');
+      // log('Status Code: ${response.statusCode}');
       if (response.statusCode == 200 &&
           response.data.toString() != '{error: 1}') {
-        log('Response Data: ${response.data}');
+        // log('Response Data: ${response.data}');
         var userRes = Pos.fromJson(response.data['item']['pos']);
         log('Position X: ${userRes.x}');
         return userRes;
       } else {
-        log('Error: Received status code ${response.statusCode}');
+        // log('Error: Received status code ${response.statusCode}');
         return null;
       }
     } catch (e) {
-      log('Exception caught: $e');
+      // log('Exception caught: $e');
       return null;
     }
   }

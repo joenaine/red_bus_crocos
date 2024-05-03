@@ -22,9 +22,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     BusStopDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<BusStopDetailRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const BusStopDetailPage(),
+        child: BusStopDetailPage(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
     BusStopsRoute.name: (routeData) {
@@ -70,16 +74,40 @@ class BottomNavigationRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [BusStopDetailPage]
-class BusStopDetailRoute extends PageRouteInfo<void> {
-  const BusStopDetailRoute({List<PageRouteInfo>? children})
-      : super(
+class BusStopDetailRoute extends PageRouteInfo<BusStopDetailRouteArgs> {
+  BusStopDetailRoute({
+    Key? key,
+    required String id,
+    List<PageRouteInfo>? children,
+  }) : super(
           BusStopDetailRoute.name,
+          args: BusStopDetailRouteArgs(
+            key: key,
+            id: id,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'BusStopDetailRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<BusStopDetailRouteArgs> page =
+      PageInfo<BusStopDetailRouteArgs>(name);
+}
+
+class BusStopDetailRouteArgs {
+  const BusStopDetailRouteArgs({
+    this.key,
+    required this.id,
+  });
+
+  final Key? key;
+
+  final String id;
+
+  @override
+  String toString() {
+    return 'BusStopDetailRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for

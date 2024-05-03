@@ -15,7 +15,8 @@ import '../common_widgets/common_scaffold_widget.dart';
 
 @RoutePage()
 class BusStopDetailPage extends StatefulWidget {
-  const BusStopDetailPage({super.key});
+  const BusStopDetailPage({super.key, required this.id});
+  final String id;
 
   @override
   State<BusStopDetailPage> createState() => _BusStopDetailPageState();
@@ -45,7 +46,8 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 30, left: 20, right: 20),
+                      padding:
+                          const EdgeInsets.only(top: 30, left: 20, right: 20),
                       child: Row(
                         children: [
                           SizedBox(
@@ -55,10 +57,10 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
                               decoration: BoxDecoration(
                                   color: AppColors.red,
                                   borderRadius: BorderRadius.circular(29)),
-                              child: Center(
+                              child: const Center(
                                 child: Text(
                                   '1',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       color: AppColors.white,
                                       fontSize: 24,
                                       height: 1.2),
@@ -112,7 +114,7 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Аудиогид',
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w600),
@@ -134,14 +136,14 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
                                           'https://www.mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/Samples/AFsp/M1F1-Alaw-AFsp.wav'));
                                       print('gfda');
                                     },
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.play_circle_outline,
                                       color: AppColors.red,
                                       size: 37,
                                     ),
                                   ),
                                   const SizedBox(width: 15),
-                                  Flexible(
+                                  const Flexible(
                                     child: Column(
                                       children: [
                                         Text('Аудиодорожка'),

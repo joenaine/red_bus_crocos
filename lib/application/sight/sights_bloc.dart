@@ -12,9 +12,10 @@ class SightsBloc extends Bloc<SightsEvent, SightsState> {
   final SightsRepository repository = SightsRepository();
 
   SightsBloc() : super(SightsInitial()) {
-    on<SightsEvent>((event, emit) async{
-      switch (event){
-        case FetchSights():await _fetchSights(emit);
+    on<SightsEvent>((event, emit) async {
+      switch (event) {
+        case FetchSights():
+          await _fetchSights(emit);
       }
     });
   }
@@ -23,5 +24,4 @@ class SightsBloc extends Bloc<SightsEvent, SightsState> {
     final List<SightModel> data = await repository.fetchSightsThumbs();
     emit(SightsLoaded(data));
   }
-
 }
