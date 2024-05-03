@@ -10,12 +10,14 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:red_bus_crocos_project/application/bus_location/bus_location_bloc.dart';
 import 'package:red_bus_crocos_project/application/location/user_location_bloc.dart';
+import 'package:red_bus_crocos_project/application/polyline_markers/polyline_markers_bloc.dart';
 import 'package:red_bus_crocos_project/application/sight/sights_bloc.dart';
 import 'package:red_bus_crocos_project/core/constants/app_variables.dart';
 import 'package:red_bus_crocos_project/core/theme/colors.dart';
 import 'package:red_bus_crocos_project/features/connectivity/cubit/connectivity_cubit.dart';
 import 'package:red_bus_crocos_project/generated/locale_keys.g.dart';
 import 'package:red_bus_crocos_project/infrastructure/bus_location/bus_location_repository.dart';
+import 'package:red_bus_crocos_project/infrastructure/sights/sights_local_data.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffold_widget.dart';
 
 @RoutePage()
@@ -27,7 +29,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static const LatLng _pAstana = LatLng(51.169392, 71.449074);
+  static const LatLng _pAstana = LatLng(51.1323332, 71.4237316);
   static const LatLng _pAstanaAiland = LatLng(51.1480892, 71.4161325);
   // final LatLng _busLocation = const LatLng(51.1107, 71.5327233);
   late Timer _timer;
@@ -79,8 +81,8 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
                 loadSuccess: (e) {
-                  return BlocBuilder<SightsBloc, SightsState>(
-                    builder: (context, sightsState) {
+                  return BlocBuilder<PolylineMarkersBloc, PolylineMarkersState>(
+                    builder: (context, polylineMarkersState) {
                       return BlocBuilder<BusLocationBloc, BusLocationState>(
                         builder: (context, busLocationState) {
                           log(busLocationState.toString());
@@ -90,16 +92,17 @@ class _HomePageState extends State<HomePage> {
                                 initialCameraPosition: CameraPosition(
                                     target: _pAstana, zoom: zoomValue),
                                 markers: {
-                                  if (sightsState is SightsLoaded)
-                                    ...sightsState.data.map(
-                                      (e) => Marker(
-                                          markerId:
-                                              MarkerId(e.obj_id.toString()),
-                                          icon: BitmapDescriptor.defaultMarker,
-                                          position: LatLng(
-                                              double.parse(e.latitude!),
-                                              double.parse(e.longitude!))),
-                                    ),
+                                  // if (sightsState is SightsLoaded)
+                                  //   ...sightsState.data.map(
+                                  //     (e) => Marker(
+                                  //         markerId:
+                                  //             MarkerId(e.obj_id.toString()),
+                                  //         icon: BitmapDescriptor
+                                  //             .defaultMarker,
+                                  //         position: LatLng(
+                                  //             double.parse(e.latitude!),
+                                  //             double.parse(e.longitude!))),
+                                  //   ),
                                   Marker(
                                       markerId: const MarkerId('_myLocation'),
                                       icon:
@@ -111,55 +114,90 @@ class _HomePageState extends State<HomePage> {
                               );
                             },
                             busLoaded: (busLocation) {
-                              return GoogleMap(
-                                onMapCreated: (controller) {
-                                  _mapController.complete(controller);
-                                  getPolylinePoints().then((coordinates) =>
-                                      generatePolylineFromPoints(coordinates));
-                                },
-                                initialCameraPosition: CameraPosition(
-                                    target: LatLng(e.userLocation.latitude,
-                                        e.userLocation.longitude),
-                                    zoom: zoomValue),
-                                markers: {
-                                  if (sightsState is SightsLoaded)
-                                    ...sightsState.data.map(
-                                      (e) => Marker(
+                              return Stack(
+                                children: [
+                                  GoogleMap(
+                                    onMapCreated: (controller) {
+                                      _mapController.complete(controller);
+                                    },
+                                    initialCameraPosition: CameraPosition(
+                                        target: _pAstana, zoom: zoomValue),
+                                    markers: {
+                                      ...sightSeeingList.map(
+                                        (e) => Marker(
+                                            markerId:
+                                                MarkerId(e.latitude.toString()),
+                                            icon:
+                                                BitmapDescriptor.defaultMarker,
+                                            position: LatLng(
+                                                e.latitude, e.longitude)),
+                                      ),
+                                      // if (sightsState is SightsLoaded)
+                                      //   ...sightsState.data.map(
+                                      //     (e) => Marker(
+                                      //         markerId:
+                                      //             MarkerId(e.obj_id.toString()),
+                                      //         icon: BitmapDescriptor.defaultMarker,
+                                      //         position: LatLng(
+                                      //             double.parse(e.latitude!),
+                                      //             double.parse(e.longitude!))),
+                                      //   ),
+                                      Marker(
                                           markerId:
-                                              MarkerId(e.obj_id.toString()),
-                                          icon: BitmapDescriptor.defaultMarker,
+                                              const MarkerId('_myLocation'),
+                                          icon: BitmapDescriptor
+                                              .defaultMarkerWithHue(
+                                                  BitmapDescriptor.hueCyan),
                                           position: LatLng(
-                                              double.parse(e.latitude!),
-                                              double.parse(e.longitude!))),
-                                    ),
-                                  Marker(
-                                      onTap: () {
-                                        showModalBottomSheet(
-                                          context: context,
-                                          builder: (context) {
-                                            return Container(
-                                              height: 200,
-                                              color: Colors.white,
-                                            );
-                                          },
-                                        );
-                                      },
-                                      markerId: const MarkerId('_myLocation'),
-                                      icon:
-                                          BitmapDescriptor.defaultMarkerWithHue(
-                                              BitmapDescriptor.hueCyan),
-                                      position: LatLng(e.userLocation.latitude,
-                                          e.userLocation.longitude)),
-                                  Marker(
-                                      markerId: const MarkerId('_busLocation'),
-                                      icon:
-                                          BitmapDescriptor.defaultMarkerWithHue(
-                                              BitmapDescriptor.hueGreen),
-                                      position: LatLng(
-                                          busLocation.latitude ?? 0,
-                                          busLocation.longitude ?? 0))
-                                },
-                                polylines: Set<Polyline>.of(polylines.values),
+                                              e.userLocation.latitude,
+                                              e.userLocation.longitude)),
+                                      Marker(
+                                          markerId:
+                                              const MarkerId('_busLocation'),
+                                          icon: BitmapDescriptor
+                                              .defaultMarkerWithHue(
+                                                  BitmapDescriptor.hueGreen),
+                                          position: LatLng(
+                                              busLocation.latitude ?? 0,
+                                              busLocation.longitude ?? 0))
+                                    },
+                                    polylines: Set<Polyline>.of(
+                                        polylineMarkersState
+                                                .polylines?.values ??
+                                            {}),
+                                  ),
+                                  Positioned(
+                                      right: 10,
+                                      bottom: kBottomNavigationBarHeight + 40,
+                                      child: InkWell(
+                                        onTap: () {
+                                          _cameraToPosition(LatLng(
+                                              e.userLocation.latitude,
+                                              e.userLocation.longitude));
+                                        },
+                                        child: const CircleAvatar(
+                                          radius: 30,
+                                          backgroundColor: AppColors.lightRed,
+                                          child: Icon(Icons.my_location),
+                                        ),
+                                      )),
+                                  Positioned(
+                                      right: 10,
+                                      bottom: kBottomNavigationBarHeight + 120,
+                                      child: InkWell(
+                                        onTap: () {
+                                          _cameraToPosition(LatLng(
+                                              busLocation.latitude ?? 0,
+                                              busLocation.longitude ?? 0));
+                                        },
+                                        child: const CircleAvatar(
+                                          radius: 30,
+                                          backgroundColor:
+                                              AppColors.backgroundDark,
+                                          child: Icon(Icons.bus_alert_sharp),
+                                        ),
+                                      ))
+                                ],
                               );
                             },
                           );
