@@ -21,9 +21,8 @@ class BusLocationBloc extends Bloc<BusLocationEvent, BusLocationState> {
     on<BusLocationEvent>((event, emit) async {
       await event.map(
         getBusLocation: (_) async {
-          dynamic trackingItem = await dioRepository.getBus();
-          emit(BusLocationState.busLoaded(
-              trackingItem?.item?.pos?.x, trackingItem?.item?.pos?.y));
+          Pos? pos = await dioRepository.getBus();
+          emit(BusLocationState.busLoaded(pos?.x, pos?.y));
         },
       );
     });

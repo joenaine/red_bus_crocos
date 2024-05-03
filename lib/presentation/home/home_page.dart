@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       context
           .read<BusLocationBloc>()
           .add(const BusLocationEvent.getBusLocation());
