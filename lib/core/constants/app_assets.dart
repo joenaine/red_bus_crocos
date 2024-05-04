@@ -9,7 +9,6 @@ class _Images {
   final String enGlobe = 'assets/icons/en_globe.png';
   final String kzGlobe = 'assets/icons/kz_globe.png';
   final String ruGlobe = 'assets/icons/ru_globe.png';
-
 }
 
 class _Svg {
@@ -20,5 +19,9 @@ class _Svg {
   final String shoppingCart = 'assets/icons/shopping_cart.svg';
   final String ticket = 'assets/icons/ticket.svg';
   final String timer = 'assets/icons/timer.svg';
+  final String busIcon = 'assets/icons/bus_icon.svg';
+  final String busLocation = 'assets/icons/bus_location.svg';
   final String arrowRight = 'assets/icons/arrow_right.svg';
+  final String redStar = 'assets/icons/red_star.svg';
+  final String userLocation = 'assets/icons/user_location.svg';
 }
