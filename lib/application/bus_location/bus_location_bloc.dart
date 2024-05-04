@@ -9,7 +9,9 @@ import 'package:red_bus_crocos_project/domain/bus_location/bus_location_dto.dart
 import 'package:red_bus_crocos_project/infrastructure/bus_location/bus_location_repository.dart';
 
 part 'bus_location_event.dart';
+
 part 'bus_location_state.dart';
+
 part 'bus_location_bloc.freezed.dart';
 
 @injectable
@@ -22,7 +24,7 @@ class BusLocationBloc extends Bloc<BusLocationEvent, BusLocationState> {
       await event.map(
         getBusLocation: (_) async {
           Pos? pos = await dioRepository.getBus();
-          emit(BusLocationState.busLoaded(pos?.x, pos?.y));
+          if (pos != null) emit(BusLocationState.busLoaded(pos.x, pos.y));
         },
       );
     });

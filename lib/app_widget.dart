@@ -36,7 +36,11 @@ class AppWidget extends StatelessWidget {
             create: (context) => getIt<BusLocationBloc>()),
         BlocProvider<PolylineMarkersBloc>(
             create: (context) => PolylineMarkersBloc()
-              ..add(const PolylineMarkersEvent.generatePolylineMarkers()))
+              ..add(const PolylineMarkersEvent.generatePolylineMarkers())),
+        BlocProvider<SightDetailBloc>(
+            create: (context) =>SightDetailBloc()),
+        BlocProvider<SightsBloc>(
+            create: (context) => SightsBloc()..add(FetchSights())),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

@@ -37,7 +37,8 @@ class TicketsPage extends StatelessWidget {
               const SizedBox(height: 30),
               InkWell(
                 onTap: () async {
-                  if (!await launchUrl(Uri.parse('https://flutter.dev'))) {
+                  if (!await launchUrl(Uri.parse(
+                      'https://astana.citypass.kz/ru/kupit-citypass/'))) {
                     throw Exception('Could not launch https://flutter.dev');
                   }
                 },
@@ -52,8 +53,8 @@ class TicketsPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Купить билет',
-                          style: TextStyle(
+                          LocaleKeys.buy_ticket.tr(),
+                          style: const TextStyle(
                               color: AppColors.white,
                               fontWeight: FontWeight.w600,
                               fontSize: 20,

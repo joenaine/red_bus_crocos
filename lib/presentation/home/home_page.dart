@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
-
+import 'dart:math' as Math;
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +38,6 @@ class _HomePageState extends State<HomePage> {
   late Timer _timer;
 
   double zoomValue = 12;
-
   final Completer<GoogleMapController> _mapController =
       Completer<GoogleMapController>();
 
@@ -51,6 +50,31 @@ class _HomePageState extends State<HomePage> {
           .read<BusLocationBloc>()
           .add(const BusLocationEvent.getBusLocation());
     });
+  }
+
+  double calculateBearing(LatLng startPoint, LatLng endPoint) {
+    final double startLat = toRadians(startPoint.latitude);
+    final double startLng = toRadians(startPoint.longitude);
+    final double endLat = toRadians(endPoint.latitude);
+    final double endLng = toRadians(endPoint.longitude);
+
+    final double deltaLng = endLng - startLng;
+
+    final double y = Math.sin(deltaLng) * Math.cos(endLat);
+    final double x = Math.cos(startLat) * Math.sin(endLat) -
+        Math.sin(startLat) * Math.cos(endLat) * Math.cos(deltaLng);
+
+    final double bearing = Math.atan2(y, x);
+
+    return (toDegrees(bearing) + 360) % 360;
+  }
+
+  double toRadians(double degrees) {
+    return degrees * (Math.pi / 180.0);
+  }
+
+  double toDegrees(double radians) {
+    return radians * (180.0 / Math.pi);
   }
 
   @override
