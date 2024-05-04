@@ -44,15 +44,41 @@ class _HomePageState extends State<HomePage> {
   final Completer<GoogleMapController> _mapController =
       Completer<GoogleMapController>();
 
+  Completer<BitmapDescriptor> starIconCompleter = Completer();
+  Completer<BitmapDescriptor> userIconCompleter = Completer();
+  Completer<BitmapDescriptor> busIconCompleter = Completer();
+
   @override
   void initState() {
     super.initState();
-    _addMarker();
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       context
           .read<BusLocationBloc>()
           .add(const BusLocationEvent.getBusLocation());
     });
+    initIcons();
+
+  }
+
+  void initIcons() async {
+    BitmapDescriptor starIcon =
+        await SvgPicture.asset(AppAssets.svg.redStar).toBitmapDescriptor();
+    starIconCompleter.complete(starIcon);
+
+    BitmapDescriptor busIcon =
+        await SvgPicture.asset(AppAssets.svg.busLocation).toBitmapDescriptor();
+    busIconCompleter.complete(busIcon);
+
+    BitmapDescriptor userIcon =
+        await SvgPicture.asset(AppAssets.svg.userLocation).toBitmapDescriptor();
+    userIconCompleter.complete(userIcon);
+
+    mapMarkers.addAll(sightSeeingList.map(
+      (e) => Marker(
+          markerId: MarkerId(e.latitude.toString()),
+          icon: starIcon,
+          position: LatLng(e.latitude, e.longitude)),
+    ));
   }
 
   double calculateBearing(LatLng startPoint, LatLng endPoint) {
@@ -80,6 +106,10 @@ class _HomePageState extends State<HomePage> {
     return radians * (180.0 / Math.pi);
   }
 
+  Set<Marker> mapMarkers = {};
+  Set<Polyline> mapPolylines = {};
+  LatLng? myLocation;
+
   @override
   void dispose() {
     _timer.cancel();
@@ -90,201 +120,101 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return CommonScaffoldWidget(
       appBarTitle: LocaleKeys.route.tr(),
-      child: BlocBuilder<ConnectivityCubit, ConnectivityState>(
-        builder: (context, state) {
-          return BlocBuilder<UserLocationBloc, UserLocationState>(
-            builder: (context, userLocationState) {
-              return userLocationState.map(
-                initial: (_) => const SizedBox(),
-                loading: (_) => GoogleMap(
+      child: BlocListener<UserLocationBloc, UserLocationState>(
+        listener: (context, userLocationState) {
+          userLocationState.map(
+              initial: (_) {},
+              loading: (_) {},
+              loadSuccess: (value) async {
+                final icon = await userIconCompleter.future;
+                mapMarkers.removeWhere(
+                    (element) => element.markerId.value == "_myLocation");
+                mapMarkers.add(
+                  Marker(
+                    markerId: const MarkerId('_myLocation'),
+                    icon: icon,
+                    position: LatLng(value.userLocation.latitude,
+                        value.userLocation.longitude),
+                  ),
+                );
+                setState(() {});
+              },
+              loadFailure: (_) {},
+              locationDisabled: (_) {},
+              locationPermissionDisabled: (_) {});
+        },
+        child: BlocListener<BusLocationBloc, BusLocationState>(
+          listener: (context, state) {
+            state.map(
+              initial: (_) {},
+              busLoaded: (busLocation) async {
+                final icon = await busIconCompleter.future;
+
+                mapMarkers.removeWhere(
+                    (element) => element.markerId.value == "busLocation");
+                mapMarkers.add(Marker(
+                    markerId: const MarkerId('busLocation'),
+                    icon: icon,
+                    position: busLocation.current,
+                    rotation: busLocation.prev != null
+                        ? calculateBearing(
+                            busLocation.prev!, busLocation.current)
+                        : 0.0));
+
+                setState(() {});
+              },
+            );
+          },
+          child: BlocListener<PolylineMarkersBloc, PolylineMarkersState>(
+            listener: (context, state) {
+              setState(() {
+                mapPolylines = Set<Polyline>.of(state.polylines?.values ?? {});
+              });
+            },
+            child: Stack(
+              children: [
+                GoogleMap(
+                  onMapCreated: (controller) {
+                    _mapController.complete(controller);
+                  },
                   initialCameraPosition:
                       CameraPosition(target: _pAstana, zoom: zoomValue),
-                  markers: {
-                    const Marker(
-                        markerId: MarkerId('_currentLocation'),
-                        icon: BitmapDescriptor.defaultMarker,
-                        position: _pAstana),
-                    const Marker(
-                        markerId: MarkerId('_ailand'),
-                        icon: BitmapDescriptor.defaultMarker,
-                        position: _pAstanaAiland),
-                  },
+                  markers: mapMarkers,
+                  polylines: mapPolylines,
                 ),
-                loadSuccess: (e) {
-                  return BlocBuilder<PolylineMarkersBloc, PolylineMarkersState>(
-                    builder: (context, polylineMarkersState) {
-                      return BlocBuilder<BusLocationBloc, BusLocationState>(
-                        builder: (context, busLocationState) {
-                          log(busLocationState.toString());
-                          return busLocationState.map(
-                            initial: (_) {
-                              return GoogleMap(
-                                initialCameraPosition: CameraPosition(
-                                    target: _pAstana, zoom: zoomValue),
-                                markers: {
-                                  // if (sightsState is SightsLoaded)
-                                  //   ...sightsState.data.map(
-                                  //     (e) => Marker(
-                                  //         markerId:
-                                  //             MarkerId(e.obj_id.toString()),
-                                  //         icon: BitmapDescriptor
-                                  //             .defaultMarker,
-                                  //         position: LatLng(
-                                  //             double.parse(e.latitude!),
-                                  //             double.parse(e.longitude!))),
-                                  //   ),
-                                  Marker(
-                                      markerId: const MarkerId('_myLocation'),
-                                      icon:
-                                          BitmapDescriptor.defaultMarkerWithHue(
-                                              BitmapDescriptor.hueCyan),
-                                      position: LatLng(e.userLocation.latitude,
-                                          e.userLocation.longitude)),
-                                  Marker(
-                                      markerId: const MarkerId('_myLocation'),
-                                      icon:
-                                          BitmapDescriptor.defaultMarkerWithHue(
-                                              BitmapDescriptor.hueCyan),
-                                      position: LatLng(e.userLocation.latitude,
-                                          e.userLocation.longitude)),
-                                },
-                              );
-                            },
-                            busLoaded: (busLocation) {
-                              return Stack(
-                                children: [
-                                  GoogleMap(
-                                    onMapCreated: (controller) {
-                                      _mapController.complete(controller);
-                                    },
-                                    initialCameraPosition: CameraPosition(
-                                        target: _pAstana, zoom: zoomValue),
-                                    markers: {
-                                      ...sightSeeingList.map(
-                                        (e) => Marker(
-                                            markerId:
-                                                MarkerId(e.latitude.toString()),
-                                            icon: _markers[2].icon,
-                                            position: LatLng(
-                                                e.latitude, e.longitude)),
-                                      ),
-                                      _markers[0].copyWith(
-                                          positionParam: LatLng(
-                                              e.userLocation.latitude,
-                                              e.userLocation.longitude)),
-                                      Marker(
-                                        markerId: const MarkerId('busLocation'),
-                                        icon: _markers[1].icon,
-                                        position: busLocation.current,
-                                        rotation:busLocation.prev!=null? calculateBearing(
-                                            busLocation.prev!,
-                                            busLocation.current):0.0
-                                      ),
-                                    },
-                                    polylines: Set<Polyline>.of(
-                                        polylineMarkersState
-                                                .polylines?.values ??
-                                            {}),
-                                  ),
-                                  Positioned(
-                                      right: 10,
-                                      bottom: kBottomNavigationBarHeight + 40,
-                                      child: InkWell(
-                                        onTap: () {
-                                          _cameraToPosition(LatLng(
-                                              e.userLocation.latitude,
-                                              e.userLocation.longitude));
-                                        },
-                                        child: const CircleAvatar(
-                                          radius: 30,
-                                          backgroundColor: AppColors.lightRed,
-                                          child: Icon(Icons.my_location),
-                                        ),
-                                      )),
-                                  Positioned(
-                                      right: 10,
-                                      bottom: kBottomNavigationBarHeight + 120,
-                                      child: InkWell(
-                                        onTap: () {
-                                          _cameraToPosition(
-                                              busLocation.current);
-                                        },
-                                        child: CircleAvatar(
-                                          radius: 30,
-                                          backgroundColor:
-                                              AppColors.backgroundDark,
-                                          child: SvgPicture.asset(
-                                              AppAssets.svg.busIcon),
-                                        ),
-                                      ))
-                                ],
-                              );
-                            },
-                          );
-                        },
-                      );
-                    },
-                  );
-                },
-                loadFailure: (_) {
-                  return TextButton(
-                      onPressed: () {
-                        context.read<UserLocationBloc>().add(
-                              const UserLocationEvent.getLocation(),
-                            );
+                Positioned(
+                    right: 10,
+                    bottom: kBottomNavigationBarHeight + 40,
+                    child: InkWell(
+                      onTap: () {
+                        // _cameraToPosition(LatLng(
+                        //     e.userLocation.latitude, e.userLocation.longitude));
                       },
-                      child: const Text('Could not detect your location'));
-                },
-                locationDisabled: (_) {
-                  return TextButton(
-                      onPressed: () {
-                        context.read<UserLocationBloc>().add(
-                              const UserLocationEvent
-                                  .askToEnableLocationServices(),
-                            );
+                      child: const CircleAvatar(
+                        radius: 30,
+                        backgroundColor: AppColors.lightRed,
+                        child: Icon(Icons.my_location),
+                      ),
+                    )),
+                Positioned(
+                    right: 10,
+                    bottom: kBottomNavigationBarHeight + 120,
+                    child: InkWell(
+                      onTap: () {
+                        // _cameraToPosition(busLocation.current);
                       },
-                      child: const Text('Device location disabled'));
-                },
-                locationPermissionDisabled: (_) {
-                  return TextButton(
-                      onPressed: () {
-                        context.read<UserLocationBloc>().add(
-                            const UserLocationEvent.askLocationPermission());
-                      },
-                      child: const Text('Device location disabled'));
-                },
-              );
-            },
-          );
-        },
+                      child: CircleAvatar(
+                        radius: 30,
+                        backgroundColor: AppColors.backgroundDark,
+                        child: SvgPicture.asset(AppAssets.svg.busIcon),
+                      ),
+                    ))
+              ],
+            ),
+          ),
+        ),
       ),
     );
-  }
-
-  final List<Marker> _markers = [];
-
-  void _addMarker() async {
-    final userLocationMarker = Marker(
-      markerId: const MarkerId('user_marker'),
-      icon: await SvgPicture.asset(AppAssets.svg.userLocation)
-          .toBitmapDescriptor(),
-    );
-
-    final busMarker = Marker(
-      markerId: const MarkerId('bus_marker'),
-      icon: await SvgPicture.asset(AppAssets.svg.busLocation)
-          .toBitmapDescriptor(),
-    );
-    final starMarker = Marker(
-      markerId: const MarkerId('star_marker'),
-      icon: await SvgPicture.asset(AppAssets.svg.redStar).toBitmapDescriptor(),
-    );
-
-    setState(() {
-      _markers.add(userLocationMarker);
-      _markers.add(busMarker);
-      _markers.add(starMarker);
-    });
   }
 
   Map<PolylineId, Polyline> polylines = {};
