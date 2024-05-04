@@ -12,6 +12,7 @@ import 'package:red_bus_crocos_project/presentation/routes/route_observer.dart';
 import 'package:red_bus_crocos_project/presentation/routes/router.dart';
 
 import 'application/sight/sights_bloc.dart';
+import 'application/sight_detail/sight_detail_bloc.dart';
 
 class AppWidget extends StatelessWidget {
   final _appRouter = AppRouter();
@@ -35,11 +36,7 @@ class AppWidget extends StatelessWidget {
             create: (context) => getIt<BusLocationBloc>()),
         BlocProvider<PolylineMarkersBloc>(
             create: (context) => PolylineMarkersBloc()
-              ..add(const PolylineMarkersEvent.generatePolylineMarkers())),
-        BlocProvider<SightsBloc>(
-          create: (context) => SightsBloc()..add(FetchSights()),
-          lazy: false,
-        ),
+              ..add(const PolylineMarkersEvent.generatePolylineMarkers()))
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

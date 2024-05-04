@@ -12,6 +12,7 @@ import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffo
 import 'package:red_bus_crocos_project/presentation/routes/router.dart';
 
 import '../../application/sight/sights_bloc.dart';
+import '../../application/sight_detail/sight_detail_bloc.dart';
 import '../../core/constants/app_assets.dart';
 import '../../domain/sight/sight_dto.dart';
 

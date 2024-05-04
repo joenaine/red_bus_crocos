@@ -10,6 +10,7 @@ part 'sights_state.dart';
 
 class SightsBloc extends Bloc<SightsEvent, SightsState> {
   final SightsRepository repository = SightsRepository();
+  Set<String> cachedIds = {};
 
   SightsBloc() : super(SightsInitial()) {
     on<SightsEvent>((event, emit) async {

@@ -18,19 +18,34 @@ class CodegenLoader extends AssetLoader{
   "route": "Маршрут",
   "bus_stops": "Остановки",
   "schedule": "Расписание",
-  "tickets": "Билеты"
+  "tickets": "Билеты",
+  "loading": "Загрузка",
+  "error": "Ошибка",
+  "departure_time": "Время отбытия",
+  "arrival_time": "Время прибытия",
+  "buy_ticket": "Купить билет"
 };
 static const Map<String,dynamic> en = {
   "route": "Routes",
   "bus_stops": "Остановки",
   "schedule": "Расписание",
-  "tickets": "Билеты"
+  "tickets": "Билеты",
+  "loading": "Loading",
+  "error": "Error",
+  "departure_time": "Departure Time",
+  "arrival_time": "Arrival Time",
+  "buy_ticket": "Buy ticket"
 };
 static const Map<String,dynamic> kz = {
   "route": "Маршрут",
   "bus_stops": "Остановки",
   "schedule": "Расписание",
-  "tickets": "Билеты"
+  "tickets": "Билеты",
+  "loading": "Загрузка",
+  "error": "Ошибка",
+  "departure_time": "Время отбытия",
+  "arrival_time": "Время прибытия",
+  "buy_ticket": "Купить билет"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "en": en, "kz": kz};
 }
