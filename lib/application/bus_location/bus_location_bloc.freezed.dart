@@ -169,19 +169,19 @@ mixin _$BusLocationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(double? longitude, double? latitude) busLoaded,
+    required TResult Function(LatLng current, LatLng? prev) busLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(double? longitude, double? latitude)? busLoaded,
+    TResult? Function(LatLng current, LatLng? prev)? busLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(double? longitude, double? latitude)? busLoaded,
+    TResult Function(LatLng current, LatLng? prev)? busLoaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -263,7 +263,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(double? longitude, double? latitude) busLoaded,
+    required TResult Function(LatLng current, LatLng? prev) busLoaded,
   }) {
     return initial();
   }
@@ -272,7 +272,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(double? longitude, double? latitude)? busLoaded,
+    TResult? Function(LatLng current, LatLng? prev)? busLoaded,
   }) {
     return initial?.call();
   }
@@ -281,7 +281,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(double? longitude, double? latitude)? busLoaded,
+    TResult Function(LatLng current, LatLng? prev)? busLoaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -332,7 +332,7 @@ abstract class _$$BusLoadedImplCopyWith<$Res> {
           _$BusLoadedImpl value, $Res Function(_$BusLoadedImpl) then) =
       __$$BusLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({double? longitude, double? latitude});
+  $Res call({LatLng current, LatLng? prev});
 }
 
 /// @nodoc
@@ -346,18 +346,18 @@ class __$$BusLoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? longitude = freezed,
-    Object? latitude = freezed,
+    Object? current = null,
+    Object? prev = freezed,
   }) {
     return _then(_$BusLoadedImpl(
-      freezed == longitude
-          ? _value.longitude
-          : longitude // ignore: cast_nullable_to_non_nullable
-              as double?,
-      freezed == latitude
-          ? _value.latitude
-          : latitude // ignore: cast_nullable_to_non_nullable
-              as double?,
+      null == current
+          ? _value.current
+          : current // ignore: cast_nullable_to_non_nullable
+              as LatLng,
+      freezed == prev
+          ? _value.prev
+          : prev // ignore: cast_nullable_to_non_nullable
+              as LatLng?,
     ));
   }
 }
@@ -365,16 +365,16 @@ class __$$BusLoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BusLoadedImpl implements _BusLoaded {
-  const _$BusLoadedImpl(this.longitude, this.latitude);
+  const _$BusLoadedImpl(this.current, this.prev);
 
   @override
-  final double? longitude;
+  final LatLng current;
   @override
-  final double? latitude;
+  final LatLng? prev;
 
   @override
   String toString() {
-    return 'BusLocationState.busLoaded(longitude: $longitude, latitude: $latitude)';
+    return 'BusLocationState.busLoaded(current: $current, prev: $prev)';
   }
 
   @override
@@ -382,14 +382,12 @@ class _$BusLoadedImpl implements _BusLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BusLoadedImpl &&
-            (identical(other.longitude, longitude) ||
-                other.longitude == longitude) &&
-            (identical(other.latitude, latitude) ||
-                other.latitude == latitude));
+            (identical(other.current, current) || other.current == current) &&
+            (identical(other.prev, prev) || other.prev == prev));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, longitude, latitude);
+  int get hashCode => Object.hash(runtimeType, current, prev);
 
   @JsonKey(ignore: true)
   @override
@@ -401,29 +399,29 @@ class _$BusLoadedImpl implements _BusLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(double? longitude, double? latitude) busLoaded,
+    required TResult Function(LatLng current, LatLng? prev) busLoaded,
   }) {
-    return busLoaded(longitude, latitude);
+    return busLoaded(current, prev);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(double? longitude, double? latitude)? busLoaded,
+    TResult? Function(LatLng current, LatLng? prev)? busLoaded,
   }) {
-    return busLoaded?.call(longitude, latitude);
+    return busLoaded?.call(current, prev);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(double? longitude, double? latitude)? busLoaded,
+    TResult Function(LatLng current, LatLng? prev)? busLoaded,
     required TResult orElse(),
   }) {
     if (busLoaded != null) {
-      return busLoaded(longitude, latitude);
+      return busLoaded(current, prev);
     }
     return orElse();
   }
@@ -461,11 +459,11 @@ class _$BusLoadedImpl implements _BusLoaded {
 }
 
 abstract class _BusLoaded implements BusLocationState {
-  const factory _BusLoaded(final double? longitude, final double? latitude) =
+  const factory _BusLoaded(final LatLng current, final LatLng? prev) =
       _$BusLoadedImpl;
 
-  double? get longitude;
-  double? get latitude;
+  LatLng get current;
+  LatLng? get prev;
   @JsonKey(ignore: true)
   _$$BusLoadedImplCopyWith<_$BusLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;

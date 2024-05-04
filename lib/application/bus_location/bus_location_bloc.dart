@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:red_bus_crocos_project/domain/bus_location/bus_location_dto.dart';
 import 'package:red_bus_crocos_project/infrastructure/bus_location/bus_location_repository.dart';
@@ -24,7 +25,16 @@ class BusLocationBloc extends Bloc<BusLocationEvent, BusLocationState> {
       await event.map(
         getBusLocation: (_) async {
           Pos? pos = await dioRepository.getBus();
-          if (pos != null) emit(BusLocationState.busLoaded(pos.x, pos.y));
+
+          if (pos != null) {
+            late LatLng prev;
+            state.map(initial: (_) {
+              prev = LatLng(pos.y!, pos.x!);
+            }, busLoaded: (val) {
+              prev = val.current;
+            });
+            emit(BusLocationState.busLoaded(LatLng(pos.y!, pos.x!), prev));
+          }
         },
       );
     });

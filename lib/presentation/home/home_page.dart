@@ -23,6 +23,8 @@ import 'package:red_bus_crocos_project/infrastructure/sights/sights_local_data.d
 import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffold_widget.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
+import '../../domain/bus_location/bus_location_dto.dart';
+
 @RoutePage()
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -34,6 +36,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   static const LatLng _pAstana = LatLng(51.1323332, 71.4237316);
   static const LatLng _pAstanaAiland = LatLng(51.1480892, 71.4161325);
+
   // final LatLng _busLocation = const LatLng(51.1107, 71.5327233);
   late Timer _timer;
 
@@ -169,30 +172,14 @@ class _HomePageState extends State<HomePage> {
                                           positionParam: LatLng(
                                               e.userLocation.latitude,
                                               e.userLocation.longitude)),
-                                      if (busLocation.latitude != null)
-                                        _markers[1].copyWith(
-                                            positionParam: LatLng(
-                                                busLocation.latitude ?? 0,
-                                                busLocation.longitude ?? 0)),
-                                      // if (sightsState is SightsLoaded)
-                                      //   ...sightsState.data.map(
-                                      //     (e) => Marker(
-                                      //         markerId:
-                                      //             MarkerId(e.obj_id.toString()),
-                                      //         icon: BitmapDescriptor.defaultMarker,
-                                      //         position: LatLng(
-                                      //             double.parse(e.latitude!),
-                                      //             double.parse(e.longitude!))),
-                                      //   ),
-                                      // Marker(
-                                      //     markerId:
-                                      //         const MarkerId('_myLocation'),
-                                      //     icon: await SvgPicture.asset(
-                                      //             AppAssets.svg.userLocation)
-                                      //         .toBitmapDescriptor(),
-                                      //     position: LatLng(
-                                      //         e.userLocation.latitude,
-                                      //         e.userLocation.longitude)),
+                                      Marker(
+                                        markerId: const MarkerId('busLocation'),
+                                        icon: _markers[1].icon,
+                                        position: busLocation.current,
+                                        rotation:busLocation.prev!=null? calculateBearing(
+                                            busLocation.prev!,
+                                            busLocation.current):0.0
+                                      ),
                                     },
                                     polylines: Set<Polyline>.of(
                                         polylineMarkersState
@@ -219,9 +206,8 @@ class _HomePageState extends State<HomePage> {
                                       bottom: kBottomNavigationBarHeight + 120,
                                       child: InkWell(
                                         onTap: () {
-                                          _cameraToPosition(LatLng(
-                                              busLocation.latitude ?? 0,
-                                              busLocation.longitude ?? 0));
+                                          _cameraToPosition(
+                                              busLocation.current);
                                         },
                                         child: CircleAvatar(
                                           radius: 30,
