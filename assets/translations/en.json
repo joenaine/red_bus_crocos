@@ -2,5 +2,12 @@
     "route":"Routes",
     "bus_stops":"Остановки",
     "schedule":"Расписание",
-    "tickets":"Билеты"
+    "tickets":"Билеты",
+    "loading": "Loading",
+    "error": "Error",
+    "departure_time": "Departure Time",
+    "arrival_time": "Arrival Time",
+    "buy_ticket": "Buy ticket"
+
+
 }

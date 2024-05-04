@@ -2,5 +2,10 @@
     "route":"Маршрут",
     "bus_stops":"Остановки",
     "schedule":"Расписание",
-    "tickets":"Билеты"
+    "tickets":"Билеты",
+    "loading": "Загрузка",
+    "error": "Ошибка",
+    "departure_time": "Время отбытия",
+    "arrival_time": "Время прибытия",
+    "buy_ticket": "Купить билет"
 }

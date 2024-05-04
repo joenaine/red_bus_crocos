@@ -48,9 +48,9 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
         builder: (context, state) {
           switch (state) {
             case SightDetailInitial():
-              return const Center(child: Text('Loading'));
+              return  Center(child: Text(LocaleKeys.loading.tr(),));
             case SightDetailError():
-              return Center(child: Text(state.message??'Error'));
+              return Center(child: Text(state.message??LocaleKeys.error.tr(),));
             case SightDetailSuccess():
               {
                 final SightModel data = state.data;

@@ -12,10 +12,18 @@ import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffo
 class SchedulePage extends StatefulWidget {
   const SchedulePage({super.key});
 
+
+  @override
+  State<SchedulePage> createState() => _SchedulePageState();
+}
+
+class _SchedulePageState extends State<SchedulePage> {
+
+
   static List<String> titleColumns = [
-    'Остановки',
-    'Время прибытия',
-    'Время отбытия',
+    LocaleKeys.bus_stops,
+    LocaleKeys.arrival_time,
+    LocaleKeys.departure_time,
   ];
   static List<List<String>> scheduleTableData = [
     [
@@ -40,11 +48,7 @@ class SchedulePage extends StatefulWidget {
     ]
   ];
 
-  @override
-  State<SchedulePage> createState() => _SchedulePageState();
-}
 
-class _SchedulePageState extends State<SchedulePage> {
   int? selectedIndex;
 
   @override
@@ -100,19 +104,19 @@ class _SchedulePageState extends State<SchedulePage> {
                 ),
                 children: [
                   TableRow(
-                    children: SchedulePage.titleColumns
-                        .map((e) => _TableTitleCell(title: e))
+                    children: titleColumns
+                        .map((e) => _TableTitleCell(title: e.tr()))
                         .toList(),
                   ),
                   ...List.generate(
-                    SchedulePage.scheduleTableData.length,
+                    scheduleTableData.length,
                     (index) => TableRow(
-                      children: SchedulePage.scheduleTableData[index]
+                      children: scheduleTableData[index]
                           .map(
                             (col) => _TableDataCell(
                                 title: col,
                                 isLastOne: index ==
-                                    SchedulePage.scheduleTableData.length - 1),
+                                    scheduleTableData.length - 1),
                           )
                           .toList(),
                     ),
