@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' hide Router;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:red_bus_crocos_project/application/bus_location/bus_location_bloc.dart';
 import 'package:red_bus_crocos_project/application/location/user_location_bloc.dart';
+import 'package:red_bus_crocos_project/application/polyline_markers/polyline_markers_bloc.dart';
 import 'package:red_bus_crocos_project/core/theme/app_theme.dart';
 import 'package:red_bus_crocos_project/domain/location/i_user_location_repository.dart';
 import 'package:red_bus_crocos_project/features/connectivity/cubit/connectivity_cubit.dart';
@@ -33,11 +34,9 @@ class AppWidget extends StatelessWidget {
         ),
         BlocProvider<BusLocationBloc>(
             create: (context) => getIt<BusLocationBloc>()),
-
-        BlocProvider<SightsBloc>(
-            create: (context) => SightsBloc()..add(FetchSights()),lazy: false,),
-        BlocProvider<SightDetailBloc>(
-            create: (context) => SightDetailBloc()),
+        BlocProvider<PolylineMarkersBloc>(
+            create: (context) => PolylineMarkersBloc()
+              ..add(const PolylineMarkersEvent.generatePolylineMarkers()))
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
