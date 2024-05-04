@@ -11,6 +11,7 @@ import 'package:red_bus_crocos_project/presentation/routes/route_observer.dart';
 import 'package:red_bus_crocos_project/presentation/routes/router.dart';
 
 import 'application/sight/sights_bloc.dart';
+import 'application/sight_detail/sight_detail_bloc.dart';
 
 class AppWidget extends StatelessWidget {
   final _appRouter = AppRouter();
@@ -35,6 +36,8 @@ class AppWidget extends StatelessWidget {
 
         BlocProvider<SightsBloc>(
             create: (context) => SightsBloc()..add(FetchSights()),lazy: false,),
+        BlocProvider<SightDetailBloc>(
+            create: (context) => SightDetailBloc()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
