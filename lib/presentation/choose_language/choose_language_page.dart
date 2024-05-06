@@ -1,12 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:red_bus_crocos_project/core/constants/app_assets.dart';
 import 'package:red_bus_crocos_project/core/theme/colors.dart';
 import 'package:red_bus_crocos_project/core/utils/translation.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/text_sizes.dart';
-import 'package:red_bus_crocos_project/presentation/routes/router.dart';
 
 @RoutePage()
 class ChooseLanguagePage extends StatelessWidget {
@@ -32,9 +30,10 @@ class ChooseLanguagePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: getLocale.values
                   .map((e) => InkWell(
-                        onTap: () {
-                          context.setLocale(Locale(getLocale.keys.firstWhere(
-                              (element) => getLocale[element] == e)));
+                        onTap: () async {
+                          await context.setLocale(Locale(getLocale.keys
+                              .firstWhere(
+                                  (element) => getLocale[element] == e)));
                           context.router.maybePop();
                         },
                         child: Container(
