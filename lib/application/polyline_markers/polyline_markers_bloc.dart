@@ -17,6 +17,8 @@ List<LatLng> polylineList = [
   const LatLng(51.163214, 71.409881), // Kenesary
   const LatLng(51.161194, 71.418347), // Irchenko
   const LatLng(51.161249, 71.421492), //Zheltoksan 2/2
+  const LatLng(51.161584, 71.428342), //Respublika
+  const LatLng(51.151887, 71.428114), //Karaotkel most
   const LatLng(51.146116, 71.411903), //Xan Watyr
   const LatLng(51.117675, 71.401398), //Turan
   const LatLng(51.113018, 71.433133), //Mangilik el
