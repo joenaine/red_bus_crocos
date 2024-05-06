@@ -131,126 +131,130 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return CommonScaffoldWidget(
       appBarTitle: LocaleKeys.route.tr(),
-      child: BlocListener<UserLocationBloc, UserLocationState>(
-        listener: (context, userLocationState) {
-          userLocationState.map(
-              initial: (_) {},
-              loading: (_) {},
-              loadSuccess: (value) async {
-                final icon = await userIconCompleter.future;
-                mapMarkers.removeWhere(
-                    (element) => element.markerId.value == "_myLocation");
-                mapMarkers.add(
-                  Marker(
-                    markerId: const MarkerId('_myLocation'),
-                    icon: icon,
-                    position: LatLng(value.userLocation.latitude,
-                        value.userLocation.longitude),
-                  ),
-                );
-                myLocation = LatLng(
-                    value.userLocation.latitude, value.userLocation.longitude);
-                setState(() {});
-              },
-              loadFailure: (_) {},
-              locationDisabled: (_) {},
-              locationPermissionDisabled: (_) {});
-        },
-        child: BlocListener<BusLocationBloc, BusLocationState>(
-          listener: (context, state) {
-            state.map(
-              initial: (_) {},
-              busLoaded: (busLocation) async {
-                final icon = await busIconCompleter.future;
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<UserLocationBloc, UserLocationState>(
+            listener: (context, userLocationState) {
+              userLocationState.map(
+                  initial: (_) {},
+                  loading: (_) {},
+                  loadSuccess: (value) async {
+                    final icon = await userIconCompleter.future;
+                    mapMarkers.removeWhere(
+                        (element) => element.markerId.value == "_myLocation");
+                    mapMarkers.add(
+                      Marker(
+                        markerId: const MarkerId('_myLocation'),
+                        icon: icon,
+                        position: LatLng(value.userLocation.latitude,
+                            value.userLocation.longitude),
+                      ),
+                    );
+                    myLocation = LatLng(value.userLocation.latitude,
+                        value.userLocation.longitude);
+                    setState(() {});
+                  },
+                  loadFailure: (_) {},
+                  locationDisabled: (_) {},
+                  locationPermissionDisabled: (_) {});
+            },
+          ),
+          BlocListener<BusLocationBloc, BusLocationState>(
+            listener: (context, state) {
+              state.map(
+                initial: (_) {},
+                busLoaded: (busLocation) async {
+                  final icon = await busIconCompleter.future;
 
-                mapMarkers.removeWhere(
-                    (element) => element.markerId.value == "busLocation");
-                mapMarkers.add(Marker(
-                    markerId: const MarkerId('busLocation'),
-                    icon: icon,
-                    position: busLocation.current,
-                    rotation: busLocation.prev != null
-                        ? calculateBearing(
-                            busLocation.prev!, busLocation.current)
-                        : 0.0));
-                busPosition = busLocation.current;
-                setState(() {});
-              },
-            );
-          },
-          child: BlocListener<PolylineMarkersBloc, PolylineMarkersState>(
+                  mapMarkers.removeWhere(
+                      (element) => element.markerId.value == "busLocation");
+                  mapMarkers.add(Marker(
+                      markerId: const MarkerId('busLocation'),
+                      icon: icon,
+                      position: busLocation.current,
+                      rotation: busLocation.prev != null
+                          ? calculateBearing(
+                              busLocation.prev!, busLocation.current)
+                          : 0.0));
+                  busPosition = busLocation.current;
+                  setState(() {});
+                },
+              );
+            },
+          ),
+          BlocListener<PolylineMarkersBloc, PolylineMarkersState>(
             listener: (context, state) {
               setState(() {
                 mapPolylines = Set<Polyline>.of(state.polylines?.values ?? {});
               });
             },
-            child: Stack(
-              children: [
-                GoogleMap(
-                  onMapCreated: (controller) {
-                    _mapController.complete(controller);
-                  },
-                  initialCameraPosition:
-                      CameraPosition(target: _pAstana, zoom: zoomValue),
-                  markers: mapMarkers,
-                  polylines: mapPolylines,
-                ),
-                // Align(
-                //   alignment: Alignment.bottomCenter,
-                //   child: Container(
-                //     width: double.infinity,
-                //     margin: const EdgeInsets.only(
-                //         bottom: kBottomNavigationBarHeight + 50,
-                //         right: 16,
-                //         left: 16),
-                //     padding: const EdgeInsets.all(25),
-                //     decoration: BoxDecoration(
-                //         color: AppColors.red,
-                //         borderRadius: BorderRadius.circular(30)),
-                //     height: 170,
-                //     child: Column(
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //       children: [
-                //         TextSizes.s24w500('Технические работы'),
-                //         Indent.h8(),
-                //         TextSizes.s16w500(
-                //             'Уважаемые пользователи.\nВедутся технических работ. Приносим свои извинения за ожидание.')
-                //       ],
-                //     ),
-                //   ),
-                // ),
-                if (myLocation != null)
-                  Positioned(
-                      right: 10,
-                      bottom: kBottomNavigationBarHeight + 40,
-                      child: InkWell(
-                        onTap: () {
-                          _cameraToPosition(LatLng(
-                              myLocation!.latitude, myLocation!.longitude));
-                        },
-                        child: const CircleAvatar(
-                          radius: 30,
-                          backgroundColor: AppColors.lightRed,
-                          child: Icon(Icons.my_location),
-                        ),
-                      )),
-                if (busPosition != null)
-                  Positioned(
-                      right: 10,
-                      bottom: kBottomNavigationBarHeight + 120,
-                      child: InkWell(
-                        onTap: () {
-                          _cameraToPosition(busPosition!);
-                        },
-                        child: CircleAvatar(
-                          radius: 30,
-                          backgroundColor: AppColors.backgroundDark,
-                          child: SvgPicture.asset(AppAssets.svg.busIcon),
-                        ),
-                      )),
-              ],
-            ),
           ),
+        ],
+        child: Stack(
+          children: [
+            GoogleMap(
+              onMapCreated: (controller) {
+                _mapController.complete(controller);
+              },
+              initialCameraPosition:
+                  CameraPosition(target: _pAstana, zoom: zoomValue),
+              markers: mapMarkers,
+              polylines: mapPolylines,
+            ),
+            // Align(
+            //   alignment: Alignment.bottomCenter,
+            //   child: Container(
+            //     width: double.infinity,
+            //     margin: const EdgeInsets.only(
+            //         bottom: kBottomNavigationBarHeight + 50,
+            //         right: 16,
+            //         left: 16),
+            //     padding: const EdgeInsets.all(25),
+            //     decoration: BoxDecoration(
+            //         color: AppColors.red,
+            //         borderRadius: BorderRadius.circular(30)),
+            //     height: 170,
+            //     child: Column(
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+            //         TextSizes.s24w500('Технические работы'),
+            //         Indent.h8(),
+            //         TextSizes.s16w500(
+            //             'Уважаемые пользователи.\nВедутся технических работ. Приносим свои извинения за ожидание.')
+            //       ],
+            //     ),
+            //   ),
+            // ),
+            if (myLocation != null)
+              Positioned(
+                  right: 10,
+                  bottom: kBottomNavigationBarHeight + 40,
+                  child: InkWell(
+                    onTap: () {
+                      _cameraToPosition(
+                          LatLng(myLocation!.latitude, myLocation!.longitude));
+                    },
+                    child: const CircleAvatar(
+                      radius: 30,
+                      backgroundColor: AppColors.lightRed,
+                      child: Icon(Icons.my_location),
+                    ),
+                  )),
+            if (busPosition != null)
+              Positioned(
+                  right: 10,
+                  bottom: kBottomNavigationBarHeight + 120,
+                  child: InkWell(
+                    onTap: () {
+                      _cameraToPosition(busPosition!);
+                    },
+                    child: CircleAvatar(
+                      radius: 30,
+                      backgroundColor: AppColors.backgroundDark,
+                      child: SvgPicture.asset(AppAssets.svg.busIcon),
+                    ),
+                  ))
+          ],
         ),
       ),
     );
