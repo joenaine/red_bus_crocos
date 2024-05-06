@@ -150,8 +150,10 @@ class _HomePageState extends State<HomePage> {
                             value.userLocation.longitude),
                       ),
                     );
+
                     myLocation = LatLng(value.userLocation.latitude,
                         value.userLocation.longitude);
+
                     setState(() {});
                   },
                   loadFailure: (_) {},
@@ -166,6 +168,7 @@ class _HomePageState extends State<HomePage> {
                 busLoaded: (busLocation) async {
                   final icon = await busIconCompleter.future;
 
+
                   mapMarkers.removeWhere(
                       (element) => element.markerId.value == "busLocation");
                   mapMarkers.add(Marker(
@@ -177,6 +180,7 @@ class _HomePageState extends State<HomePage> {
                               busLocation.prev!, busLocation.current)
                           : 0.0));
                   busPosition = busLocation.current;
+
                   setState(() {});
                 },
               );
@@ -225,6 +229,7 @@ class _HomePageState extends State<HomePage> {
             //     ),
             //   ),
             // ),
+
             if (myLocation != null)
               Positioned(
                   right: 10,
@@ -254,6 +259,7 @@ class _HomePageState extends State<HomePage> {
                       child: SvgPicture.asset(AppAssets.svg.busIcon),
                     ),
                   ))
+
           ],
         ),
       ),
