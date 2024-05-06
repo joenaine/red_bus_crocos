@@ -59,7 +59,7 @@ class BusLocationRepository {
         ),
       );
 
-      // log('Status Code: ${response.statusCode}');
+      log('Status Code: ${response.data}');
       if (response.statusCode == 200 &&
           response.data.toString() != '{error: 1}') {
         // log('Response Data: ${response.data}');

@@ -1,29 +1,20 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:math' as Math;
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:red_bus_crocos_project/application/bus_location/bus_location_bloc.dart';
 import 'package:red_bus_crocos_project/application/location/user_location_bloc.dart';
 import 'package:red_bus_crocos_project/application/polyline_markers/polyline_markers_bloc.dart';
-import 'package:red_bus_crocos_project/application/sight/sights_bloc.dart';
 import 'package:red_bus_crocos_project/core/constants/app_assets.dart';
-import 'package:red_bus_crocos_project/core/constants/app_variables.dart';
 import 'package:red_bus_crocos_project/core/theme/colors.dart';
-import 'package:red_bus_crocos_project/features/connectivity/cubit/connectivity_cubit.dart';
 import 'package:red_bus_crocos_project/generated/locale_keys.g.dart';
-import 'package:red_bus_crocos_project/infrastructure/bus_location/bus_location_repository.dart';
 import 'package:red_bus_crocos_project/infrastructure/sights/sights_local_data.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffold_widget.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
-
-import '../../domain/bus_location/bus_location_dto.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget {
@@ -35,7 +26,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   static const LatLng _pAstana = LatLng(51.1323332, 71.4237316);
-  static const LatLng _pAstanaAiland = LatLng(51.1480892, 71.4161325);
 
   // final LatLng _busLocation = const LatLng(51.1107, 71.5327233);
   late Timer _timer;
@@ -57,7 +47,6 @@ class _HomePageState extends State<HomePage> {
           .add(const BusLocationEvent.getBusLocation());
     });
     initIcons();
-
   }
 
   void initIcons() async {
@@ -77,6 +66,9 @@ class _HomePageState extends State<HomePage> {
       (e) => Marker(
           markerId: MarkerId(e.latitude.toString()),
           icon: starIcon,
+          infoWindow: const InfoWindow(
+            title: 'Astana',
+          ),
           position: LatLng(e.latitude, e.longitude)),
     ));
   }
