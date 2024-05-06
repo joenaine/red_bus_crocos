@@ -26,7 +26,7 @@ class BusStopDetailPage extends StatefulWidget {
 
 class _BusStopDetailPageState extends State<BusStopDetailPage> {
   static List<(String, String)> countries = [
-    ('kz', AppAssets.images.kzGlobe),
+    ('uk', AppAssets.images.kzGlobe),
     ('en', AppAssets.images.enGlobe),
     ('ru', AppAssets.images.ruGlobe),
   ];
@@ -48,9 +48,15 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
         builder: (context, state) {
           switch (state) {
             case SightDetailInitial():
-              return  Center(child: Text(LocaleKeys.loading.tr(),));
+              return Center(
+                  child: Text(
+                LocaleKeys.loading.tr(),
+              ));
             case SightDetailError():
-              return Center(child: Text(state.message??LocaleKeys.error.tr(),));
+              return Center(
+                  child: Text(
+                state.message ?? LocaleKeys.error.tr(),
+              ));
             case SightDetailSuccess():
               {
                 final SightModel data = state.data;

@@ -4,6 +4,14 @@ import 'package:red_bus_crocos_project/core/theme/colors.dart';
 class TextSizes {
   static Widget s22w600(String text, {Color? color = Colors.white}) =>
       Text(text, style: TextStyle(fontSize: 22, color: color));
+  static Widget s24w400(String text, {Color? color = Colors.white}) => Text(
+      text,
+      style:
+          TextStyle(fontSize: 24, color: color, fontWeight: FontWeight.w400));
+  static Widget s24w500(String text, {Color? color = Colors.white}) => Text(
+      text,
+      style:
+          TextStyle(fontSize: 24, color: color, fontWeight: FontWeight.w500));
   static Widget s18w600(String text, {Color? color = Colors.white}) => Text(
       text,
       style:

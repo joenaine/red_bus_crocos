@@ -9,3 +9,13 @@ List<LatLng> sightSeeingList = [
   const LatLng(51.12846068359925, 71.43058480774638), // Baiterek
   const LatLng(51.1483954, 71.4147056), // Ailand
 ];
+
+List<String> sightSeeingNamesList = [
+  'Лодочная станция на Набережной', //Zheltoksan 2/2
+  'ТРЦ «Хан-Шатыр» ', //Xan Watyr
+  'Триумфальная арка', //Triumfalnaya arka
+  'Музей будущего «Нур-Алем» (Expo)', //Nur Alem Expo
+  'Дворец независимости', // Tauelsizdik
+  'Монумент «Астана-Байтерек» ', // Baiterek
+  'Центр семейного отдыха «Ailand» ', // Ailand
+];
