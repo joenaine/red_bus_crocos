@@ -119,6 +119,7 @@ class _HomePageState extends State<HomePage> {
   Set<Marker> mapMarkers = {};
   Set<Polyline> mapPolylines = {};
   LatLng? myLocation;
+  LatLng? busPosition;
 
   @override
   void dispose() {
@@ -149,6 +150,10 @@ class _HomePageState extends State<HomePage> {
                             value.userLocation.longitude),
                       ),
                     );
+
+                    myLocation = LatLng(value.userLocation.latitude,
+                        value.userLocation.longitude);
+
                     setState(() {});
                   },
                   loadFailure: (_) {},
@@ -163,6 +168,7 @@ class _HomePageState extends State<HomePage> {
                 busLoaded: (busLocation) async {
                   final icon = await busIconCompleter.future;
 
+
                   mapMarkers.removeWhere(
                       (element) => element.markerId.value == "busLocation");
                   mapMarkers.add(Marker(
@@ -173,6 +179,7 @@ class _HomePageState extends State<HomePage> {
                           ? calculateBearing(
                               busLocation.prev!, busLocation.current)
                           : 0.0));
+                  busPosition = busLocation.current;
 
                   setState(() {});
                 },
@@ -222,33 +229,37 @@ class _HomePageState extends State<HomePage> {
             //     ),
             //   ),
             // ),
-            Positioned(
-                right: 10,
-                bottom: kBottomNavigationBarHeight + 40,
-                child: InkWell(
-                  onTap: () {
-                    // _cameraToPosition(LatLng(
-                    //     e.userLocation.latitude, e.userLocation.longitude));
-                  },
-                  child: const CircleAvatar(
-                    radius: 30,
-                    backgroundColor: AppColors.lightRed,
-                    child: Icon(Icons.my_location),
-                  ),
-                )),
-            Positioned(
-                right: 10,
-                bottom: kBottomNavigationBarHeight + 120,
-                child: InkWell(
-                  onTap: () {
-                    // _cameraToPosition(busLocation.current);
-                  },
-                  child: CircleAvatar(
-                    radius: 30,
-                    backgroundColor: AppColors.backgroundDark,
-                    child: SvgPicture.asset(AppAssets.svg.busIcon),
-                  ),
-                ))
+
+            if (myLocation != null)
+              Positioned(
+                  right: 10,
+                  bottom: kBottomNavigationBarHeight + 40,
+                  child: InkWell(
+                    onTap: () {
+                      _cameraToPosition(
+                          LatLng(myLocation!.latitude, myLocation!.longitude));
+                    },
+                    child: const CircleAvatar(
+                      radius: 30,
+                      backgroundColor: AppColors.lightRed,
+                      child: Icon(Icons.my_location),
+                    ),
+                  )),
+            if (busPosition != null)
+              Positioned(
+                  right: 10,
+                  bottom: kBottomNavigationBarHeight + 120,
+                  child: InkWell(
+                    onTap: () {
+                      _cameraToPosition(busPosition!);
+                    },
+                    child: CircleAvatar(
+                      radius: 30,
+                      backgroundColor: AppColors.backgroundDark,
+                      child: SvgPicture.asset(AppAssets.svg.busIcon),
+                    ),
+                  ))
+
           ],
         ),
       ),
