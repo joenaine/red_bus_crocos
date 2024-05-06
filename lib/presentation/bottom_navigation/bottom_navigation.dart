@@ -72,7 +72,7 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
       global.safeAreaBottomPadding = MediaQuery.of(context).padding.bottom;
     }
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: SafeArea(
         bottom: false,
         child: IndexedStack(
@@ -81,60 +81,57 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
         ),
       ),
       extendBody: true,
-      bottomNavigationBar: SafeArea(
-        bottom: _isVisible,
-        child: AnimatedContainer(
-          height: _isVisible ? kBottomNavigationBarHeight + 30 : 0,
-          duration: const Duration(milliseconds: 0),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30.0),
-              topRight: Radius.circular(30.0),
-            ),
-            child: BottomNavigationBar(
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              selectedFontSize: 10,
-              unselectedFontSize: 10,
-              type: BottomNavigationBarType.fixed,
-              elevation: 0.0,
-              onTap: _onTappedBar,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              currentIndex: _currentIndex,
-              selectedItemColor:
-                  global.isDarkModeOn ? AppColors.white : AppColors.black,
-              unselectedItemColor: AppColors.body,
-              items: [
-                BottomNavigationBarItem(
-                  icon: BottomNavigationIconWidget(
-                    svgPath: AppAssets.svg.location,
-                    isSelected: _currentIndex == 0,
-                  ),
-                  label: 'Home',
+      bottomNavigationBar: AnimatedContainer(
+        height: _isVisible ? kBottomNavigationBarHeight + 30 : 0,
+        duration: const Duration(milliseconds: 0),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
+          ),
+          child: BottomNavigationBar(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            selectedFontSize: 10,
+            unselectedFontSize: 10,
+            type: BottomNavigationBarType.fixed,
+            elevation: 0.0,
+            onTap: _onTappedBar,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            currentIndex: _currentIndex,
+            selectedItemColor:
+                global.isDarkModeOn ? AppColors.white : AppColors.black,
+            unselectedItemColor: AppColors.body,
+            items: [
+              BottomNavigationBarItem(
+                icon: BottomNavigationIconWidget(
+                  svgPath: AppAssets.svg.location,
+                  isSelected: _currentIndex == 0,
                 ),
-                BottomNavigationBarItem(
-                  icon: BottomNavigationIconWidget(
-                    svgPath: AppAssets.svg.flag,
-                    isSelected: _currentIndex == 1,
-                  ),
-                  label: 'Bus Stops',
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: BottomNavigationIconWidget(
+                  svgPath: AppAssets.svg.flag,
+                  isSelected: _currentIndex == 1,
                 ),
-                BottomNavigationBarItem(
-                  icon: BottomNavigationIconWidget(
-                    svgPath: AppAssets.svg.timer,
-                    isSelected: _currentIndex == 2,
-                  ),
-                  label: 'Schedule',
+                label: 'Bus Stops',
+              ),
+              BottomNavigationBarItem(
+                icon: BottomNavigationIconWidget(
+                  svgPath: AppAssets.svg.timer,
+                  isSelected: _currentIndex == 2,
                 ),
-                BottomNavigationBarItem(
-                  icon: BottomNavigationIconWidget(
-                    svgPath: AppAssets.svg.shoppingCart,
-                    isSelected: _currentIndex == 3,
-                  ),
-                  label: 'Cart',
+                label: 'Schedule',
+              ),
+              BottomNavigationBarItem(
+                icon: BottomNavigationIconWidget(
+                  svgPath: AppAssets.svg.shoppingCart,
+                  isSelected: _currentIndex == 3,
                 ),
-              ],
-            ),
+                label: 'Cart',
+              ),
+            ],
           ),
         ),
       ),

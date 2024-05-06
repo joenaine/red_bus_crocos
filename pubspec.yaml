@@ -55,6 +55,7 @@ flutter:
     - assets/
     - assets/translations/
     - assets/icons/
+    - assets/images/
 
   fonts:
     - family: Euclid

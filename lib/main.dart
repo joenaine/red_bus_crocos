@@ -32,6 +32,7 @@ Future<void> main() async {
   // Bloc.observer = RedBusBlocObserver();
   runApp(
     EasyLocalization(
+      startLocale: supportedLocales[1],
       supportedLocales: supportedLocales,
       path: 'assets/translations',
       fallbackLocale: supportedLocales[1],
