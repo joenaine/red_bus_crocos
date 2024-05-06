@@ -81,7 +81,7 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
         ),
       ),
       extendBody: true,
-      bottomNavigationBar: AnimatedContainer(
+      bottomSheet: AnimatedContainer(
         height: _isVisible ? kBottomNavigationBarHeight + 30 : 0,
         duration: const Duration(milliseconds: 0),
         child: ClipRRect(
