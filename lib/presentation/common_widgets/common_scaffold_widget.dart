@@ -18,7 +18,7 @@ class CommonScaffoldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.red,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text(appBarTitle!),

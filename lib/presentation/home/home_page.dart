@@ -168,7 +168,6 @@ class _HomePageState extends State<HomePage> {
                 busLoaded: (busLocation) async {
                   final icon = await busIconCompleter.future;
 
-
                   mapMarkers.removeWhere(
                       (element) => element.markerId.value == "busLocation");
                   mapMarkers.add(Marker(
@@ -259,7 +258,6 @@ class _HomePageState extends State<HomePage> {
                       child: SvgPicture.asset(AppAssets.svg.busIcon),
                     ),
                   ))
-
           ],
         ),
       ),

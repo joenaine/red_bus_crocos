@@ -59,10 +59,10 @@ class BusLocationRepository {
         ),
       );
 
-      log('Status Code: ${response.data}');
+      // log('Status Code: ${response.data}');
       if (response.statusCode == 200 &&
           response.data.toString() != '{error: 1}') {
-        log('Response Data: ${response.data}');
+        // log('Response Data: ${response.data}');
         var userRes = Pos.fromJson(response.data['item']['pos']);
         log('Position X: ${userRes.x}');
         return userRes;

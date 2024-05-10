@@ -28,6 +28,7 @@ class BusStopsPage extends StatelessWidget {
         padding: const EdgeInsets.only(
           left: 20,
           right: 20,
+          bottom: 100,
         ),
         child: BlocBuilder<SightsBloc, SightsState>(
           builder: (context, state) {

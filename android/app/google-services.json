@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "713085165445",
+    "project_id": "red-bus-crocos",
+    "storage_bucket": "red-bus-crocos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713085165445:android:f6c72d99064e38a0126eec",
+        "android_client_info": {
+          "package_name": "com.example.red_bus_crocos_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADiCkR4qXTu8CAZEPEWw29Jj_0X7jQ1xA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
