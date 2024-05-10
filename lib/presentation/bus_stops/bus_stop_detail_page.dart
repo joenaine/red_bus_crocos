@@ -8,6 +8,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:red_bus_crocos_project/application/sight/sights_bloc.dart';
 import 'package:red_bus_crocos_project/application/sight_detail/sight_detail_bloc.dart';
+import 'package:red_bus_crocos_project/infrastructure/sights/sights_wp_repository.dart';
 import '../../core/constants/app_assets.dart';
 import '../../core/theme/colors.dart';
 import '../../domain/sight/sight_dto.dart';
@@ -35,6 +36,10 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
   void initState() {
     context.read<SightDetailBloc>().add(OpenSightEvent(widget.id));
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await SightsWPRepository.fetchThisOne();
+    });
   }
 
   final player = AudioPlayer();

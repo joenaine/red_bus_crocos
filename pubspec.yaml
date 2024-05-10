@@ -31,6 +31,8 @@ dependencies:
   geolocator: ^11.0.0
   get_it: ^7.6.7
   google_maps_flutter: ^2.6.1
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
   injectable: ^2.4.1
   overlay_support: ^2.1.0
   shared_preferences: ^2.2.2
@@ -46,6 +48,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^2.4.7
+  hive_generator: ^2.0.1
   injectable_generator: ^2.6.1
   json_serializable: ^6.7.1
 

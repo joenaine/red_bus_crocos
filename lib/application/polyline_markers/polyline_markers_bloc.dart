@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:red_bus_crocos_project/core/constants/app_variables.dart';
+import 'package:red_bus_crocos_project/domain/lat_lng/lat_lng_model.dart';
 
 part 'polyline_markers_event.dart';
 part 'polyline_markers_state.dart';
@@ -38,13 +40,40 @@ class PolylineMarkersBloc
     on<PolylineMarkersEvent>((event, emit) async {
       await event.map(
         generatePolylineMarkers: (_) async {
-          await getPolylinePoints().then((coordinates) {
-            generatePolylineFromPoints(coordinates);
-          });
+          await _openBox();
+          List<LatLngData> savedList = _retrievedData();
+          if (savedList.isEmpty) {
+            await getPolylinePoints().then((coordinates) {
+              _saveData(coordinates);
+              generatePolylineFromPoints(coordinates);
+            });
+          } else {
+            generatePolylineFromPoints(
+                savedList.map((e) => LatLng(e.latitude, e.longitude)).toList());
+          }
+
           emit(state.copyWith(polylines: polylines));
         },
       );
     });
+  }
+
+  late Box<LatLngData> _box;
+
+  Future<void> _openBox() async {
+    _box = await Hive.openBox<LatLngData>('lat_lng_box');
+  }
+
+  void _saveData(List<LatLng> latLngList) {
+    final List<LatLngData> dataList = latLngList
+        .map((latLng) => LatLngData(latLng.latitude, latLng.longitude))
+        .toList();
+
+    _box.addAll(dataList);
+  }
+
+  List<LatLngData> _retrievedData() {
+    return _box.values.toList();
   }
 
   Map<PolylineId, Polyline> polylines = {};

@@ -2,9 +2,7 @@ import 'dart:async';
 import 'dart:math' as Math;
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -16,8 +14,6 @@ import 'package:red_bus_crocos_project/core/theme/colors.dart';
 import 'package:red_bus_crocos_project/generated/locale_keys.g.dart';
 import 'package:red_bus_crocos_project/infrastructure/sights/sights_local_data.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffold_widget.dart';
-import 'package:red_bus_crocos_project/presentation/common_widgets/indents.dart';
-import 'package:red_bus_crocos_project/presentation/common_widgets/text_sizes.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
 @RoutePage()
