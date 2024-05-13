@@ -12,9 +12,9 @@ import 'package:connectivity_plus/connectivity_plus.dart' as _i4;
 import 'package:dio/dio.dart' as _i5;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:red_bus_crocos_project/application/bus_location/bus_location_bloc.dart'
+import 'package:red_bus_crocos_project/application/home/bus_location/bus_location_bloc.dart'
     as _i6;
-import 'package:red_bus_crocos_project/application/location/user_location_bloc.dart'
+import 'package:red_bus_crocos_project/application/home/location/user_location_bloc.dart'
     as _i12;
 import 'package:red_bus_crocos_project/domain/connectivity/i_connectivity_repository.dart'
     as _i9;

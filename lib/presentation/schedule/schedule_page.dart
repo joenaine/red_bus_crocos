@@ -136,12 +136,12 @@ class _SchedulePageState extends State<SchedulePage> {
                               height: 29,
                             ),
                             const SizedBox(width: 10),
-                            const Flexible(
+                            Flexible(
                               child: FittedBox(
                                 fit: BoxFit.contain,
                                 child: Text(
-                                  "Время в пути - 1 час 55 минут",
-                                  style: TextStyle(
+                                  LocaleKeys.travel_time.tr(),
+                                  style: const TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.w600,
                                     letterSpacing: -0.03,

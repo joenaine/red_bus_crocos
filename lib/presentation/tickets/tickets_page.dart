@@ -25,15 +25,19 @@ class TicketsPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 30),
-              _InfoContainer(title: 'Взрослый билет', price: '5000 тенге'),
+              _InfoContainer(
+                  title: LocaleKeys.adult_ticket.tr(),
+                  price: '5000 ${LocaleKeys.tenge.tr()}'),
               const SizedBox(height: 30),
               _InfoContainer(
-                title: 'Льготный билет для детей, студентов и пенсионеров',
-                price: '3000 тенге',
+                title: LocaleKeys.discount_ticket.tr(),
+                price: '3000 ${LocaleKeys.tenge.tr()}',
                 isSpecial: true,
               ),
               const SizedBox(height: 30),
-              _InfoContainer(title: 'Детям до 6 лет', price: 'бесплатно'),
+              _InfoContainer(
+                  title: LocaleKeys.child_under_six.tr(),
+                  price: LocaleKeys.free),
               const SizedBox(height: 30),
               InkWell(
                 onTap: () async {

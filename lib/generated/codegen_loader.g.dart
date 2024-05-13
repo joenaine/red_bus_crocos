@@ -23,7 +23,13 @@ class CodegenLoader extends AssetLoader{
   "error": "Ошибка",
   "departure_time": "Время отбытия",
   "arrival_time": "Время прибытия",
-  "buy_ticket": "Купить билет"
+  "buy_ticket": "Купить билет",
+  "travel_time": "Время в пути - 1 час 55 минут",
+  "adult_ticket": "Взрослый билет",
+  "discount_ticket": "Льготный билет для детей, студентов и пенсионеров",
+  "child_under_six": "Детям до 6 лет",
+  "free": "бесплатно",
+  "tenge": "тенге"
 };
 static const Map<String,dynamic> uk = {
   "route": "Маршрут",
@@ -34,7 +40,8 @@ static const Map<String,dynamic> uk = {
   "error": "Ошибка",
   "departure_time": "Время отбытия",
   "arrival_time": "Время прибытия",
-  "buy_ticket": "Купить билет"
+  "buy_ticket": "Купить билет",
+  "travel_time": "Время в пути - 1 час 55 минут"
 };
 static const Map<String,dynamic> en = {
   "route": "Routes",
@@ -45,7 +52,8 @@ static const Map<String,dynamic> en = {
   "error": "Error",
   "departure_time": "Departure Time",
   "arrival_time": "Arrival Time",
-  "buy_ticket": "Buy ticket"
+  "buy_ticket": "Buy ticket",
+  "travel_time": "Время в пути - 1 час 55 минут"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "uk": uk, "en": en};
 }

@@ -7,7 +7,8 @@
     "error": "Error",
     "departure_time": "Departure Time",
     "arrival_time": "Arrival Time",
-    "buy_ticket": "Buy ticket"
+    "buy_ticket": "Buy ticket",
+    "travel_time":"Время в пути - 1 час 55 минут"
 
 
 }

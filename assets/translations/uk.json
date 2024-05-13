@@ -7,5 +7,6 @@
     "error": "Ошибка",
     "departure_time": "Время отбытия",
     "arrival_time": "Время прибытия",
-    "buy_ticket": "Купить билет"
+    "buy_ticket": "Купить билет",
+    "travel_time":"Время в пути - 1 час 55 минут"
 }

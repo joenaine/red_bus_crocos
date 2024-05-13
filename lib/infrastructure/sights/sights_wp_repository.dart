@@ -11,7 +11,7 @@ class SightsWPRepository {
           await client.get('https://redbus.kz/ru/wp-json/wl/v1/posts');
 
       if (result.statusCode == 200) {
-        log(result.data[0].toString());
+        // log(result.data[0].toString());
         return SightWPDto.fromJson(result.data[0]);
       } else {
         throw Exception('Error on fetchCategories: ${result.statusCode}');

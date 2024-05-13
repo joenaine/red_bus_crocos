@@ -10,5 +10,11 @@ abstract class  LocaleKeys {
   static const departure_time = 'departure_time';
   static const arrival_time = 'arrival_time';
   static const buy_ticket = 'buy_ticket';
+  static const travel_time = 'travel_time';
+  static const adult_ticket = 'adult_ticket';
+  static const discount_ticket = 'discount_ticket';
+  static const child_under_six = 'child_under_six';
+  static const free = 'free';
+  static const tenge = 'tenge';
 
 }

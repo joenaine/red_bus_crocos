@@ -1,15 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:full_screen_image/full_screen_image.dart';
-import 'package:red_bus_crocos_project/application/sight/sights_bloc.dart';
 import 'package:red_bus_crocos_project/application/sight_detail/sight_detail_bloc.dart';
-import 'package:red_bus_crocos_project/infrastructure/sights/sights_wp_repository.dart';
 import '../../core/constants/app_assets.dart';
 import '../../core/theme/colors.dart';
 import '../../domain/sight/sight_dto.dart';
@@ -37,10 +33,6 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
   void initState() {
     context.read<SightDetailBloc>().add(OpenSightEvent(widget.id));
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await SightsWPRepository.fetchThisOne();
-    });
   }
 
   final cardController = PageController(viewportFraction: 1 / 1.1);

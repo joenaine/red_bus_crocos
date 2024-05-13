@@ -34,11 +34,11 @@ class BusStopsPage extends StatelessWidget {
             switch (state) {
               case SightsInitial():
                 return const Center(
-                  child: Text('Loading'),
+                  child: Text(LocaleKeys.loading),
                 );
               case SightsError():
                 return const Center(
-                  child: Text('Error'),
+                  child: Text(LocaleKeys.error),
                 );
               case SightsLoaded():
                 {
