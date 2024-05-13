@@ -2,8 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart' hide Router;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:red_bus_crocos_project/application/bus_location/bus_location_bloc.dart';
+import 'package:red_bus_crocos_project/application/information_modal/information_modal_bloc.dart';
 import 'package:red_bus_crocos_project/application/location/user_location_bloc.dart';
 import 'package:red_bus_crocos_project/application/polyline_markers/polyline_markers_bloc.dart';
+import 'package:red_bus_crocos_project/application/schedule/schedule_bloc.dart';
 import 'package:red_bus_crocos_project/core/theme/app_theme.dart';
 import 'package:red_bus_crocos_project/domain/location/i_user_location_repository.dart';
 import 'package:red_bus_crocos_project/features/connectivity/cubit/connectivity_cubit.dart';
@@ -38,8 +40,14 @@ class AppWidget extends StatelessWidget {
             create: (context) => PolylineMarkersBloc()
               ..add(const PolylineMarkersEvent.generatePolylineMarkers())),
         BlocProvider<SightDetailBloc>(create: (context) => SightDetailBloc()),
+        BlocProvider<ScheduleBloc>(
+            create: (context) =>
+                ScheduleBloc()..add(const ScheduleEvent.getSchedule())),
         BlocProvider<SightsBloc>(
             create: (context) => SightsBloc()..add(FetchSights())),
+        BlocProvider<InformationModalBloc>(
+            create: (context) => InformationModalBloc()
+              ..add(const InformationModalEvent.getInformationModal())),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

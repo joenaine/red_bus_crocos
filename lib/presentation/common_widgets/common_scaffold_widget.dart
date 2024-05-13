@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:red_bus_crocos_project/core/constants/app_assets.dart';
@@ -23,7 +24,7 @@ class CommonScaffoldWidget extends StatelessWidget {
       appBar: AppBar(
         title: Text(appBarTitle!),
         actions: [
-          InkWell(
+          GestureDetector(
             onTap: () {
               context.router.push(const ChooseLanguageRoute());
             },

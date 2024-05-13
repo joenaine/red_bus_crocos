@@ -7,13 +7,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:red_bus_crocos_project/application/bus_location/bus_location_bloc.dart';
+import 'package:red_bus_crocos_project/application/information_modal/information_modal_bloc.dart';
 import 'package:red_bus_crocos_project/application/location/user_location_bloc.dart';
 import 'package:red_bus_crocos_project/application/polyline_markers/polyline_markers_bloc.dart';
 import 'package:red_bus_crocos_project/core/constants/app_assets.dart';
 import 'package:red_bus_crocos_project/core/theme/colors.dart';
+import 'package:red_bus_crocos_project/domain/sight/sight_wp_dto.dart';
 import 'package:red_bus_crocos_project/generated/locale_keys.g.dart';
 import 'package:red_bus_crocos_project/infrastructure/sights/sights_local_data.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffold_widget.dart';
+import 'package:red_bus_crocos_project/presentation/common_widgets/indents.dart';
+import 'package:red_bus_crocos_project/presentation/common_widgets/text_sizes.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
 @RoutePage()
@@ -46,6 +50,12 @@ class _HomePageState extends State<HomePage> {
           .read<BusLocationBloc>()
           .add(const BusLocationEvent.getBusLocation());
     });
+    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+      context
+          .read<InformationModalBloc>()
+          .add(const InformationModalEvent.getInformationModal());
+    });
+
     initIcons();
   }
 
@@ -123,6 +133,9 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
+  bool trigger = false;
+  SightWPDto? modalInfo;
+
   @override
   Widget build(BuildContext context) {
     return CommonScaffoldWidget(
@@ -155,6 +168,18 @@ class _HomePageState extends State<HomePage> {
                   loadFailure: (_) {},
                   locationDisabled: (_) {},
                   locationPermissionDisabled: (_) {});
+            },
+          ),
+          BlocListener<InformationModalBloc, InformationModalState>(
+            listener: (context, state) {
+              modalInfo = state.modalInfo;
+              if (state.modalInfo?.acfData?.trigger == true) {
+                trigger = true;
+                modalInfo = state.modalInfo;
+              } else {
+                trigger = false;
+              }
+              setState(() {});
             },
           ),
           BlocListener<BusLocationBloc, BusLocationState>(
@@ -200,32 +225,31 @@ class _HomePageState extends State<HomePage> {
               markers: mapMarkers,
               polylines: mapPolylines,
             ),
-            // Align(
-            //   alignment: Alignment.bottomCenter,
-            //   child: Container(
-            //     width: double.infinity,
-            //     margin: const EdgeInsets.only(
-            //         bottom: kBottomNavigationBarHeight + 50,
-            //         right: 16,
-            //         left: 16),
-            //     padding: const EdgeInsets.all(25),
-            //     decoration: BoxDecoration(
-            //         color: AppColors.red,
-            //         borderRadius: BorderRadius.circular(30)),
-            //     height: 170,
-            //     child: Column(
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //       children: [
-            //         TextSizes.s24w500('Технические работы'),
-            //         Indent.h8(),
-            //         TextSizes.s16w500(
-            //             'Уважаемые пользователи.\nВедутся технических работ. Приносим свои извинения за ожидание.')
-            //       ],
-            //     ),
-            //   ),
-            // ),
-
-            if (myLocation != null)
+            if (trigger)
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.only(
+                      bottom: kBottomNavigationBarHeight + 50,
+                      right: 16,
+                      left: 16),
+                  padding: const EdgeInsets.all(25),
+                  decoration: BoxDecoration(
+                      color: AppColors.red,
+                      borderRadius: BorderRadius.circular(30)),
+                  height: 180,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextSizes.s24w500(modalInfo?.title ?? ''),
+                      Indent.h8(),
+                      TextSizes.s16w500(modalInfo?.content ?? '')
+                    ],
+                  ),
+                ),
+              ),
+            if (myLocation != null && !trigger)
               Positioned(
                   right: 10,
                   bottom: kBottomNavigationBarHeight + 40,
@@ -240,7 +264,7 @@ class _HomePageState extends State<HomePage> {
                       child: Icon(Icons.my_location),
                     ),
                   )),
-            if (busPosition != null)
+            if (busPosition != null && !trigger)
               Positioned(
                   right: 10,
                   bottom: kBottomNavigationBarHeight + 120,

@@ -71,7 +71,7 @@ class UserLocationBloc extends Bloc<UserLocationEvent, UserLocationState> {
         );
 
     if (location is UserLocation) {
-      log(location.toString());
+      // log(location.toString());
       final isLocationDifferent =
           await _userLocationRepository.isLocationDifferent(location);
 
@@ -124,7 +124,7 @@ class UserLocationBloc extends Bloc<UserLocationEvent, UserLocationState> {
         },
       );
     } else {
-      log(event.failureOrUserLocation.toString());
+      // log(event.failureOrUserLocation.toString());
       var location = event.failureOrUserLocation as UserLocation;
       String userAddress = 'Unable to locate';
 

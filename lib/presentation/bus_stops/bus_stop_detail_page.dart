@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:full_screen_image/full_screen_image.dart';
 import 'package:red_bus_crocos_project/application/sight/sights_bloc.dart';
 import 'package:red_bus_crocos_project/application/sight_detail/sight_detail_bloc.dart';
 import 'package:red_bus_crocos_project/infrastructure/sights/sights_wp_repository.dart';
@@ -41,6 +42,8 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
       await SightsWPRepository.fetchThisOne();
     });
   }
+
+  final cardController = PageController(viewportFraction: 1 / 1.1);
 
   final player = AudioPlayer();
   int selectedIndex = 0;
@@ -110,21 +113,22 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
                       const SizedBox(height: 15),
                       SizedBox(
                         height: 200,
-                        child: ListView.builder(
-                          physics: const PageScrollPhysics(),
-                          padding: EdgeInsets.zero,
+                        child: PageView.builder(
+                          controller: cardController,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return Padding(
-                              padding: EdgeInsets.only(
-                                  left: index == 0 ? 20 : 0, right: 5),
+                              padding: const EdgeInsets.only(right: 5.0),
                               child: AspectRatio(
                                 aspectRatio: 351 / 200,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: CachedNetworkImage(
-                                      fit: BoxFit.fill,
-                                      imageUrl: data.photos?[index] ?? ''),
+                                child: FullScreenWidget(
+                                  disposeLevel: DisposeLevel.High,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: CachedNetworkImage(
+                                        fit: BoxFit.fitWidth,
+                                        imageUrl: data.photos?[index] ?? ''),
+                                  ),
                                 ),
                               ),
                             );

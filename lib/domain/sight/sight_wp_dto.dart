@@ -1,82 +1,49 @@
-import 'dart:convert';
-
 class SightWPDto {
-  final int? id;
-  final String? title;
-  final String? content;
-  final String? slug;
-  SightWPDto({
-    this.id,
-    this.title,
-    this.content,
-    this.slug,
-  });
+  int? id;
+  String? title;
+  String? content;
+  String? slug;
+  AcfData? acfData;
 
-  SightWPDto copyWith({
-    int? id,
-    String? title,
-    String? content,
-    String? slug,
-  }) {
-    return SightWPDto(
-      id: id ?? this.id,
-      title: title ?? this.title,
-      content: content ?? this.content,
-      slug: slug ?? this.slug,
-    );
+  SightWPDto({this.id, this.title, this.content, this.slug, this.acfData});
+
+  SightWPDto.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    content = json['content'];
+    slug = json['slug'];
+    acfData =
+        json['acf_data'] != null ? AcfData.fromJson(json['acf_data']) : null;
   }
 
-  Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-
-    if (id != null) {
-      result.addAll({'id': id});
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['content'] = content;
+    data['slug'] = slug;
+    if (acfData != null) {
+      data['acf_data'] = acfData!.toJson();
     }
-    if (title != null) {
-      result.addAll({'title': title});
-    }
-    if (content != null) {
-      result.addAll({'content': content});
-    }
-    if (slug != null) {
-      result.addAll({'slug': slug});
-    }
+    return data;
+  }
+}
 
-    return result;
+class AcfData {
+  bool? b3dTurs;
+  bool? trigger;
+
+  AcfData({this.b3dTurs, this.trigger});
+
+  AcfData.fromJson(Map<String, dynamic> json) {
+    b3dTurs = json['3d_turs'];
+    trigger = json['trigger'];
   }
 
-  factory SightWPDto.fromMap(Map<String, dynamic> map) {
-    return SightWPDto(
-      id: map['id']?.toInt(),
-      title: map['title'],
-      content: map['content'],
-      slug: map['slug'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory SightWPDto.fromJson(String source) =>
-      SightWPDto.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'SightWPDto(id: $id, title: $title, content: $content, slug: $slug)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is SightWPDto &&
-        other.id == id &&
-        other.title == title &&
-        other.content == content &&
-        other.slug == slug;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^ title.hashCode ^ content.hashCode ^ slug.hashCode;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['3d_turs'] = b3dTurs;
+    data['trigger'] = trigger;
+    return data;
   }
 }

@@ -12,7 +12,7 @@ class SightsWPRepository {
 
       if (result.statusCode == 200) {
         log(result.data[0].toString());
-        return SightWPDto.fromMap(result.data[0]);
+        return SightWPDto.fromJson(result.data[0]);
       } else {
         throw Exception('Error on fetchCategories: ${result.statusCode}');
       }
@@ -30,7 +30,7 @@ class SightsWPRepository {
 
       if (result.statusCode == 200) {
         return ((result.data as List)
-            .map((e) => SightWPDto.fromMap(e))
+            .map((e) => SightWPDto.fromJson(e))
             .toList());
       } else {
         throw Exception('Error on fetchCategories: ${result.statusCode}');
