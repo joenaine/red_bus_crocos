@@ -1,9 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:red_bus_crocos_project/core/theme/colors.dart';
@@ -110,45 +108,54 @@ class BusStopItemWidget extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                width: 29,
-                height: 29,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                      color: AppColors.red,
-                      borderRadius: BorderRadius.circular(29)),
-                  child: Center(
-                    child: Text(
-                      num,
-                      style: const TextStyle(
-                          color: AppColors.white, fontSize: 24, height: 1.2),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
               Flexible(
-                child: FittedBox(
-                  fit: BoxFit.contain,
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: -0.03),
-                  ),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 29,
+                      height: 29,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                            color: AppColors.red,
+                            borderRadius: BorderRadius.circular(29)),
+                        child: Center(
+                          child: Text(
+                            num,
+                            style: const TextStyle(
+                                color: AppColors.white,
+                                fontSize: 24,
+                                height: 1.2),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: Text(
+                          title,
+                          style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: -0.03),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(width: 50),
+              const SizedBox(width: 10),
               SvgPicture.asset(AppAssets.svg.arrowRight)
             ],
           ),
           const SizedBox(height: 10),
-          Text(
-            subTitle,
-            style: const TextStyle(letterSpacing: -0.03),
-          )
+          // Text(
+          //   subTitle,
+          //   style: const TextStyle(letterSpacing: -0.03),
+          // )
         ],
       ),
     );

@@ -19,6 +19,7 @@ import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffo
 import 'package:red_bus_crocos_project/presentation/common_widgets/indents.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/text_sizes.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
+import 'package:huawei_map/huawei_map.dart' as hmaps;
 
 @RoutePage()
 class HomePage extends StatefulWidget {
@@ -38,13 +39,29 @@ class _HomePageState extends State<HomePage> {
   final Completer<GoogleMapController> _mapController =
       Completer<GoogleMapController>();
 
+  final Completer<hmaps.HuaweiMapController> _huaweiMapController =
+      Completer<hmaps.HuaweiMapController>();
+
   Completer<BitmapDescriptor> starIconCompleter = Completer();
   Completer<BitmapDescriptor> userIconCompleter = Completer();
   Completer<BitmapDescriptor> busIconCompleter = Completer();
 
+  bool isHuawei = false;
+
+  // Future<void> _checkDevice() async {
+  //   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+  //   AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+  //   if (androidInfo.manufacturer.toLowerCase() == 'huawei') {
+  //     setState(() {
+  //       isHuawei = true;
+  //     });
+  //   }
+  // }
+
   @override
   void initState() {
     super.initState();
+    // _checkDevice();
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       context
           .read<BusLocationBloc>()
@@ -217,15 +234,25 @@ class _HomePageState extends State<HomePage> {
         ],
         child: Stack(
           children: [
-            GoogleMap(
-              onMapCreated: (controller) {
-                _mapController.complete(controller);
-              },
-              initialCameraPosition:
-                  CameraPosition(target: _pAstana, zoom: zoomValue),
-              markers: mapMarkers,
-              polylines: mapPolylines,
-            ),
+            if (isHuawei)
+              hmaps.HuaweiMap(
+                onMapCreated: (hmaps.HuaweiMapController controller) {
+                  _huaweiMapController.complete(controller);
+                },
+                initialCameraPosition: hmaps.CameraPosition(
+                    target: hmaps.LatLng(_pAstana.latitude, _pAstana.longitude),
+                    zoom: zoomValue),
+              ),
+            if (!isHuawei)
+              GoogleMap(
+                onMapCreated: (controller) {
+                  _mapController.complete(controller);
+                },
+                initialCameraPosition:
+                    CameraPosition(target: _pAstana, zoom: zoomValue),
+                markers: mapMarkers,
+                polylines: mapPolylines,
+              ),
             if (trigger)
               Align(
                 alignment: Alignment.bottomCenter,

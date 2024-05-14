@@ -1,14 +1,28 @@
+import 'dart:isolate';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:red_bus_crocos_project/app_widget.dart';
 import 'package:red_bus_crocos_project/core/constants/app_assets.dart';
 import 'package:red_bus_crocos_project/core/theme/colors.dart';
 import 'package:red_bus_crocos_project/core/utils/translation.dart';
+import 'package:red_bus_crocos_project/generated/codegen_loader.g.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/text_sizes.dart';
+import 'package:restart_app/restart_app.dart';
 
 @RoutePage()
-class ChooseLanguagePage extends StatelessWidget {
+class ChooseLanguagePage extends StatefulWidget {
   const ChooseLanguagePage({super.key});
+
+  @override
+  State<ChooseLanguagePage> createState() => _ChooseLanguagePageState();
+}
+
+class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
+  void restartApp() {
+    Restart.restartApp();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +44,10 @@ class ChooseLanguagePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: getLocale.values
                   .map((e) => InkWell(
-                        onTap: () async {
-                          await context.setLocale(Locale(getLocale.keys
-                              .firstWhere(
-                                  (element) => getLocale[element] == e)));
-                          context.router.maybePop();
+                        onTap: () {
+                          context.setLocale(Locale(getLocale.keys.firstWhere(
+                              (element) => getLocale[element] == e)));
+                          restartApp();
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(

@@ -11,7 +11,7 @@ class ScheduleRepository {
           await client.get('https://redbus.kz/ru/wp-json/wl/v1/page/marshruty');
 
       if (result.statusCode == 200) {
-        log(result.data["acf_data"].toString());
+        // log(result.data["acf_data"].toString());
         return AcfData.fromJson(result.data["acf_data"]);
       } else {
         throw Exception('Error on fetchCategories: ${result.statusCode}');
