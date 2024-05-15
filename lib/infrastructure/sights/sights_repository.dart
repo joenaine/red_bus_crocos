@@ -1,8 +1,20 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../domain/sight/sight_dto.dart';
+import 'package:red_bus_crocos_project/core/theme/theme_global_var.dart'
+    as global;
 
+@LazySingleton()
 class SightsRepository {
+  String getLocale() {
+    if (global.locale.toString() == 'uk') {
+      return 'kz';
+    } else {
+      return global.locale.toString();
+    }
+  }
+
   Future<SightModel> fetchThisOne(String id) async {
     try {
       final client = Dio();
@@ -10,7 +22,7 @@ class SightsRepository {
           .post('https://ais.citypass.kz/app/v1/objects/data', data: {
         "api_key": "rTD6psMNcuMfewz8YAv825X",
         "project_id": "1",
-        "lang": "ru",
+        "lang": getLocale(),
         "object_id": id,
       });
 
@@ -32,7 +44,7 @@ class SightsRepository {
           .post('https://ais.citypass.kz/app/v1/objects/cat-list', data: {
         "api_key": "rTD6psMNcuMfewz8YAv825X",
         "project_id": "1",
-        "lang": "ru"
+        "lang": getLocale()
       });
 
       if (result.statusCode == 200) {

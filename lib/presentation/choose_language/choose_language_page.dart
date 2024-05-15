@@ -3,7 +3,9 @@ import 'dart:isolate';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:red_bus_crocos_project/app_widget.dart';
+import 'package:red_bus_crocos_project/application/locale/locale_bloc.dart';
 import 'package:red_bus_crocos_project/core/constants/app_assets.dart';
 import 'package:red_bus_crocos_project/core/theme/colors.dart';
 import 'package:red_bus_crocos_project/core/utils/translation.dart';
@@ -47,6 +49,13 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                         onTap: () {
                           context.setLocale(Locale(getLocale.keys.firstWhere(
                               (element) => getLocale[element] == e)));
+                          BlocProvider.of<LocaleBloc>(context)
+                              .add(LocaleEvent.setLocale(
+                            Locale(
+                              getLocale.keys.firstWhere(
+                                  (element) => getLocale[element] == e),
+                            ),
+                          ));
                           restartApp();
                         },
                         child: Container(

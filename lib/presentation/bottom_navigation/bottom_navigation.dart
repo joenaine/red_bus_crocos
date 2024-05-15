@@ -9,6 +9,7 @@ import 'package:red_bus_crocos_project/core/theme/theme_global_var.dart'
 import 'package:red_bus_crocos_project/presentation/bottom_navigation/widget/bottom_nav_icon_widget.dart';
 import 'package:red_bus_crocos_project/presentation/bus_stops/bus_stops_page.dart';
 import 'package:red_bus_crocos_project/presentation/home/home_page.dart';
+import 'package:red_bus_crocos_project/presentation/home/widgets/huawei_map_widget.dart';
 import 'package:red_bus_crocos_project/presentation/schedule/schedule_page.dart';
 import 'package:red_bus_crocos_project/presentation/tickets/tickets_page.dart';
 

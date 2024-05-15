@@ -31,7 +31,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   static const LatLng _pAstana = LatLng(51.1323332, 71.4237316);
 
-  // final LatLng _busLocation = const LatLng(51.1107, 71.5327233);
   late Timer _timer;
 
   double zoomValue = 12;
@@ -195,10 +194,10 @@ class _HomePageState extends State<HomePage> {
                   mapMarkers.add(Marker(
                       markerId: const MarkerId('busLocation'),
                       icon: icon,
-                      position: busLocation.current,
+                      position: busLocation.current!,
                       rotation: busLocation.prev != null
                           ? calculateBearing(
-                              busLocation.prev!, busLocation.current)
+                              busLocation.prev!, busLocation.current!)
                           : 0.0));
                   busPosition = busLocation.current;
 

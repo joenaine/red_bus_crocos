@@ -5,6 +5,8 @@ import 'package:red_bus_crocos_project/application/home/bus_location/bus_locatio
 import 'package:red_bus_crocos_project/application/home/information_modal/information_modal_bloc.dart';
 import 'package:red_bus_crocos_project/application/home/location/user_location_bloc.dart';
 import 'package:red_bus_crocos_project/application/home/polyline_markers/polyline_markers_bloc.dart';
+import 'package:red_bus_crocos_project/application/home/polyline_markers_huawei/polyline_markers_huawei_bloc.dart';
+import 'package:red_bus_crocos_project/application/locale/locale_bloc.dart';
 import 'package:red_bus_crocos_project/application/schedule/schedule_bloc.dart';
 import 'package:red_bus_crocos_project/core/theme/app_theme.dart';
 import 'package:red_bus_crocos_project/domain/location/i_user_location_repository.dart';
@@ -39,15 +41,23 @@ class AppWidget extends StatelessWidget {
         BlocProvider<PolylineMarkersBloc>(
             create: (context) => PolylineMarkersBloc()
               ..add(const PolylineMarkersEvent.generatePolylineMarkers())),
-        BlocProvider<SightDetailBloc>(create: (context) => SightDetailBloc()),
+        BlocProvider<PolylineMarkersHuaweiBloc>(
+            create: (context) => PolylineMarkersHuaweiBloc()
+              ..add(
+                  const PolylineMarkersHuaweiEvent.generatePolylineMarkers())),
+        BlocProvider<SightDetailBloc>(
+            create: (context) => getIt<SightDetailBloc>()),
         BlocProvider<ScheduleBloc>(
             create: (context) =>
                 ScheduleBloc()..add(const ScheduleEvent.getSchedule())),
         BlocProvider<SightsBloc>(
-            create: (context) => SightsBloc()..add(FetchSights())),
+            create: (context) => getIt<SightsBloc>()..add(FetchSights())),
         BlocProvider<InformationModalBloc>(
             create: (context) => InformationModalBloc()
               ..add(const InformationModalEvent.getInformationModal())),
+        BlocProvider<LocaleBloc>(
+          create: (context) => getIt<LocaleBloc>(),
+        ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

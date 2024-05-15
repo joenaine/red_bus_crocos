@@ -169,19 +169,25 @@ mixin _$BusLocationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(LatLng current, LatLng? prev) busLoaded,
+    required TResult Function(gMaps.LatLng? current, gMaps.LatLng? prev,
+            hMaps.LatLng? currentHmaps, hMaps.LatLng? prevHmaps)
+        busLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(LatLng current, LatLng? prev)? busLoaded,
+    TResult? Function(gMaps.LatLng? current, gMaps.LatLng? prev,
+            hMaps.LatLng? currentHmaps, hMaps.LatLng? prevHmaps)?
+        busLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(LatLng current, LatLng? prev)? busLoaded,
+    TResult Function(gMaps.LatLng? current, gMaps.LatLng? prev,
+            hMaps.LatLng? currentHmaps, hMaps.LatLng? prevHmaps)?
+        busLoaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -263,7 +269,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(LatLng current, LatLng? prev) busLoaded,
+    required TResult Function(gMaps.LatLng? current, gMaps.LatLng? prev,
+            hMaps.LatLng? currentHmaps, hMaps.LatLng? prevHmaps)
+        busLoaded,
   }) {
     return initial();
   }
@@ -272,7 +280,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(LatLng current, LatLng? prev)? busLoaded,
+    TResult? Function(gMaps.LatLng? current, gMaps.LatLng? prev,
+            hMaps.LatLng? currentHmaps, hMaps.LatLng? prevHmaps)?
+        busLoaded,
   }) {
     return initial?.call();
   }
@@ -281,7 +291,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(LatLng current, LatLng? prev)? busLoaded,
+    TResult Function(gMaps.LatLng? current, gMaps.LatLng? prev,
+            hMaps.LatLng? currentHmaps, hMaps.LatLng? prevHmaps)?
+        busLoaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -332,7 +344,11 @@ abstract class _$$BusLoadedImplCopyWith<$Res> {
           _$BusLoadedImpl value, $Res Function(_$BusLoadedImpl) then) =
       __$$BusLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({LatLng current, LatLng? prev});
+  $Res call(
+      {gMaps.LatLng? current,
+      gMaps.LatLng? prev,
+      hMaps.LatLng? currentHmaps,
+      hMaps.LatLng? prevHmaps});
 }
 
 /// @nodoc
@@ -346,18 +362,28 @@ class __$$BusLoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? current = null,
+    Object? current = freezed,
     Object? prev = freezed,
+    Object? currentHmaps = freezed,
+    Object? prevHmaps = freezed,
   }) {
     return _then(_$BusLoadedImpl(
-      null == current
+      current: freezed == current
           ? _value.current
           : current // ignore: cast_nullable_to_non_nullable
-              as LatLng,
-      freezed == prev
+              as gMaps.LatLng?,
+      prev: freezed == prev
           ? _value.prev
           : prev // ignore: cast_nullable_to_non_nullable
-              as LatLng?,
+              as gMaps.LatLng?,
+      currentHmaps: freezed == currentHmaps
+          ? _value.currentHmaps
+          : currentHmaps // ignore: cast_nullable_to_non_nullable
+              as hMaps.LatLng?,
+      prevHmaps: freezed == prevHmaps
+          ? _value.prevHmaps
+          : prevHmaps // ignore: cast_nullable_to_non_nullable
+              as hMaps.LatLng?,
     ));
   }
 }
@@ -365,16 +391,21 @@ class __$$BusLoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BusLoadedImpl implements _BusLoaded {
-  const _$BusLoadedImpl(this.current, this.prev);
+  const _$BusLoadedImpl(
+      {this.current, this.prev, this.currentHmaps, this.prevHmaps});
 
   @override
-  final LatLng current;
+  final gMaps.LatLng? current;
   @override
-  final LatLng? prev;
+  final gMaps.LatLng? prev;
+  @override
+  final hMaps.LatLng? currentHmaps;
+  @override
+  final hMaps.LatLng? prevHmaps;
 
   @override
   String toString() {
-    return 'BusLocationState.busLoaded(current: $current, prev: $prev)';
+    return 'BusLocationState.busLoaded(current: $current, prev: $prev, currentHmaps: $currentHmaps, prevHmaps: $prevHmaps)';
   }
 
   @override
@@ -383,11 +414,16 @@ class _$BusLoadedImpl implements _BusLoaded {
         (other.runtimeType == runtimeType &&
             other is _$BusLoadedImpl &&
             (identical(other.current, current) || other.current == current) &&
-            (identical(other.prev, prev) || other.prev == prev));
+            (identical(other.prev, prev) || other.prev == prev) &&
+            (identical(other.currentHmaps, currentHmaps) ||
+                other.currentHmaps == currentHmaps) &&
+            (identical(other.prevHmaps, prevHmaps) ||
+                other.prevHmaps == prevHmaps));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, current, prev);
+  int get hashCode =>
+      Object.hash(runtimeType, current, prev, currentHmaps, prevHmaps);
 
   @JsonKey(ignore: true)
   @override
@@ -399,29 +435,35 @@ class _$BusLoadedImpl implements _BusLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(LatLng current, LatLng? prev) busLoaded,
+    required TResult Function(gMaps.LatLng? current, gMaps.LatLng? prev,
+            hMaps.LatLng? currentHmaps, hMaps.LatLng? prevHmaps)
+        busLoaded,
   }) {
-    return busLoaded(current, prev);
+    return busLoaded(current, prev, currentHmaps, prevHmaps);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(LatLng current, LatLng? prev)? busLoaded,
+    TResult? Function(gMaps.LatLng? current, gMaps.LatLng? prev,
+            hMaps.LatLng? currentHmaps, hMaps.LatLng? prevHmaps)?
+        busLoaded,
   }) {
-    return busLoaded?.call(current, prev);
+    return busLoaded?.call(current, prev, currentHmaps, prevHmaps);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(LatLng current, LatLng? prev)? busLoaded,
+    TResult Function(gMaps.LatLng? current, gMaps.LatLng? prev,
+            hMaps.LatLng? currentHmaps, hMaps.LatLng? prevHmaps)?
+        busLoaded,
     required TResult orElse(),
   }) {
     if (busLoaded != null) {
-      return busLoaded(current, prev);
+      return busLoaded(current, prev, currentHmaps, prevHmaps);
     }
     return orElse();
   }
@@ -459,11 +501,16 @@ class _$BusLoadedImpl implements _BusLoaded {
 }
 
 abstract class _BusLoaded implements BusLocationState {
-  const factory _BusLoaded(final LatLng current, final LatLng? prev) =
-      _$BusLoadedImpl;
+  const factory _BusLoaded(
+      {final gMaps.LatLng? current,
+      final gMaps.LatLng? prev,
+      final hMaps.LatLng? currentHmaps,
+      final hMaps.LatLng? prevHmaps}) = _$BusLoadedImpl;
 
-  LatLng get current;
-  LatLng? get prev;
+  gMaps.LatLng? get current;
+  gMaps.LatLng? get prev;
+  hMaps.LatLng? get currentHmaps;
+  hMaps.LatLng? get prevHmaps;
   @JsonKey(ignore: true)
   _$$BusLoadedImplCopyWith<_$BusLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;

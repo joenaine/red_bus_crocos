@@ -4,6 +4,7 @@ import 'package:red_bus_crocos_project/presentation/bottom_navigation/bottom_nav
 import 'package:red_bus_crocos_project/presentation/bus_stops/bus_stops_page.dart';
 import 'package:red_bus_crocos_project/presentation/choose_language/choose_language_page.dart';
 import 'package:red_bus_crocos_project/presentation/home/home_page.dart';
+import 'package:red_bus_crocos_project/presentation/home/widgets/huawei_map_widget.dart';
 import 'package:red_bus_crocos_project/presentation/schedule/schedule_page.dart';
 import 'package:red_bus_crocos_project/presentation/tickets/tickets_page.dart';
 
@@ -21,5 +22,6 @@ class AppRouter extends _$AppRouter {
     AdaptiveRoute(page: BottomNavigationRoute.page, initial: true),
     AdaptiveRoute(page: BusStopDetailRoute.page),
     AdaptiveRoute(page: ChooseLanguageRoute.page),
+    AdaptiveRoute(page: HuaweiHomeRoute.page),
   ];
 }

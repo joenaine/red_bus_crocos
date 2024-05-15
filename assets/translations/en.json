@@ -1,14 +1,17 @@
 {
-    "route":"Routes",
-    "bus_stops":"Остановки",
-    "schedule":"Расписание",
-    "tickets":"Билеты",
+    "route": "Route",
+    "bus_stops": "Bus Stops",
+    "schedule": "Schedule",
+    "tickets": "Tickets",
     "loading": "Loading",
     "error": "Error",
     "departure_time": "Departure Time",
     "arrival_time": "Arrival Time",
-    "buy_ticket": "Buy ticket",
-    "travel_time":"Время в пути - 1 час 55 минут"
-
-
+    "buy_ticket": "Buy Ticket",
+    "travel_time": "Travel Time - 1 hour 55 minutes",
+    "adult_ticket": "Adult Ticket",
+    "discount_ticket": "Discount Ticket for Children, Students, and Pensioners",
+    "child_under_six": "Children under 6",
+    "free": "free",
+    "tenge": "tenge"
 }

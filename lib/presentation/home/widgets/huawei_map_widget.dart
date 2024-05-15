@@ -5,11 +5,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:red_bus_crocos_project/application/home/bus_location/bus_location_bloc.dart';
 import 'package:red_bus_crocos_project/application/home/information_modal/information_modal_bloc.dart';
 import 'package:red_bus_crocos_project/application/home/location/user_location_bloc.dart';
-import 'package:red_bus_crocos_project/application/home/polyline_markers/polyline_markers_bloc.dart';
+import 'package:red_bus_crocos_project/application/home/polyline_markers_huawei/polyline_markers_huawei_bloc.dart';
 import 'package:red_bus_crocos_project/core/constants/app_assets.dart';
 import 'package:red_bus_crocos_project/core/theme/colors.dart';
 import 'package:red_bus_crocos_project/domain/sight/sight_wp_dto.dart';
@@ -18,45 +17,31 @@ import 'package:red_bus_crocos_project/infrastructure/sights/sights_local_data.d
 import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffold_widget.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/indents.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/text_sizes.dart';
-import 'package:widget_to_marker/widget_to_marker.dart';
-import 'package:huawei_map/huawei_map.dart' as hmaps;
+import 'package:red_bus_crocos_project/presentation/home/widgets/huawei_bitmap.dart';
+import 'package:huawei_map/huawei_map.dart';
 
 @RoutePage()
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HuaweiHomePage extends StatefulWidget {
+  const HuaweiHomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HuaweiHomePage> createState() => _HuaweiHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HuaweiHomePageState extends State<HuaweiHomePage> {
   static const LatLng _pAstana = LatLng(51.1323332, 71.4237316);
 
   // final LatLng _busLocation = const LatLng(51.1107, 71.5327233);
   late Timer _timer;
 
   double zoomValue = 12;
-  final Completer<GoogleMapController> _mapController =
-      Completer<GoogleMapController>();
 
-  final Completer<hmaps.HuaweiMapController> _huaweiMapController =
-      Completer<hmaps.HuaweiMapController>();
+  final Completer<HuaweiMapController> _huaweiMapController =
+      Completer<HuaweiMapController>();
 
   Completer<BitmapDescriptor> starIconCompleter = Completer();
   Completer<BitmapDescriptor> userIconCompleter = Completer();
   Completer<BitmapDescriptor> busIconCompleter = Completer();
-
-  bool isHuawei = false;
-
-  // Future<void> _checkDevice() async {
-  //   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-  //   AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-  //   if (androidInfo.manufacturer.toLowerCase() == 'huawei') {
-  //     setState(() {
-  //       isHuawei = true;
-  //     });
-  //   }
-  // }
 
   @override
   void initState() {
@@ -77,16 +62,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   void initIcons() async {
-    BitmapDescriptor starIcon =
-        await SvgPicture.asset(AppAssets.svg.redStar).toBitmapDescriptor();
+    BitmapDescriptor starIcon = await SvgPicture.asset(AppAssets.svg.redStar)
+        .toBitmapDescriptorHuawei();
     starIconCompleter.complete(starIcon);
 
-    BitmapDescriptor busIcon =
-        await SvgPicture.asset(AppAssets.svg.busLocation).toBitmapDescriptor();
+    BitmapDescriptor busIcon = await SvgPicture.asset(AppAssets.svg.busLocation)
+        .toBitmapDescriptorHuawei();
     busIconCompleter.complete(busIcon);
 
     BitmapDescriptor userIcon =
-        await SvgPicture.asset(AppAssets.svg.userLocation).toBitmapDescriptor();
+        await SvgPicture.asset(AppAssets.svg.userLocation)
+            .toBitmapDescriptorHuawei();
     userIconCompleter.complete(userIcon);
 
     mapMarkers.addAll(sightSeeingList
@@ -115,10 +101,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   double calculateBearing(LatLng startPoint, LatLng endPoint) {
-    final double startLat = toRadians(startPoint.latitude);
-    final double startLng = toRadians(startPoint.longitude);
-    final double endLat = toRadians(endPoint.latitude);
-    final double endLng = toRadians(endPoint.longitude);
+    final double startLat = toRadians(startPoint.lat);
+    final double startLng = toRadians(startPoint.lng);
+    final double endLat = toRadians(endPoint.lat);
+    final double endLng = toRadians(endPoint.lng);
 
     final double deltaLng = endLng - startLng;
 
@@ -167,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                   loadSuccess: (value) async {
                     final icon = await userIconCompleter.future;
                     mapMarkers.removeWhere(
-                        (element) => element.markerId.value == "_myLocation");
+                        (element) => element.markerId.id == "_myLocation");
                     mapMarkers.add(
                       Marker(
                         markerId: const MarkerId('_myLocation'),
@@ -208,23 +194,23 @@ class _HomePageState extends State<HomePage> {
                   final icon = await busIconCompleter.future;
 
                   mapMarkers.removeWhere(
-                      (element) => element.markerId.value == "busLocation");
+                      (element) => element.markerId.id == "busLocation");
                   mapMarkers.add(Marker(
                       markerId: const MarkerId('busLocation'),
                       icon: icon,
-                      position: busLocation.current,
+                      position: busLocation.currentHmaps!,
                       rotation: busLocation.prev != null
                           ? calculateBearing(
-                              busLocation.prev!, busLocation.current)
+                              busLocation.prevHmaps!, busLocation.currentHmaps!)
                           : 0.0));
-                  busPosition = busLocation.current;
+                  busPosition = busLocation.currentHmaps;
 
                   setState(() {});
                 },
               );
             },
           ),
-          BlocListener<PolylineMarkersBloc, PolylineMarkersState>(
+          BlocListener<PolylineMarkersHuaweiBloc, PolylineMarkersHuaweiState>(
             listener: (context, state) {
               setState(() {
                 mapPolylines = Set<Polyline>.of(state.polylines?.values ?? {});
@@ -234,25 +220,13 @@ class _HomePageState extends State<HomePage> {
         ],
         child: Stack(
           children: [
-            if (isHuawei)
-              hmaps.HuaweiMap(
-                onMapCreated: (hmaps.HuaweiMapController controller) {
-                  _huaweiMapController.complete(controller);
-                },
-                initialCameraPosition: hmaps.CameraPosition(
-                    target: hmaps.LatLng(_pAstana.latitude, _pAstana.longitude),
-                    zoom: zoomValue),
-              ),
-            if (!isHuawei)
-              GoogleMap(
-                onMapCreated: (controller) {
-                  _mapController.complete(controller);
-                },
-                initialCameraPosition:
-                    CameraPosition(target: _pAstana, zoom: zoomValue),
-                markers: mapMarkers,
-                polylines: mapPolylines,
-              ),
+            HuaweiMap(
+              onMapCreated: (HuaweiMapController controller) {
+                _huaweiMapController.complete(controller);
+              },
+              initialCameraPosition: CameraPosition(
+                  target: LatLng(_pAstana.lat, _pAstana.lng), zoom: zoomValue),
+            ),
             if (trigger)
               Align(
                 alignment: Alignment.bottomCenter,
@@ -284,7 +258,7 @@ class _HomePageState extends State<HomePage> {
                   child: InkWell(
                     onTap: () {
                       _cameraToPosition(
-                          LatLng(myLocation!.latitude, myLocation!.longitude));
+                          LatLng(myLocation!.lat, myLocation!.lng));
                     },
                     child: const CircleAvatar(
                       radius: 30,
@@ -315,7 +289,7 @@ class _HomePageState extends State<HomePage> {
   Map<PolylineId, Polyline> polylines = {};
 
   Future<void> _cameraToPosition(LatLng pos) async {
-    final GoogleMapController controller = await _mapController.future;
+    final HuaweiMapController controller = await _huaweiMapController.future;
     CameraPosition newCameraPosition =
         CameraPosition(target: pos, zoom: zoomValue);
     await controller

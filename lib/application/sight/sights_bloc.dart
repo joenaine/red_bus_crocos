@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../domain/sight/sight_dto.dart';
@@ -8,11 +9,12 @@ part 'sights_event.dart';
 
 part 'sights_state.dart';
 
+@injectable
 class SightsBloc extends Bloc<SightsEvent, SightsState> {
-  final SightsRepository repository = SightsRepository();
+  final SightsRepository repository;
   Set<String> cachedIds = {};
 
-  SightsBloc() : super(SightsInitial()) {
+  SightsBloc(this.repository) : super(SightsInitial()) {
     on<SightsEvent>((event, emit) async {
       switch (event) {
         case FetchSights():

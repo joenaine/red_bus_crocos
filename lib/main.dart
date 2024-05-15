@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,6 +32,7 @@ Future<void> main() async {
           element.languageCode ==
           (shared.get('locale')! as String).substring(0, 2),
     );
+    log(global.locale.toString());
   }
   // Bloc.observer = RedBusBlocObserver();
   runApp(
