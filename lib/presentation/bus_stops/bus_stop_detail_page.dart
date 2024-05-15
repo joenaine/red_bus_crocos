@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:audioplayers/audioplayers.dart';
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:full_screen_image/full_screen_image.dart';
 import 'package:red_bus_crocos_project/application/sight_detail/sight_detail_bloc.dart';
@@ -37,7 +37,7 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
 
   final cardController = PageController(viewportFraction: 1 / 1.1);
 
-  final player = AudioPlayer();
+  // final player = AudioPlayer();
   int selectedIndex = 0;
 
   @override
@@ -151,8 +151,9 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
                                   children: [
                                     InkWell(
                                       onTap: () async {
-                                        await player.play(UrlSource(
-                                            'https://www.mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/Samples/AFsp/M1F1-Alaw-AFsp.wav'));
+                                        //TODO: AUDIO
+                                        // await player.play(UrlSource(
+                                        // 'https://www.mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/Samples/AFsp/M1F1-Alaw-AFsp.wav'));
                                       },
                                       child: const Icon(
                                         Icons.play_circle_outline,
