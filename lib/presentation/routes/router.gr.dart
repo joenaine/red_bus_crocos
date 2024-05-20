@@ -55,6 +55,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const HuaweiHomePage(),
       );
     },
+    InitialOnceRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const InitialOncePage(),
+      );
+    },
     ScheduleRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -174,6 +180,20 @@ class HuaweiHomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HuaweiHomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [InitialOncePage]
+class InitialOnceRoute extends PageRouteInfo<void> {
+  const InitialOnceRoute({List<PageRouteInfo>? children})
+      : super(
+          InitialOnceRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'InitialOnceRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -11,15 +11,6 @@ class BusLocationRepository {
 
     Dio dio = Dio();
 
-    // dio.options.preserveHeaderCase = true;
-    // dio.options.headers['content-Type'] = 'application/json';
-    // dio.options.headers["authorization"] = tok;
-
-    // FormData formData = FormData.fromMap({
-    //   "handler_id": '5cd37a6ed4fc7ae1ff1c612bf74bff00',
-    //   "status": "Complete",
-    // });
-
     try {
       Response response = await dio.get(
         url,

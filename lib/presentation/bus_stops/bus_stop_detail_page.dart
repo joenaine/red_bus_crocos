@@ -134,95 +134,95 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Аудиогид',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w600),
-                            ),
+                            // const Text(
+                            //   'Аудиогид',
+                            //   style: TextStyle(
+                            //       fontSize: 20, fontWeight: FontWeight.w600),
+                            // ),
                             const SizedBox(height: 12),
-                            DecoratedBox(
-                              decoration: BoxDecoration(
-                                color: const Color(0xffFFEDED),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: Row(
-                                  children: [
-                                    InkWell(
-                                      onTap: () async {
-                                        //TODO: AUDIO
-                                        // await player.play(UrlSource(
-                                        // 'https://www.mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/Samples/AFsp/M1F1-Alaw-AFsp.wav'));
-                                      },
-                                      child: const Icon(
-                                        Icons.play_circle_outline,
-                                        color: AppColors.red,
-                                        size: 37,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 15),
-                                    const Flexible(
-                                      child: Column(
-                                        children: [
-                                          Text('Аудиодорожка'),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                '02:00',
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: AppColors.red),
-                                              ),
-                                              Text(
-                                                '07:00',
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: AppColors.red),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                            Row(
-                              children: List.generate(
-                                countries.length,
-                                (index) => InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      selectedIndex = index;
-                                    });
-                                  },
-                                  child: CircleAvatar(
-                                    backgroundColor: selectedIndex == index
-                                        ? AppColors.red
-                                        : AppColors.backgroundLight,
-                                    radius: 25,
-                                    child: CircleAvatar(
-                                      backgroundColor:
-                                          AppColors.backgroundLight,
-                                      radius: 20,
-                                      child: CircleAvatar(
-                                        backgroundImage:
-                                            AssetImage(countries[index].$2),
-                                        radius: 17.5,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 25),
+                            // DecoratedBox(
+                            //   decoration: BoxDecoration(
+                            //     color: const Color(0xffFFEDED),
+                            //     borderRadius: BorderRadius.circular(15),
+                            //   ),
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.all(20),
+                            //     child: Row(
+                            //       children: [
+                            //         InkWell(
+                            //           onTap: () async {
+                            //             //TODO: AUDIO
+                            //             // await player.play(UrlSource(
+                            //             // 'https://www.mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/Samples/AFsp/M1F1-Alaw-AFsp.wav'));
+                            //           },
+                            //           child: const Icon(
+                            //             Icons.play_circle_outline,
+                            //             color: AppColors.red,
+                            //             size: 37,
+                            //           ),
+                            //         ),
+                            //         const SizedBox(width: 15),
+                            //         const Flexible(
+                            //           child: Column(
+                            //             children: [
+                            //               Text('Аудиодорожка'),
+                            //               Row(
+                            //                 mainAxisAlignment:
+                            //                     MainAxisAlignment.spaceBetween,
+                            //                 children: [
+                            //                   Text(
+                            //                     '02:00',
+                            //                     style: TextStyle(
+                            //                         fontSize: 12,
+                            //                         fontWeight: FontWeight.w600,
+                            //                         color: AppColors.red),
+                            //                   ),
+                            //                   Text(
+                            //                     '07:00',
+                            //                     style: TextStyle(
+                            //                         fontSize: 12,
+                            //                         fontWeight: FontWeight.w600,
+                            //                         color: AppColors.red),
+                            //                   ),
+                            //                 ],
+                            //               )
+                            //             ],
+                            //           ),
+                            //         )
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
+                            // const SizedBox(height: 12),
+                            // Row(
+                            //   children: List.generate(
+                            //     countries.length,
+                            //     (index) => InkWell(
+                            //       onTap: () {
+                            //         setState(() {
+                            //           selectedIndex = index;
+                            //         });
+                            //       },
+                            //       child: CircleAvatar(
+                            //         backgroundColor: selectedIndex == index
+                            //             ? AppColors.red
+                            //             : AppColors.backgroundLight,
+                            //         radius: 25,
+                            //         child: CircleAvatar(
+                            //           backgroundColor:
+                            //               AppColors.backgroundLight,
+                            //           radius: 20,
+                            //           child: CircleAvatar(
+                            //             backgroundImage:
+                            //                 AssetImage(countries[index].$2),
+                            //             radius: 17.5,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            // const SizedBox(height: 25),
                             Text(
                               data.description ?? '',
                               style: const TextStyle(

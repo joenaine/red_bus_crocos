@@ -1,4 +1,4 @@
-package com.example.red_bus_crocos_project
+package com.crocos.redbustour
 
 import io.flutter.embedding.android.FlutterActivity
 

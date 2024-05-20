@@ -11,7 +11,10 @@ import 'package:red_bus_crocos_project/core/theme/colors.dart';
 import 'package:red_bus_crocos_project/core/utils/translation.dart';
 import 'package:red_bus_crocos_project/generated/codegen_loader.g.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/text_sizes.dart';
+import 'package:red_bus_crocos_project/presentation/initial_once_page.dart';
+import 'package:red_bus_crocos_project/presentation/routes/router.dart';
 import 'package:restart_app/restart_app.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
 class ChooseLanguagePage extends StatefulWidget {
@@ -46,9 +49,10 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: getLocale.values
                   .map((e) => InkWell(
-                        onTap: () {
+                        onTap: () async {
                           context.setLocale(Locale(getLocale.keys.firstWhere(
                               (element) => getLocale[element] == e)));
+                          setShownPage();
                           BlocProvider.of<LocaleBloc>(context)
                               .add(LocaleEvent.setLocale(
                             Locale(
@@ -56,7 +60,14 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                                   (element) => getLocale[element] == e),
                             ),
                           ));
-                          restartApp();
+                          bool? isShownPage = await hasShownPage();
+                          if (!isShownPage) {
+                            context.router.pushAndPopUntil(
+                                const BottomNavigationRoute(),
+                                predicate: (route) => false);
+                          }
+
+                          if (isShownPage) restartApp();
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(

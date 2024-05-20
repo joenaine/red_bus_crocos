@@ -26,6 +26,7 @@ class TicketsPage extends StatelessWidget {
             children: [
               const SizedBox(height: 30),
               _InfoContainer(
+                  isSpecial: true,
                   title: LocaleKeys.adult_ticket.tr(),
                   price: '5000 ${LocaleKeys.tenge.tr()}'),
               const SizedBox(height: 30),
@@ -36,6 +37,7 @@ class TicketsPage extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               _InfoContainer(
+                  isSpecial: true,
                   title: LocaleKeys.child_under_six.tr(),
                   price: LocaleKeys.free),
               const SizedBox(height: 30),
@@ -100,6 +102,7 @@ class _InfoContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.shade300),
           color: isSpecial ? AppColors.white : AppColors.red,
           borderRadius: BorderRadius.circular(30)),
       child: Padding(
