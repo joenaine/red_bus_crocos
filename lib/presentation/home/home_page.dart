@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   static const LatLng _pAstana = LatLng(51.1323332, 71.4237316);
 
   late Timer _timer;
+  late Timer _timerInfoModal;
 
   double zoomValue = 12;
   final Completer<GoogleMapController> _mapController =
@@ -53,7 +54,7 @@ class _HomePageState extends State<HomePage> {
           .read<BusLocationBloc>()
           .add(const BusLocationEvent.getBusLocation());
     });
-    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+    _timerInfoModal = Timer.periodic(const Duration(seconds: 10), (timer) {
       context
           .read<InformationModalBloc>()
           .add(const InformationModalEvent.getInformationModal());
