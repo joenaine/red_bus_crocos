@@ -36,7 +36,11 @@ class CodegenLoader extends AssetLoader{
   "location_not_granted": "Разрешение на определение местоположения устройства не предоставлено",
   "enable": "Включить",
   "attention": "Внимание",
-  "cancel": "Отмена"
+  "cancel": "Отмена",
+  "location_access": "Доступ к местоположению",
+  "location_permission": "Это приложение запрашивает доступ к вашему местоположению, чтобы показать ваше текущее положение на карте в реальном времени. Местоположение используется только во время работы приложения и не собирается в фоновом режиме.",
+  "allow": "Разрешить",
+  "decline": "Отказаться"
 };
 static const Map<String,dynamic> uk = {
   "route": "Бағыт",
@@ -60,7 +64,11 @@ static const Map<String,dynamic> uk = {
   "location_not_granted": "Құрылғының орналасқан жерін анықтау рұқсаты берілмеді",
   "enable": "Қосу",
   "attention": "Назар аударыңыз",
-  "cancel": "Болдырмау"
+  "cancel": "Болдырмау",
+  "location_access": "Орналасқан жерге қолжетімділік",
+  "location_permission": "Бұл қосымша сіздің орналасқан жеріңізді шын мәнінде картада көрсету үшін сіздің орналасқан жеріңізге қолжетімділікті сұрайды. Орналасқан жер тек қосымша іске қосылған кезде ғана пайдаланылады және фон режимінде жиналмайды.",
+  "allow": "Рұқсат ету",
+  "decline": "Бас тарту"
 };
 static const Map<String,dynamic> en = {
   "route": "Route",
@@ -84,7 +92,11 @@ static const Map<String,dynamic> en = {
   "location_not_granted": "Device location permission not granted",
   "enable": "Enable",
   "attention": "Attention",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "location_access": "Location Access",
+  "location_permission": "This app requests access to your location to display your current position on the map in real-time. Location is only used while the app is active and is not collected in the background.",
+  "allow": "Allow",
+  "decline": "Decline"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "uk": uk, "en": en};
 }

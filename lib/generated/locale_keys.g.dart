@@ -23,5 +23,9 @@ abstract class  LocaleKeys {
   static const enable = 'enable';
   static const attention = 'attention';
   static const cancel = 'cancel';
+  static const location_access = 'location_access';
+  static const location_permission = 'location_permission';
+  static const allow = 'allow';
+  static const decline = 'decline';
 
 }

@@ -109,10 +109,11 @@ class _InfoContainer extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 35),
         child: Center(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 title,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w700,
@@ -122,6 +123,7 @@ class _InfoContainer extends StatelessWidget {
               ),
               Text(
                 price,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w300,

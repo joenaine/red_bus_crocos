@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:red_bus_crocos_project/core/constants/app_assets.dart';
 import 'package:red_bus_crocos_project/core/theme/colors.dart';
 import 'package:red_bus_crocos_project/core/utils/translation.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/text_sizes.dart';
+import 'package:red_bus_crocos_project/presentation/home/widgets/cupertino_dialog_alert.dart';
 import 'package:red_bus_crocos_project/presentation/initial_once_page.dart';
 import 'package:red_bus_crocos_project/presentation/routes/router.dart';
 import 'package:restart_app/restart_app.dart';
@@ -24,6 +27,18 @@ class ChooseLanguagePage extends StatefulWidget {
 class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
   void restartApp() {
     Restart.restartApp();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (Platform.isAndroid) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        if (await hasShownPage() == false) {
+          CustomCupertinoDialog.locationPermisstion(context: context);
+        }
+      });
+    }
   }
 
   @override

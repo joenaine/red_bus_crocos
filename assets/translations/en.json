@@ -20,5 +20,9 @@
     "location_not_granted":"Device location permission not granted",
     "enable":"Enable",
     "attention":"Attention",
-    "cancel":"Cancel"
+    "cancel":"Cancel",
+    "location_access":"Location Access",
+  "location_permission":"This app requests access to your location to display your current position on the map in real-time. Location is only used while the app is active and is not collected in the background.",
+  "allow":"Allow",
+  "decline":"Decline"
 }
