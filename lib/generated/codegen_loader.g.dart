@@ -29,7 +29,14 @@ class CodegenLoader extends AssetLoader{
   "discount_ticket": "Льготный билет для детей, студентов и пенсионеров",
   "child_under_six": "Детям до 6 лет",
   "free": "бесплатно",
-  "tenge": "тенге"
+  "tenge": "тенге",
+  "no_internet_access": "Нет подключения к интернету",
+  "not_detect_location": "Не удалось определить ваше местоположение",
+  "location_disabled": "Местоположение устройства отключено",
+  "location_not_granted": "Разрешение на определение местоположения устройства не предоставлено",
+  "enable": "Включить",
+  "attention": "Внимание",
+  "cancel": "Отмена"
 };
 static const Map<String,dynamic> uk = {
   "route": "Бағыт",
@@ -46,7 +53,14 @@ static const Map<String,dynamic> uk = {
   "discount_ticket": "Балаларға, студенттерге және зейнеткерлерге арналған жеңілдік билеті",
   "child_under_six": "6 жасқа дейінгі балалар",
   "free": "Тегін",
-  "tenge": "Теңге"
+  "tenge": "Теңге",
+  "no_internet_access": "Интернет байланысы жоқ",
+  "not_detect_location": "Орналасқан жеріңізді анықтау мүмкін болмады",
+  "location_disabled": "Құрылғының орналасуы өшірілген",
+  "location_not_granted": "Құрылғының орналасқан жерін анықтау рұқсаты берілмеді",
+  "enable": "Қосу",
+  "attention": "Назар аударыңыз",
+  "cancel": "Болдырмау"
 };
 static const Map<String,dynamic> en = {
   "route": "Route",
@@ -63,7 +77,14 @@ static const Map<String,dynamic> en = {
   "discount_ticket": "Discount Ticket for Children, Students, and Pensioners",
   "child_under_six": "Children under 6",
   "free": "free",
-  "tenge": "tenge"
+  "tenge": "tenge",
+  "no_internet_access": "No internet connection",
+  "not_detect_location": "Could not detect your location",
+  "location_disabled": "Device location disabled",
+  "location_not_granted": "Device location permission not granted",
+  "enable": "Enable",
+  "attention": "Attention",
+  "cancel": "Cancel"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "uk": uk, "en": en};
 }

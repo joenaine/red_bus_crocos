@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:math' as Math;
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:red_bus_crocos_project/application/home/bus_location/bus_location_bloc.dart';
 import 'package:red_bus_crocos_project/application/home/information_modal/information_modal_bloc.dart';
 import 'package:red_bus_crocos_project/application/home/location/user_location_bloc.dart';
@@ -13,11 +15,13 @@ import 'package:red_bus_crocos_project/application/home/polyline_markers/polylin
 import 'package:red_bus_crocos_project/core/constants/app_assets.dart';
 import 'package:red_bus_crocos_project/core/theme/colors.dart';
 import 'package:red_bus_crocos_project/domain/sight/sight_wp_dto.dart';
+import 'package:red_bus_crocos_project/features/connectivity/cubit/connectivity_cubit.dart';
 import 'package:red_bus_crocos_project/generated/locale_keys.g.dart';
 import 'package:red_bus_crocos_project/infrastructure/sights/sights_local_data.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffold_widget.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/indents.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/text_sizes.dart';
+import 'package:red_bus_crocos_project/presentation/home/widgets/cupertino_dialog_alert.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
 @RoutePage()
@@ -141,6 +145,19 @@ class _HomePageState extends State<HomePage> {
       appBarTitle: LocaleKeys.route.tr(),
       child: MultiBlocListener(
         listeners: [
+          BlocListener<ConnectivityCubit, ConnectivityState>(
+            listener: (context, state) {
+              if (!state.hasConnection) {
+                showSimpleNotification(
+                    Text(
+                      LocaleKeys.no_internet_access.tr(),
+                      selectionColor: Colors.white,
+                    ),
+                    background: Colors.green,
+                    duration: const Duration(seconds: 15));
+              }
+            },
+          ),
           BlocListener<UserLocationBloc, UserLocationState>(
             listener: (context, userLocationState) {
               userLocationState.map(
@@ -164,9 +181,59 @@ class _HomePageState extends State<HomePage> {
 
                     setState(() {});
                   },
-                  loadFailure: (_) {},
-                  locationDisabled: (_) {},
-                  locationPermissionDisabled: (_) {});
+                  loadFailure: (_) {
+                    // showCupertinoDialog(
+                    //     context: context,
+                    //     builder: (BuildContext context) {
+                    //       return CupertinoAlertDialog(
+                    //         title: const Text('Alert'),
+                    //         content: Text(LocaleKeys.not_detect_location.tr()),
+                    //         actions: <Widget>[
+                    //           CupertinoDialogAction(
+                    //             child: const Text('Cancel'),
+                    //             onPressed: () {
+                    //               Navigator.of(context).pop();
+                    //             },
+                    //           ),
+                    //           CupertinoDialogAction(
+                    //             child: const Text('Try again'),
+                    //             onPressed: () {
+                    //               context.read<UserLocationBloc>().add(
+                    //                     const UserLocationEvent.getLocation(),
+                    //                   );
+                    //               Navigator.of(context).pop();
+                    //             },
+                    //           ),
+                    //         ],
+                    //       );
+                    //     });
+                  },
+                  locationDisabled: (_) {
+                    CustomCupertinoDialog.call(
+                      context: context,
+                      content: LocaleKeys.enable.tr(),
+                      actionText: LocaleKeys.enable.tr(),
+                      onPressed: () {
+                        context.read<UserLocationBloc>().add(
+                              const UserLocationEvent
+                                  .askToEnableLocationServices(),
+                            );
+                        Navigator.of(context).pop();
+                      },
+                    );
+                  },
+                  locationPermissionDisabled: (_) {
+                    CustomCupertinoDialog.call(
+                      context: context,
+                      content: LocaleKeys.location_not_granted.tr(),
+                      actionText: LocaleKeys.location_not_granted.tr(),
+                      onPressed: () {
+                        context.read<UserLocationBloc>().add(
+                            const UserLocationEvent.askLocationPermission());
+                        Navigator.of(context).pop();
+                      },
+                    );
+                  });
             },
           ),
           BlocListener<InformationModalBloc, InformationModalState>(

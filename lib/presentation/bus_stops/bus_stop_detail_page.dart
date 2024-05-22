@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 // import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:full_screen_image/full_screen_image.dart';
+import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:red_bus_crocos_project/application/sight_detail/sight_detail_bloc.dart';
 import '../../core/constants/app_assets.dart';
 import '../../core/theme/colors.dart';
@@ -113,8 +113,8 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
                               padding: const EdgeInsets.only(right: 5.0),
                               child: AspectRatio(
                                 aspectRatio: 351 / 200,
-                                child: FullScreenWidget(
-                                  disposeLevel: DisposeLevel.High,
+                                child: InstaImageViewer(
+                                  disposeLevel: DisposeLevel.high,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
                                     child: CachedNetworkImage(

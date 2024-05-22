@@ -16,5 +16,12 @@ abstract class  LocaleKeys {
   static const child_under_six = 'child_under_six';
   static const free = 'free';
   static const tenge = 'tenge';
+  static const no_internet_access = 'no_internet_access';
+  static const not_detect_location = 'not_detect_location';
+  static const location_disabled = 'location_disabled';
+  static const location_not_granted = 'location_not_granted';
+  static const enable = 'enable';
+  static const attention = 'attention';
+  static const cancel = 'cancel';
 
 }

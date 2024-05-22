@@ -13,7 +13,7 @@ class UserLocationEvent with _$UserLocationEvent {
       _AskLocationPermission;
 
   const factory UserLocationEvent.parseLocation({
-    required UserLocationDataState failureOrUserLocation,
+    required Either<UserLocationFailure, UserLocation> failureOrUserLocation,
     @Default(false) bool silent,
   }) = _ParseLocation;
 }

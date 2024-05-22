@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart' hide Router;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:red_bus_crocos_project/application/home/bus_location/bus_location_bloc.dart';
 import 'package:red_bus_crocos_project/application/home/information_modal/information_modal_bloc.dart';
 import 'package:red_bus_crocos_project/application/home/location/user_location_bloc.dart';
@@ -59,19 +60,21 @@ class AppWidget extends StatelessWidget {
           create: (context) => getIt<LocaleBloc>(),
         ),
       ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: 'RedBus Tour',
-        routerDelegate: _appRouter.delegate(
-          navigatorObservers: () => [
-            AppRouteObserver(),
-          ],
+      child: OverlaySupport.global(
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'RedBus Tour',
+          routerDelegate: _appRouter.delegate(
+            navigatorObservers: () => [
+              AppRouteObserver(),
+            ],
+          ),
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          routeInformationParser: _appRouter.defaultRouteParser(),
+          theme: AppTheme.lightTheme,
         ),
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        routeInformationParser: _appRouter.defaultRouteParser(),
-        theme: AppTheme.lightTheme,
       ),
     );
   }

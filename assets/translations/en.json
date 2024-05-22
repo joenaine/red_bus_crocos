@@ -13,5 +13,12 @@
     "discount_ticket": "Discount Ticket for Children, Students, and Pensioners",
     "child_under_six": "Children under 6",
     "free": "free",
-    "tenge": "tenge"
+    "tenge": "tenge",
+    "no_internet_access":"No internet connection",
+    "not_detect_location":"Could not detect your location",
+    "location_disabled":"Device location disabled",
+    "location_not_granted":"Device location permission not granted",
+    "enable":"Enable",
+    "attention":"Attention",
+    "cancel":"Cancel"
 }

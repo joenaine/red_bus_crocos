@@ -22,6 +22,7 @@ class CommonScaffoldWidget extends StatelessWidget {
       backgroundColor: AppColors.red,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
+        centerTitle: false,
         title: Text(appBarTitle!),
         actions: [
           GestureDetector(

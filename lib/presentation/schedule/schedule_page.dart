@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:red_bus_crocos_project/application/schedule/schedule_bloc.dart';
 import 'package:red_bus_crocos_project/core/constants/app_assets.dart';
 import 'package:red_bus_crocos_project/core/theme/colors.dart';
+import 'package:red_bus_crocos_project/core/utils/translation.dart';
 import 'package:red_bus_crocos_project/domain/schedule/schedule_dto.dart';
 import 'package:red_bus_crocos_project/generated/locale_keys.g.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffold_widget.dart';
@@ -58,7 +59,9 @@ class _SchedulePageState extends State<SchedulePage> {
         (index) {
           return TableRow(children: [
             _TableDataCell(
-                title: schedule.firstLap![index].location!,
+                title: getScheduleTranslate(
+                  schedule.firstLap![index].location!,
+                ),
                 isLastOne: index == schedule.firstLap!.length - 1),
             _TableDataCell(
                 title: schedule.firstLap![index].arrivalTime!,
@@ -74,7 +77,8 @@ class _SchedulePageState extends State<SchedulePage> {
         (index) {
           return TableRow(children: [
             _TableDataCell(
-                title: schedule.secondLap![index].location2!,
+                title:
+                    getScheduleTranslate(schedule.secondLap![index].location2!),
                 isLastOne: index == schedule.secondLap!.length - 1),
             _TableDataCell(
                 title: schedule.secondLap![index].arrivalTime2!,
@@ -90,7 +94,7 @@ class _SchedulePageState extends State<SchedulePage> {
         (index) {
           return TableRow(children: [
             _TableDataCell(
-                title: schedule.thirdLap![index].location3!,
+                title: getScheduleTranslate(schedule.thirdLap![index].location3!),
                 isLastOne: index == schedule.thirdLap!.length - 1),
             _TableDataCell(
                 title: schedule.thirdLap![index].arrivalTime3!,

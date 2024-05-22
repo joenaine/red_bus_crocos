@@ -22,7 +22,8 @@ mixin _$UserLocationEvent {
     required TResult Function() askToEnableLocationServices,
     required TResult Function() askLocationPermission,
     required TResult Function(
-            UserLocationDataState failureOrUserLocation, bool silent)
+            Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+            bool silent)
         parseLocation,
   }) =>
       throw _privateConstructorUsedError;
@@ -31,7 +32,9 @@ mixin _$UserLocationEvent {
     TResult? Function(bool silent)? getLocation,
     TResult? Function()? askToEnableLocationServices,
     TResult? Function()? askLocationPermission,
-    TResult? Function(UserLocationDataState failureOrUserLocation, bool silent)?
+    TResult? Function(
+            Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+            bool silent)?
         parseLocation,
   }) =>
       throw _privateConstructorUsedError;
@@ -40,7 +43,9 @@ mixin _$UserLocationEvent {
     TResult Function(bool silent)? getLocation,
     TResult Function()? askToEnableLocationServices,
     TResult Function()? askLocationPermission,
-    TResult Function(UserLocationDataState failureOrUserLocation, bool silent)?
+    TResult Function(
+            Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+            bool silent)?
         parseLocation,
     required TResult orElse(),
   }) =>
@@ -164,7 +169,8 @@ class _$GetUserLocationImpl implements _GetUserLocation {
     required TResult Function() askToEnableLocationServices,
     required TResult Function() askLocationPermission,
     required TResult Function(
-            UserLocationDataState failureOrUserLocation, bool silent)
+            Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+            bool silent)
         parseLocation,
   }) {
     return getLocation(silent);
@@ -176,7 +182,9 @@ class _$GetUserLocationImpl implements _GetUserLocation {
     TResult? Function(bool silent)? getLocation,
     TResult? Function()? askToEnableLocationServices,
     TResult? Function()? askLocationPermission,
-    TResult? Function(UserLocationDataState failureOrUserLocation, bool silent)?
+    TResult? Function(
+            Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+            bool silent)?
         parseLocation,
   }) {
     return getLocation?.call(silent);
@@ -188,7 +196,9 @@ class _$GetUserLocationImpl implements _GetUserLocation {
     TResult Function(bool silent)? getLocation,
     TResult Function()? askToEnableLocationServices,
     TResult Function()? askLocationPermission,
-    TResult Function(UserLocationDataState failureOrUserLocation, bool silent)?
+    TResult Function(
+            Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+            bool silent)?
         parseLocation,
     required TResult orElse(),
   }) {
@@ -296,7 +306,8 @@ class _$AskToEnableLocationServicesImpl
     required TResult Function() askToEnableLocationServices,
     required TResult Function() askLocationPermission,
     required TResult Function(
-            UserLocationDataState failureOrUserLocation, bool silent)
+            Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+            bool silent)
         parseLocation,
   }) {
     return askToEnableLocationServices();
@@ -308,7 +319,9 @@ class _$AskToEnableLocationServicesImpl
     TResult? Function(bool silent)? getLocation,
     TResult? Function()? askToEnableLocationServices,
     TResult? Function()? askLocationPermission,
-    TResult? Function(UserLocationDataState failureOrUserLocation, bool silent)?
+    TResult? Function(
+            Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+            bool silent)?
         parseLocation,
   }) {
     return askToEnableLocationServices?.call();
@@ -320,7 +333,9 @@ class _$AskToEnableLocationServicesImpl
     TResult Function(bool silent)? getLocation,
     TResult Function()? askToEnableLocationServices,
     TResult Function()? askLocationPermission,
-    TResult Function(UserLocationDataState failureOrUserLocation, bool silent)?
+    TResult Function(
+            Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+            bool silent)?
         parseLocation,
     required TResult orElse(),
   }) {
@@ -421,7 +436,8 @@ class _$AskLocationPermissionImpl implements _AskLocationPermission {
     required TResult Function() askToEnableLocationServices,
     required TResult Function() askLocationPermission,
     required TResult Function(
-            UserLocationDataState failureOrUserLocation, bool silent)
+            Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+            bool silent)
         parseLocation,
   }) {
     return askLocationPermission();
@@ -433,7 +449,9 @@ class _$AskLocationPermissionImpl implements _AskLocationPermission {
     TResult? Function(bool silent)? getLocation,
     TResult? Function()? askToEnableLocationServices,
     TResult? Function()? askLocationPermission,
-    TResult? Function(UserLocationDataState failureOrUserLocation, bool silent)?
+    TResult? Function(
+            Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+            bool silent)?
         parseLocation,
   }) {
     return askLocationPermission?.call();
@@ -445,7 +463,9 @@ class _$AskLocationPermissionImpl implements _AskLocationPermission {
     TResult Function(bool silent)? getLocation,
     TResult Function()? askToEnableLocationServices,
     TResult Function()? askLocationPermission,
-    TResult Function(UserLocationDataState failureOrUserLocation, bool silent)?
+    TResult Function(
+            Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+            bool silent)?
         parseLocation,
     required TResult orElse(),
   }) {
@@ -507,7 +527,9 @@ abstract class _$$ParseLocationImplCopyWith<$Res> {
           _$ParseLocationImpl value, $Res Function(_$ParseLocationImpl) then) =
       __$$ParseLocationImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({UserLocationDataState failureOrUserLocation, bool silent});
+  $Res call(
+      {Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+      bool silent});
 }
 
 /// @nodoc
@@ -528,7 +550,7 @@ class __$$ParseLocationImplCopyWithImpl<$Res>
       failureOrUserLocation: null == failureOrUserLocation
           ? _value.failureOrUserLocation
           : failureOrUserLocation // ignore: cast_nullable_to_non_nullable
-              as UserLocationDataState,
+              as Either<UserLocationFailure, UserLocation>,
       silent: null == silent
           ? _value.silent
           : silent // ignore: cast_nullable_to_non_nullable
@@ -544,7 +566,7 @@ class _$ParseLocationImpl implements _ParseLocation {
       {required this.failureOrUserLocation, this.silent = false});
 
   @override
-  final UserLocationDataState failureOrUserLocation;
+  final Either<UserLocationFailure, UserLocation> failureOrUserLocation;
   @override
   @JsonKey()
   final bool silent;
@@ -580,7 +602,8 @@ class _$ParseLocationImpl implements _ParseLocation {
     required TResult Function() askToEnableLocationServices,
     required TResult Function() askLocationPermission,
     required TResult Function(
-            UserLocationDataState failureOrUserLocation, bool silent)
+            Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+            bool silent)
         parseLocation,
   }) {
     return parseLocation(failureOrUserLocation, silent);
@@ -592,7 +615,9 @@ class _$ParseLocationImpl implements _ParseLocation {
     TResult? Function(bool silent)? getLocation,
     TResult? Function()? askToEnableLocationServices,
     TResult? Function()? askLocationPermission,
-    TResult? Function(UserLocationDataState failureOrUserLocation, bool silent)?
+    TResult? Function(
+            Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+            bool silent)?
         parseLocation,
   }) {
     return parseLocation?.call(failureOrUserLocation, silent);
@@ -604,7 +629,9 @@ class _$ParseLocationImpl implements _ParseLocation {
     TResult Function(bool silent)? getLocation,
     TResult Function()? askToEnableLocationServices,
     TResult Function()? askLocationPermission,
-    TResult Function(UserLocationDataState failureOrUserLocation, bool silent)?
+    TResult Function(
+            Either<UserLocationFailure, UserLocation> failureOrUserLocation,
+            bool silent)?
         parseLocation,
     required TResult orElse(),
   }) {
@@ -658,10 +685,11 @@ class _$ParseLocationImpl implements _ParseLocation {
 
 abstract class _ParseLocation implements UserLocationEvent {
   const factory _ParseLocation(
-      {required final UserLocationDataState failureOrUserLocation,
+      {required final Either<UserLocationFailure, UserLocation>
+          failureOrUserLocation,
       final bool silent}) = _$ParseLocationImpl;
 
-  UserLocationDataState get failureOrUserLocation;
+  Either<UserLocationFailure, UserLocation> get failureOrUserLocation;
   bool get silent;
   @JsonKey(ignore: true)
   _$$ParseLocationImplCopyWith<_$ParseLocationImpl> get copyWith =>

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -26,7 +28,9 @@ class BusLocationBloc extends Bloc<BusLocationEvent, BusLocationState> {
         getBusLocation: (_) async {
           Pos? pos = await dioRepository.getBus();
 
-          bool isHuawei = await DeviceInfoService.isHuaweiDevice();
+          bool isHuawei = !Platform.isIOS
+              ? await DeviceInfoService.isHuaweiDevice()
+              : false;
 
           if (isHuawei) {
             if (pos != null) {

@@ -1,10 +1,10 @@
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:injectable/injectable.dart';
 import 'package:red_bus_crocos_project/domain/location/i_user_location_repository.dart';
 import 'package:red_bus_crocos_project/domain/location/user_location.dart';
-import 'package:red_bus_crocos_project/domain/location/user_location_data_state.dart';
 import 'package:red_bus_crocos_project/domain/location/user_location_failure.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,12 +18,14 @@ class UserLocationRepository implements IUserLocationRepository {
   UserLocationRepository(this._preferences);
 
   @override
-  Future<UserLocationDataState> getLocation() async {
+  Future<Either<UserLocationFailure, UserLocation>> getLocation() async {
     final bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
     if (!serviceEnabled) {
-      return const UserLocationFailure.locationDisabled(
-        'Location services are disabled.',
+      return left(
+        const UserLocationFailure.locationDisabled(
+          'Location services are disabled.',
+        ),
       );
     }
 
@@ -32,12 +34,16 @@ class UserLocationRepository implements IUserLocationRepository {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return const UserLocationFailure.locationPermissionDisabled(
-          'Location permissions are denied.',
+        return left(
+          const UserLocationFailure.locationPermissionDisabled(
+            'Location permissions are denied.',
+          ),
         );
       } else if (permission == LocationPermission.deniedForever) {
-        return const UserLocationFailure.locationPermissionDisabled(
-          'Location permissions are permanently denied, we cannot request permissions.',
+        return left(
+          const UserLocationFailure.locationPermissionDisabled(
+            'Location permissions are permanently denied, we cannot request permissions.',
+          ),
         );
       }
     }
@@ -50,10 +56,10 @@ class UserLocationRepository implements IUserLocationRepository {
         timeLimit: const Duration(seconds: 60),
       );
     } on TimeoutException {
-      return const UserLocationFailure.unableToGet();
+      return left(const UserLocationFailure.unableToGet());
       // ignore: unused_catch_stack
     } catch (e, stacktrace) {
-      return const UserLocationFailure.unexpected();
+      return left(const UserLocationFailure.unexpected());
     }
 
     final userLocation = UserLocation(
@@ -63,19 +69,20 @@ class UserLocationRepository implements IUserLocationRepository {
 
     await _setLastLocation(userLocation);
 
-    return userLocation;
+    return right(userLocation);
   }
 
   @override
-  Future<bool> askToEnableLocationService() {
+  Future<bool> askToEnableLocationService() async {
     return Geolocator.openLocationSettings();
   }
 
   @override
-  Future<bool> askToGrantPermission() {
+  Future<bool> askToGrantPermission() async {
     return Geolocator.openAppSettings();
   }
 
+  ///INFO: this is not implemented in Geolocator for web
   @override
   Stream<ServiceStatus> get serviceStatusStream =>
       GeolocatorPlatform.instance.getServiceStatusStream();
@@ -99,6 +106,7 @@ class UserLocationRepository implements IUserLocationRepository {
     await _preferences.setDouble(lastLongitudeKey, location.longitude);
   }
 
+  ///Location is considered different if it is more than 100 meters
   @override
   Future<bool> isLocationDifferent(UserLocation location) async {
     final UserLocation? lastLocationOrNull = await _getLastLocationOrNull();

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:red_bus_crocos_project/core/theme/colors.dart';
 import 'package:red_bus_crocos_project/generated/locale_keys.g.dart';
+import 'package:red_bus_crocos_project/presentation/bus_stops/widgets/bus_stops_shimmer.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffold_widget.dart';
 import 'package:red_bus_crocos_project/presentation/routes/router.dart';
 
@@ -32,9 +33,7 @@ class BusStopsPage extends StatelessWidget {
           builder: (context, state) {
             switch (state) {
               case SightsInitial():
-                return Center(
-                  child: Text(LocaleKeys.loading.tr()),
-                );
+                return const BusStopsShimmerWidget();
               case SightsError():
                 return Center(
                   child: Text(LocaleKeys.error.tr()),

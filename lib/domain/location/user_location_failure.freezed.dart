@@ -107,8 +107,8 @@ class __$$UnexpectedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UnexpectedImpl extends _Unexpected {
-  const _$UnexpectedImpl() : super._();
+class _$UnexpectedImpl implements _Unexpected {
+  const _$UnexpectedImpl();
 
   @override
   String toString() {
@@ -202,9 +202,8 @@ class _$UnexpectedImpl extends _Unexpected {
   }
 }
 
-abstract class _Unexpected extends UserLocationFailure {
+abstract class _Unexpected implements UserLocationFailure {
   const factory _Unexpected() = _$UnexpectedImpl;
-  const _Unexpected._() : super._();
 }
 
 /// @nodoc
@@ -225,8 +224,8 @@ class __$$UnableToGetImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UnableToGetImpl extends _UnableToGet {
-  const _$UnableToGetImpl() : super._();
+class _$UnableToGetImpl implements _UnableToGet {
+  const _$UnableToGetImpl();
 
   @override
   String toString() {
@@ -320,9 +319,8 @@ class _$UnableToGetImpl extends _UnableToGet {
   }
 }
 
-abstract class _UnableToGet extends UserLocationFailure {
+abstract class _UnableToGet implements UserLocationFailure {
   const factory _UnableToGet() = _$UnableToGetImpl;
-  const _UnableToGet._() : super._();
 }
 
 /// @nodoc
@@ -361,8 +359,8 @@ class __$$LocationServiceDisabledImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LocationServiceDisabledImpl extends _LocationServiceDisabled {
-  const _$LocationServiceDisabledImpl(this.message) : super._();
+class _$LocationServiceDisabledImpl implements _LocationServiceDisabled {
+  const _$LocationServiceDisabledImpl(this.message);
 
   @override
   final String message;
@@ -468,10 +466,9 @@ class _$LocationServiceDisabledImpl extends _LocationServiceDisabled {
   }
 }
 
-abstract class _LocationServiceDisabled extends UserLocationFailure {
+abstract class _LocationServiceDisabled implements UserLocationFailure {
   const factory _LocationServiceDisabled(final String message) =
       _$LocationServiceDisabledImpl;
-  const _LocationServiceDisabled._() : super._();
 
   String get message;
   @JsonKey(ignore: true)
@@ -515,8 +512,8 @@ class __$$LocationPermissionDisabledImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LocationPermissionDisabledImpl extends _LocationPermissionDisabled {
-  const _$LocationPermissionDisabledImpl(this.message) : super._();
+class _$LocationPermissionDisabledImpl implements _LocationPermissionDisabled {
+  const _$LocationPermissionDisabledImpl(this.message);
 
   @override
   final String message;
@@ -622,10 +619,9 @@ class _$LocationPermissionDisabledImpl extends _LocationPermissionDisabled {
   }
 }
 
-abstract class _LocationPermissionDisabled extends UserLocationFailure {
+abstract class _LocationPermissionDisabled implements UserLocationFailure {
   const factory _LocationPermissionDisabled(final String message) =
       _$LocationPermissionDisabledImpl;
-  const _LocationPermissionDisabled._() : super._();
 
   String get message;
   @JsonKey(ignore: true)
