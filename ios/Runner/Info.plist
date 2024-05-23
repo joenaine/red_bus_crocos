@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Red Bus Crocos Project</string>
+	<string>Red Bus Tour</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -33,10 +33,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.example.redBusCrocosProject</string>
+			<string>com.crocos.redbustour</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>Red Bus Tour</string>
+				<string>RedBusTour</string>
 			</array>
 		</dict>
 	</array>
@@ -49,9 +49,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Want to display location on map, and track it</string>
+	<string>Red Bus Tour needs access to your location to show nearby attractions and provide real-time navigation while you explore the city. For example, the app uses your location to highlight points of interest around you during the tour</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Want to display location on map, and track it</string>
+	<string>Red Bus Tour needs access to your location to show nearby attractions and provide real-time navigation while you explore the city. For example, the app uses your location to highlight points of interest around you during the tour</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
