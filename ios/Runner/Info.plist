@@ -49,9 +49,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Red Bus Tour needs access to your location to show nearby attractions and provide real-time navigation while you explore the city. For example, the app uses your location to highlight points of interest around you during the tour</string>
+	<string>Red Bus Tour требует доступа к вашему местоположению, чтобы показать ближайшие достопримечательности и предоставить навигацию в реальном времени, пока вы исследуете город.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Red Bus Tour needs access to your location to show nearby attractions and provide real-time navigation while you explore the city. For example, the app uses your location to highlight points of interest around you during the tour</string>
+	<string>Red Bus Tour требует доступа к вашему местоположению, чтобы показать ближайшие достопримечательности и предоставить навигацию в реальном времени, пока вы исследуете город.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
