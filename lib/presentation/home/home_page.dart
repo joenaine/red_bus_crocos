@@ -55,9 +55,11 @@ class _HomePageState extends State<HomePage> {
           .add(const BusLocationEvent.getBusLocation());
     });
     _timerInfoModal = Timer.periodic(const Duration(seconds: 10), (timer) {
-      context
-          .read<InformationModalBloc>()
-          .add(const InformationModalEvent.getInformationModal());
+      if (mounted) {
+        context
+            .read<InformationModalBloc>()
+            .add(const InformationModalEvent.getInformationModal());
+      }
     });
 
     initIcons();

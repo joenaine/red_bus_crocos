@@ -33,7 +33,7 @@ class AcfData {
   List<FirstLap>? firstLap;
   List<SecondLap>? secondLap;
   List<ThirdLap>? thirdLap;
-  bool? fourthLap;
+  List<FourthLap>? fourthLap;
 
   AcfData({this.firstLap, this.secondLap, this.thirdLap, this.fourthLap});
 
@@ -41,22 +41,29 @@ class AcfData {
     if (json['first_lap'] != null) {
       firstLap = <FirstLap>[];
       json['first_lap'].forEach((v) {
-        firstLap!.add(FirstLap.fromJson(v));
+        firstLap?.add(FirstLap.fromJson(v));
       });
     }
     if (json['second_lap'] != null) {
       secondLap = <SecondLap>[];
       json['second_lap'].forEach((v) {
-        secondLap!.add(SecondLap.fromJson(v));
+        secondLap?.add(SecondLap.fromJson(v));
       });
     }
     if (json['third_lap'] != null) {
       thirdLap = <ThirdLap>[];
       json['third_lap'].forEach((v) {
-        thirdLap!.add(ThirdLap.fromJson(v));
+        thirdLap?.add(ThirdLap.fromJson(v));
       });
     }
-    fourthLap = json['fourth_lap'];
+    if (json['fourth_lap'] != null) {
+      fourthLap = <FourthLap>[];
+      json['fourth_lap'].forEach((v) {
+        fourthLap?.add(FourthLap.fromJson(v));
+      });
+    }
+
+    // fourthLap = json['fourth_lap'];
   }
 
   Map<String, dynamic> toJson() {
@@ -137,6 +144,27 @@ class ThirdLap {
     data['location3'] = location3;
     data['arrival_time3'] = arrivalTime3;
     data['departure_time3'] = departureTime3;
+    return data;
+  }
+}
+
+class FourthLap {
+  String? location4;
+  String? arrivalTime4;
+  String? departureTime4;
+
+  FourthLap({this.location4, this.arrivalTime4, this.departureTime4});
+  FourthLap.fromJson(Map<String, dynamic> json) {
+    location4 = json['location4'];
+    arrivalTime4 = json['arrival_time4'];
+    departureTime4 = json['departure_time4'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['location4'] = location4;
+    data['arrival_time4'] = arrivalTime4;
+    data['departure_time4'] = departureTime4;
     return data;
   }
 }

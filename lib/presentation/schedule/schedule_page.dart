@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -94,7 +93,8 @@ class _SchedulePageState extends State<SchedulePage> {
         (index) {
           return TableRow(children: [
             _TableDataCell(
-                title: getScheduleTranslate(schedule.thirdLap![index].location3!),
+                title:
+                    getScheduleTranslate(schedule.thirdLap![index].location3!),
                 isLastOne: index == schedule.thirdLap!.length - 1),
             _TableDataCell(
                 title: schedule.thirdLap![index].arrivalTime3!,
@@ -102,6 +102,23 @@ class _SchedulePageState extends State<SchedulePage> {
             _TableDataCell(
                 title: schedule.thirdLap![index].departureTime3!,
                 isLastOne: index == schedule.thirdLap!.length - 1),
+          ]);
+        },
+      ),
+      3: List.generate(
+        schedule.thirdLap!.length,
+        (index) {
+          return TableRow(children: [
+            _TableDataCell(
+                title:
+                    getScheduleTranslate(schedule.fourthLap![index].location4!),
+                isLastOne: index == schedule.fourthLap!.length - 1),
+            _TableDataCell(
+                title: schedule.fourthLap![index].arrivalTime4!,
+                isLastOne: index == schedule.fourthLap!.length - 1),
+            _TableDataCell(
+                title: schedule.fourthLap![index].departureTime4!,
+                isLastOne: index == schedule.fourthLap!.length - 1),
           ]);
         },
       ),
@@ -182,7 +199,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: List.generate(
-                            3,
+                            4,
                             (index) => _RadioButton(
                               title: '${index + 1} круг',
                               isSelected: index == selectedIndex,

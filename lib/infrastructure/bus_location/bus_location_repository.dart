@@ -4,9 +4,28 @@ import 'package:dio/dio.dart';
 import 'package:red_bus_crocos_project/domain/bus_location/bus_location_dto.dart';
 
 class BusLocationRepository {
+  static Future<String> fetchToken() async {
+    try {
+      final client = Dio();
+      final result =
+          await client.get('https://redbus.kz/ru/wp-json/wl/v1/posts/token');
+
+      if (result.statusCode == 200) {
+        // log(result.data["acf_data"].toString());
+        return result.data["content"];
+      } else {
+        throw Exception('Error on fetchToken: ${result.statusCode}');
+      }
+    } on Exception catch (e) {
+      print(e);
+      throw Exception('Error: $e');
+    }
+  }
+
   static Future<String> getEid() async {
-    String tok =
-        'd610c5141811401bc0eef050fe19b6966A4F9085940B4FE383BF54910B3BB971D1A55EE7';
+    // String tok =
+    //     'd610c5141811401bc0eef050fe19b6966D1035C2A56D10AE6B1D53583D3BF75AC48E15B5';
+    String tok = await fetchToken();
     String url = 'https://hst-api.wialon.com/wialon/ajax.html?svc=token/login';
 
     Dio dio = Dio();
