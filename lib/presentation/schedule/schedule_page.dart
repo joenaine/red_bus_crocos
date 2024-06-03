@@ -54,12 +54,12 @@ class _SchedulePageState extends State<SchedulePage> {
   List<TableRow> getTableRowLap(AcfData? schedule, int selectedIndex) {
     Map<int, List<TableRow>> keyForLaps = {
       0: List.generate(
-        schedule!.firstLap!.length,
+        schedule?.firstLap?.length ?? 0,
         (index) {
           return TableRow(children: [
             _TableDataCell(
                 title: getScheduleTranslate(
-                  schedule.firstLap![index].location!,
+                  schedule!.firstLap![index].location!,
                 ),
                 isLastOne: index == schedule.firstLap!.length - 1),
             _TableDataCell(
@@ -72,54 +72,60 @@ class _SchedulePageState extends State<SchedulePage> {
         },
       ),
       1: List.generate(
-        schedule.secondLap!.length,
+        schedule?.secondLap?.length ?? 0,
         (index) {
-          return TableRow(children: [
-            _TableDataCell(
-                title:
-                    getScheduleTranslate(schedule.secondLap![index].location2!),
-                isLastOne: index == schedule.secondLap!.length - 1),
-            _TableDataCell(
-                title: schedule.secondLap![index].arrivalTime2!,
-                isLastOne: index == schedule.secondLap!.length - 1),
-            _TableDataCell(
-                title: schedule.secondLap![index].departureTime2!,
-                isLastOne: index == schedule.secondLap!.length - 1),
-          ]);
+          return schedule?.secondLap?.length != null
+              ? TableRow(children: [
+                  _TableDataCell(
+                      title: getScheduleTranslate(
+                          schedule!.secondLap![index].location2!),
+                      isLastOne: index == schedule.secondLap!.length - 1),
+                  _TableDataCell(
+                      title: schedule.secondLap![index].arrivalTime2!,
+                      isLastOne: index == schedule.secondLap!.length - 1),
+                  _TableDataCell(
+                      title: schedule.secondLap![index].departureTime2!,
+                      isLastOne: index == schedule.secondLap!.length - 1),
+                ])
+              : const TableRow();
         },
       ),
       2: List.generate(
-        schedule.thirdLap!.length,
+        schedule?.thirdLap?.length ?? 0,
         (index) {
-          return TableRow(children: [
-            _TableDataCell(
-                title:
-                    getScheduleTranslate(schedule.thirdLap![index].location3!),
-                isLastOne: index == schedule.thirdLap!.length - 1),
-            _TableDataCell(
-                title: schedule.thirdLap![index].arrivalTime3!,
-                isLastOne: index == schedule.thirdLap!.length - 1),
-            _TableDataCell(
-                title: schedule.thirdLap![index].departureTime3!,
-                isLastOne: index == schedule.thirdLap!.length - 1),
-          ]);
+          return schedule?.thirdLap?.length != null
+              ? TableRow(children: [
+                  _TableDataCell(
+                      title: getScheduleTranslate(
+                          schedule!.thirdLap![index].location3!),
+                      isLastOne: index == schedule.thirdLap!.length - 1),
+                  _TableDataCell(
+                      title: schedule.thirdLap![index].arrivalTime3!,
+                      isLastOne: index == schedule.thirdLap!.length - 1),
+                  _TableDataCell(
+                      title: schedule.thirdLap![index].departureTime3!,
+                      isLastOne: index == schedule.thirdLap!.length - 1),
+                ])
+              : const TableRow();
         },
       ),
       3: List.generate(
-        schedule.thirdLap!.length,
+        schedule?.thirdLap?.length ?? 0,
         (index) {
-          return TableRow(children: [
-            _TableDataCell(
-                title:
-                    getScheduleTranslate(schedule.fourthLap![index].location4!),
-                isLastOne: index == schedule.fourthLap!.length - 1),
-            _TableDataCell(
-                title: schedule.fourthLap![index].arrivalTime4!,
-                isLastOne: index == schedule.fourthLap!.length - 1),
-            _TableDataCell(
-                title: schedule.fourthLap![index].departureTime4!,
-                isLastOne: index == schedule.fourthLap!.length - 1),
-          ]);
+          return schedule?.thirdLap?.length != null
+              ? TableRow(children: [
+                  _TableDataCell(
+                      title: getScheduleTranslate(
+                          schedule?.fourthLap?[index].location4 ?? ''),
+                      isLastOne: index == schedule!.fourthLap!.length - 1),
+                  _TableDataCell(
+                      title: schedule.fourthLap![index].arrivalTime4!,
+                      isLastOne: index == schedule.fourthLap!.length - 1),
+                  _TableDataCell(
+                      title: schedule.fourthLap![index].departureTime4!,
+                      isLastOne: index == schedule.fourthLap!.length - 1),
+                ])
+              : const TableRow();
         },
       ),
     };

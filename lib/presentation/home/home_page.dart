@@ -17,6 +17,7 @@ import 'package:red_bus_crocos_project/core/theme/colors.dart';
 import 'package:red_bus_crocos_project/domain/sight/sight_wp_dto.dart';
 import 'package:red_bus_crocos_project/features/connectivity/cubit/connectivity_cubit.dart';
 import 'package:red_bus_crocos_project/generated/locale_keys.g.dart';
+import 'package:red_bus_crocos_project/infrastructure/bus_location/bus_location_repository.dart';
 import 'package:red_bus_crocos_project/infrastructure/sights/sights_local_data.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffold_widget.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/indents.dart';
@@ -63,6 +64,14 @@ class _HomePageState extends State<HomePage> {
     });
 
     initIcons();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await setBusToken();
+    });
+  }
+
+  Future<void> setBusToken() async {
+    await BusLocationRepository.fetchToken()
+        .then((value) async => await BusLocationRepository.setBusToken(value));
   }
 
   void initIcons() async {

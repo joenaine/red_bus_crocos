@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:red_bus_crocos_project/domain/bus_location/bus_location_dto.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BusLocationRepository {
   static Future<String> fetchToken() async {
@@ -22,10 +23,21 @@ class BusLocationRepository {
     }
   }
 
+  static Future<String> getBusToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('bus_token') ?? '';
+  }
+
+  static Future<bool> setBusToken(String tok) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString('bus_token', tok);
+  }
+
   static Future<String> getEid() async {
     // String tok =
     //     'd610c5141811401bc0eef050fe19b6966D1035C2A56D10AE6B1D53583D3BF75AC48E15B5';
-    String tok = await fetchToken();
+    String tok = await getBusToken();
+
     String url = 'https://hst-api.wialon.com/wialon/ajax.html?svc=token/login';
 
     Dio dio = Dio();
