@@ -40,7 +40,14 @@ class CodegenLoader extends AssetLoader{
   "location_access": "Доступ к местоположению",
   "location_permission": "Это приложение запрашивает доступ к вашему местоположению, чтобы показать ваше текущее положение на карте в реальном времени. Местоположение используется только во время работы приложения и не собирается в фоновом режиме.",
   "allow": "Разрешить",
-  "decline": "Отказаться"
+  "decline": "Отказаться",
+  "check_ticket": "Проверить билет",
+  "your_tickets": "Ваши билеты",
+  "enter_ticket_number": "Введите номер билета",
+  "submit": "Подтвердить",
+  "ticket_number": "Номер билета",
+  "activated": "Активирован",
+  "not_activated": "Не активирован"
 };
 static const Map<String,dynamic> uk = {
   "route": "Бағыт",
@@ -68,7 +75,14 @@ static const Map<String,dynamic> uk = {
   "location_access": "Орналасқан жерге қолжетімділік",
   "location_permission": "Бұл қосымша сіздің орналасқан жеріңізді шын мәнінде картада көрсету үшін сіздің орналасқан жеріңізге қолжетімділікті сұрайды. Орналасқан жер тек қосымша іске қосылған кезде ғана пайдаланылады және фон режимінде жиналмайды.",
   "allow": "Рұқсат ету",
-  "decline": "Бас тарту"
+  "decline": "Бас тарту",
+  "check_ticket": "Билет тексеру",
+  "your_tickets": "Сіздің билеттеріңіз",
+  "enter_ticket_number": "Билет нөмірін енгізіңіз",
+  "submit": "Жіберу",
+  "ticket_number": "Билет нөмірі",
+  "activated": "Іске қосылды",
+  "not_activated": "Іске қосылмаған"
 };
 static const Map<String,dynamic> en = {
   "route": "Route",
@@ -96,7 +110,14 @@ static const Map<String,dynamic> en = {
   "location_access": "Location Access",
   "location_permission": "This app requests access to your location to display your current position on the map in real-time. Location is only used while the app is active and is not collected in the background.",
   "allow": "Allow",
-  "decline": "Decline"
+  "decline": "Decline",
+  "check_ticket": "Check ticket",
+  "your_tickets": "Your tickets",
+  "enter_ticket_number": "Enter ticket number",
+  "submit": "Submit",
+  "ticket_number": "Ticket number",
+  "activated": "Activated",
+  "not_activated": "Not activated"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "uk": uk, "en": en};
 }

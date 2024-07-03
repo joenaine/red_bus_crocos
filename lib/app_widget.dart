@@ -9,6 +9,7 @@ import 'package:red_bus_crocos_project/application/home/polyline_markers/polylin
 import 'package:red_bus_crocos_project/application/home/polyline_markers_huawei/polyline_markers_huawei_bloc.dart';
 import 'package:red_bus_crocos_project/application/locale/locale_bloc.dart';
 import 'package:red_bus_crocos_project/application/schedule/schedule_bloc.dart';
+import 'package:red_bus_crocos_project/application/ticket/ticket_bloc.dart';
 import 'package:red_bus_crocos_project/core/theme/app_theme.dart';
 import 'package:red_bus_crocos_project/domain/location/i_user_location_repository.dart';
 import 'package:red_bus_crocos_project/features/connectivity/cubit/connectivity_cubit.dart';
@@ -39,6 +40,9 @@ class AppWidget extends StatelessWidget {
         ),
         BlocProvider<BusLocationBloc>(
             create: (context) => getIt<BusLocationBloc>()),
+        BlocProvider<TicketBloc>(
+            lazy: false,
+            create: (context) => TicketBloc()..add(FetchTickets())),
         BlocProvider<PolylineMarkersBloc>(
             create: (context) => PolylineMarkersBloc()
               ..add(const PolylineMarkersEvent.generatePolylineMarkers())),

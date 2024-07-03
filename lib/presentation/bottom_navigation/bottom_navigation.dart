@@ -62,7 +62,7 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
       const HomePage(),
       const BusStopsPage(),
       const SchedulePage(),
-      const TicketsPage(),
+       TicketsPage(),
     ];
     super.initState();
   }

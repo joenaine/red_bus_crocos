@@ -27,5 +27,12 @@ abstract class  LocaleKeys {
   static const location_permission = 'location_permission';
   static const allow = 'allow';
   static const decline = 'decline';
+  static const check_ticket = 'check_ticket';
+  static const your_tickets = 'your_tickets';
+  static const enter_ticket_number = 'enter_ticket_number';
+  static const submit = 'submit';
+  static const ticket_number = 'ticket_number';
+  static const activated = 'activated';
+  static const not_activated = 'not_activated';
 
 }
