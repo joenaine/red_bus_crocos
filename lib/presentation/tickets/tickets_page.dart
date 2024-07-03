@@ -229,6 +229,7 @@ class TicketsPage extends StatelessWidget {
                       );
                     },
                   ).then((value) async {
+                    _controller.clear();
                     if (value ?? false) {
                       context
                           .read<TicketBloc>()
