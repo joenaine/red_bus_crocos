@@ -339,7 +339,7 @@ class _HomePageState extends State<HomePage> {
                     },
                     child: const CircleAvatar(
                       radius: 30,
-                      backgroundColor: AppColors.lightRed,
+                      backgroundColor: AppColors.red,
                       child: Icon(Icons.my_location),
                     ),
                   )),
