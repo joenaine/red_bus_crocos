@@ -75,21 +75,18 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: SafeArea(
-        bottom: false,
-        child: IndexedStack(
-          index: _currentIndex,
-          children: _screens,
-        ),
-      ),
+          bottom: false,
+          child: IndexedStack(
+            index: _currentIndex,
+            children: _screens,
+          )),
       extendBody: true,
       bottomSheet: AnimatedContainer(
         height: _isVisible ? kBottomNavigationBarHeight + 30 : 0,
         duration: const Duration(milliseconds: 0),
         child: ClipRRect(
           borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(30.0),
-            topRight: Radius.circular(30.0),
-          ),
+              topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0)),
           child: BottomNavigationBar(
             backgroundColor: Theme.of(context).colorScheme.primary,
             selectedFontSize: 10,

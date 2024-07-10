@@ -28,7 +28,7 @@ class TicketsPage extends StatelessWidget {
               _InfoContainer(
                   isSpecial: true,
                   title: LocaleKeys.adult_ticket.tr(),
-                  price: '5000 ${LocaleKeys.tenge.tr()}'),
+                  price: '6000 ${LocaleKeys.tenge.tr()}'),
               const SizedBox(height: 30),
               _InfoContainer(
                 title: LocaleKeys.discount_ticket.tr(),
