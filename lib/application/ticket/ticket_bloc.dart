@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:red_bus_crocos_project/generated/locale_keys.g.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -99,6 +102,7 @@ class TicketBloc extends Bloc<TicketEvent, TicketState> {
         final result = await client
             .post('https://ais.citypass.kz/app/v1/cards/find', data: map);
         if (result.data["code"] == 0) {
+          log(result.data.toString());
           Ticket ticket = Ticket(
             cardNumber: result.data["data"]["card_number"],
             minLeft: result.data["data"]["time_left"],
@@ -106,6 +110,8 @@ class TicketBloc extends Bloc<TicketEvent, TicketState> {
             category: result.data["data"]["cat_name"],
             qrLink: result.data["data"]["qr"],
             finalDate: result.data["data"]["final_date"],
+            duration: result.data["data"]["duration"],
+            status: result.data["data"]["status"],
           );
           tickets.remove(t);
           if (ticket.finalDate != null) {
@@ -114,7 +120,7 @@ class TicketBloc extends Bloc<TicketEvent, TicketState> {
             if (dateTime.isAfter(DateTime.now())) {
               tickets.add(ticket);
             }
-          }else{
+          } else {
             tickets.add(ticket);
           }
         }
@@ -133,7 +139,9 @@ class Ticket {
       required this.minLeft,
       required this.qrLink,
       required this.finalDate,
-      required this.used});
+      required this.used,
+      this.status,
+      this.duration});
 
   final String cardNumber;
   final String category;
@@ -141,6 +149,8 @@ class Ticket {
   final int minLeft;
   final String qrLink;
   final String? finalDate;
+  final String? duration;
+  final String? status;
 
   Map<String, dynamic> toMap() {
     return {
@@ -150,7 +160,37 @@ class Ticket {
       'minLeft': minLeft,
       'qr': qrLink,
       'final_date': finalDate,
+      'duration': duration,
+      'status': status,
     };
+  }
+
+  String getStatus(String statusCode) {
+    switch (statusCode) {
+      case '0':
+        return LocaleKeys.ready_to_use.tr();
+      case '1':
+        return LocaleKeys.activated.tr();
+      case '2':
+        return LocaleKeys.expired.tr();
+      default:
+        return '-';
+    }
+  }
+
+  static Color midColor = const Color.fromRGBO(45, 192, 255, 1);
+
+  Color getStatusColor(String statusCode) {
+    switch (statusCode) {
+      case '0':
+        return midColor;
+      case '1':
+        return Colors.green;
+      case '2':
+        return Colors.red;
+      default:
+        return Colors.grey[600]!;
+    }
   }
 
   factory Ticket.fromMap(Map<String, dynamic> map) {
@@ -161,7 +201,9 @@ class Ticket {
       used: map['used'],
       minLeft: map['minLeft'],
       qrLink: map['qr'],
+      status: map['status'].toString(),
       finalDate: map['final_date'],
+      duration: map['duration'].toString(),
     );
   }
 }

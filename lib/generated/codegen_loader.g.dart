@@ -47,7 +47,20 @@ class CodegenLoader extends AssetLoader{
   "submit": "Подтвердить",
   "ticket_number": "Номер билета",
   "activated": "Активирован",
-  "not_activated": "Не активирован"
+  "not_activated": "Не активирован",
+  "Not_visited": "Не посетил",
+  "Visited": "Посетил",
+  "Time": "Время",
+  "Visits_by_pass": "Посещения по карте",
+  "QR_to_show": "QR для предъявления",
+  "Card_type": "Тип карты",
+  "Time_left": "Осталось времени",
+  "Validity": "Срок действия",
+  "Card_number": "Номер карты",
+  "Information_about_Citypass": "Информация о Citypass",
+  "ready_to_use": "готова к использованию",
+  "expired": "истекла",
+  "hours": "часов"
 };
 static const Map<String,dynamic> uk = {
   "route": "Бағыт",
@@ -82,7 +95,20 @@ static const Map<String,dynamic> uk = {
   "submit": "Жіберу",
   "ticket_number": "Билет нөмірі",
   "activated": "Іске қосылды",
-  "not_activated": "Іске қосылмаған"
+  "not_activated": "Іске қосылмаған",
+  "Not_visited": "Бармаған",
+  "Visited": "Барды",
+  "Time": "Уақыт",
+  "Visits_by_pass": "Карта бойынша кіруі",
+  "QR_to_show": "Көрсетілетін QR",
+  "Card_type": "Карта түрі",
+  "Time_left": "Қалған уақыт",
+  "Validity": "Жарамдылық",
+  "Card_number": "Карта нөмірі",
+  "Information_about_Citypass": "Информация о Citypass",
+  "ready_to_use": "қолдануға дайын",
+  "expired": "жарамсыз",
+  "hours": "сағат"
 };
 static const Map<String,dynamic> en = {
   "route": "Route",
@@ -117,7 +143,20 @@ static const Map<String,dynamic> en = {
   "submit": "Submit",
   "ticket_number": "Ticket number",
   "activated": "Activated",
-  "not_activated": "Not activated"
+  "not_activated": "Not activated",
+  "Not_visited": "Not visited",
+  "Visited": "Visited",
+  "Time": "Time",
+  "Visits_by_pass": "Visits by pass",
+  "QR_to_show": "QR to show",
+  "Card_type": "Card type",
+  "Time_left": "Time left",
+  "Validity": "Validity",
+  "Card_number": "Card number",
+  "Information_about_Citypass": "Information about Citypass",
+  "ready_to_use": "ready to use",
+  "expired": "expired",
+  "hours": "hours"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "uk": uk, "en": en};
 }

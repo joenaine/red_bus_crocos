@@ -31,6 +31,20 @@
   "submit": "Жіберу",
   "ticket_number": "Билет нөмірі",
   "activated": "Іске қосылды",
-  "not_activated": "Іске қосылмаған"
+  "not_activated": "Іске қосылмаған",
 
+  "Not_visited": "Бармаған",
+  "Visited": "Барды",
+  "Time": "Уақыт",
+  "Visits_by_pass": "Карта бойынша кіруі",
+  "QR_to_show": "Көрсетілетін QR",
+  "Card_type": "Карта түрі",
+  "Time_left": "Қалған уақыт",
+  "Validity": "Жарамдылық",
+  "Card_number": "Карта нөмірі",
+  "Information_about_Citypass": "Информация о Citypass",
+
+  "ready_to_use": "қолдануға дайын",
+  "expired": "жарамсыз",
+  "hours": "сағат"
 }

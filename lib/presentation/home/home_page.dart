@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math' as Math;
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -80,11 +79,12 @@ class _HomePageState extends State<HomePage> {
     starIconCompleter.complete(starIcon);
 
     BitmapDescriptor busIcon =
-        await SvgPicture.asset(AppAssets.svg.busLocation).toBitmapDescriptor();
+        await SvgPicture.asset(AppAssets.svg.upleft).toBitmapDescriptor();
     busIconCompleter.complete(busIcon);
 
     BitmapDescriptor userIcon =
-        await SvgPicture.asset(AppAssets.svg.userLocation).toBitmapDescriptor();
+        await SvgPicture.asset(AppAssets.svg.userLocation, height: 12)
+            .toBitmapDescriptor();
     userIconCompleter.complete(userIcon);
 
     mapMarkers.addAll(sightSeeingList

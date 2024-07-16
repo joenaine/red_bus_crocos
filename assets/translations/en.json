@@ -31,5 +31,20 @@
   "submit": "Submit",
   "ticket_number": "Ticket number",
   "activated": "Activated",
-  "not_activated": "Not activated"
+  "not_activated": "Not activated",
+  
+  "Not_visited": "Not visited",
+  "Visited": "Visited",
+  "Time": "Time",
+  "Visits_by_pass": "Visits by pass",
+  "QR_to_show": "QR to show",
+  "Card_type": "Card type",
+  "Time_left": "Time left",
+  "Validity": "Validity",
+  "Card_number": "Card number",
+  "Information_about_Citypass": "Information about Citypass",
+
+  "ready_to_use": "ready to use",
+  "expired": "expired",
+  "hours": "hours"
 }

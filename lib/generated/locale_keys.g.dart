@@ -34,5 +34,18 @@ abstract class  LocaleKeys {
   static const ticket_number = 'ticket_number';
   static const activated = 'activated';
   static const not_activated = 'not_activated';
+  static const Not_visited = 'Not_visited';
+  static const Visited = 'Visited';
+  static const Time = 'Time';
+  static const Visits_by_pass = 'Visits_by_pass';
+  static const QR_to_show = 'QR_to_show';
+  static const Card_type = 'Card_type';
+  static const Time_left = 'Time_left';
+  static const Validity = 'Validity';
+  static const Card_number = 'Card_number';
+  static const Information_about_Citypass = 'Information_about_Citypass';
+  static const ready_to_use = 'ready_to_use';
+  static const expired = 'expired';
+  static const hours = 'hours';
 
 }

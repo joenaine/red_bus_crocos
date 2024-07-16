@@ -31,6 +31,21 @@
   "submit": "Подтвердить",
   "ticket_number": "Номер билета",
   "activated": "Активирован",
-  "not_activated": "Не активирован"
+  "not_activated": "Не активирован",
+
+  "Not_visited": "Не посетил",
+  "Visited": "Посетил",
+  "Time": "Время",
+  "Visits_by_pass": "Посещения по карте",
+  "QR_to_show": "QR для предъявления",
+  "Card_type": "Тип карты",
+  "Time_left": "Осталось времени",
+  "Validity": "Срок действия",
+  "Card_number": "Номер карты",
+  "Information_about_Citypass": "Информация о Citypass",
+
+  "ready_to_use": "готова к использованию",
+  "expired": "истекла",
+  "hours": "часов"
 
 }
