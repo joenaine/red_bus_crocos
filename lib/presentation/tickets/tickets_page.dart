@@ -47,7 +47,7 @@ class TicketsPage extends StatelessWidget {
                         children: [
                           Text(
                             LocaleKeys.your_tickets.tr(),
-                            style: TextStyle(fontSize: 22),
+                            style: const TextStyle(fontSize: 22),
                           ),
                           const SizedBox(height: 15),
                           SizedBox(
@@ -65,15 +65,15 @@ class TicketsPage extends StatelessWidget {
                                                   Text(list[index].cardNumber),
                                             ),
                                             body: Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 SizedBox(
                                                   width: MediaQuery.of(context)
                                                       .size
                                                       .width,
                                                   child: Hero(
-                                                    tag: list[index]
-                                                        .cardNumber,
+                                                    tag: list[index].cardNumber,
                                                     child: CachedNetworkImage(
                                                       imageUrl:
                                                           list[index].qrLink,
@@ -81,9 +81,12 @@ class TicketsPage extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
-                                                SizedBox(height: 15),
+                                                const SizedBox(height: 15),
                                                 Text(list[index].category),
-                                                Text(list[index].used?LocaleKeys.activated.tr():LocaleKeys.not_activated.tr())
+                                                Text(list[index].used
+                                                    ? LocaleKeys.activated.tr()
+                                                    : LocaleKeys.not_activated
+                                                        .tr())
                                               ],
                                             ),
                                           );
@@ -95,7 +98,7 @@ class TicketsPage extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Text(list[index].cardNumber),
-                                      SizedBox(height: 5),
+                                      const SizedBox(height: 5),
                                       Hero(
                                         tag: list[index].cardNumber,
                                         child: CachedNetworkImage(
@@ -114,9 +117,9 @@ class TicketsPage extends StatelessWidget {
                         ],
                       );
                     }
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                   } else {
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                   }
                 },
                 listener: (context, state) {
@@ -148,7 +151,7 @@ class TicketsPage extends StatelessWidget {
               _InfoContainer(
                   isSpecial: true,
                   title: LocaleKeys.adult_ticket.tr(),
-                  price: '5000 ${LocaleKeys.tenge.tr()}'),
+                  price: '6000 ${LocaleKeys.tenge.tr()}'),
               const SizedBox(height: 30),
               _InfoContainer(
                 title: LocaleKeys.discount_ticket.tr(),
@@ -207,8 +210,8 @@ class TicketsPage extends StatelessWidget {
                         title: Text(LocaleKeys.enter_ticket_number.tr()),
                         content: TextField(
                           controller: _controller,
-                          decoration:
-                              InputDecoration(hintText: LocaleKeys.ticket_number.tr()),
+                          decoration: InputDecoration(
+                              hintText: LocaleKeys.ticket_number.tr()),
                           keyboardType: TextInputType.number,
                         ),
                         actions: <Widget>[
