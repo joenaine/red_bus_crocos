@@ -17,9 +17,9 @@ class TicketDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
+      width: MediaQuery.of(context).size.width * .8,
       padding: const EdgeInsets.all(30),
-      margin: const EdgeInsets.only(bottom: 12, right: 20, left: 20, top: 20),
+      margin: const EdgeInsets.only(bottom: 12, left: 20, right: 20, top: 20),
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(

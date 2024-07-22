@@ -68,9 +68,11 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     TicketsRoute.name: (routeData) {
+      final args = routeData.argsAs<TicketsRouteArgs>(
+          orElse: () => const TicketsRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child:  TicketsPage(),
+        child: TicketsPage(key: args.key),
       );
     },
   };
@@ -214,14 +216,29 @@ class ScheduleRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [TicketsPage]
-class TicketsRoute extends PageRouteInfo<void> {
-  const TicketsRoute({List<PageRouteInfo>? children})
-      : super(
+class TicketsRoute extends PageRouteInfo<TicketsRouteArgs> {
+  TicketsRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           TicketsRoute.name,
+          args: TicketsRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'TicketsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<TicketsRouteArgs> page =
+      PageInfo<TicketsRouteArgs>(name);
+}
+
+class TicketsRouteArgs {
+  const TicketsRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'TicketsRouteArgs{key: $key}';
+  }
 }

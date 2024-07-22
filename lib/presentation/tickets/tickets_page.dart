@@ -105,8 +105,8 @@ class TicketsPage extends StatelessWidget {
                       const SizedBox(height: 30),
                       InkWell(
                         onTap: () async {
-                          if (!await launchUrl(Uri.parse(
-                              'https://astana.citypass.kz/ru/kupit-citypass/'))) {
+                          if (!await launchUrl(
+                              Uri.parse('https://redbus.kz/ru/kupit-bilet/'))) {
                             throw Exception(
                                 'Could not launch https://flutter.dev');
                           }

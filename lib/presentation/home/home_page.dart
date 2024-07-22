@@ -59,6 +59,9 @@ class _HomePageState extends State<HomePage> {
         context
             .read<InformationModalBloc>()
             .add(const InformationModalEvent.getInformationModal());
+        context
+            .read<InformationModalBloc>()
+            .add(const InformationModalEvent.getDismissableModal());
       }
     });
 
@@ -150,6 +153,7 @@ class _HomePageState extends State<HomePage> {
 
   bool trigger = false;
   SightWPDto? modalInfo;
+  SightWPDto? modalDismissableInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -251,6 +255,7 @@ class _HomePageState extends State<HomePage> {
           BlocListener<InformationModalBloc, InformationModalState>(
             listener: (context, state) {
               modalInfo = state.modalInfo;
+
               //TODO: UNCOMMENT
               if (state.modalInfo?.acfData?.trigger == true) {
                 trigger = true;
@@ -339,7 +344,7 @@ class _HomePageState extends State<HomePage> {
                     },
                     child: const CircleAvatar(
                       radius: 30,
-                      backgroundColor: AppColors.lightRed,
+                      backgroundColor: AppColors.red,
                       child: Icon(Icons.my_location),
                     ),
                   )),

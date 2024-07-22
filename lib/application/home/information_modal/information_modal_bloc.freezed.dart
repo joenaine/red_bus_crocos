@@ -19,32 +19,38 @@ mixin _$InformationModalEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getInformationModal,
+    required TResult Function() getDismissableModal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getInformationModal,
+    TResult? Function()? getDismissableModal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getInformationModal,
+    TResult Function()? getDismissableModal,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetInformationModal value) getInformationModal,
+    required TResult Function(_GetInformationModal value) getDismissableModal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetInformationModal value)? getInformationModal,
+    TResult? Function(_GetInformationModal value)? getDismissableModal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetInformationModal value)? getInformationModal,
+    TResult Function(_GetInformationModal value)? getDismissableModal,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -109,6 +115,7 @@ class _$GetInformationModalImpl implements _GetInformationModal {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getInformationModal,
+    required TResult Function() getDismissableModal,
   }) {
     return getInformationModal();
   }
@@ -117,6 +124,7 @@ class _$GetInformationModalImpl implements _GetInformationModal {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getInformationModal,
+    TResult? Function()? getDismissableModal,
   }) {
     return getInformationModal?.call();
   }
@@ -125,6 +133,7 @@ class _$GetInformationModalImpl implements _GetInformationModal {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getInformationModal,
+    TResult Function()? getDismissableModal,
     required TResult orElse(),
   }) {
     if (getInformationModal != null) {
@@ -137,6 +146,7 @@ class _$GetInformationModalImpl implements _GetInformationModal {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetInformationModal value) getInformationModal,
+    required TResult Function(_GetInformationModal value) getDismissableModal,
   }) {
     return getInformationModal(this);
   }
@@ -145,6 +155,7 @@ class _$GetInformationModalImpl implements _GetInformationModal {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetInformationModal value)? getInformationModal,
+    TResult? Function(_GetInformationModal value)? getDismissableModal,
   }) {
     return getInformationModal?.call(this);
   }
@@ -153,6 +164,7 @@ class _$GetInformationModalImpl implements _GetInformationModal {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetInformationModal value)? getInformationModal,
+    TResult Function(_GetInformationModal value)? getDismissableModal,
     required TResult orElse(),
   }) {
     if (getInformationModal != null) {
@@ -167,8 +179,112 @@ abstract class _GetInformationModal implements InformationModalEvent {
 }
 
 /// @nodoc
+abstract class _$$GetInformationModalImplCopyWith<$Res> {
+  factory _$$GetInformationModalImplCopyWith(_$GetInformationModalImpl value,
+          $Res Function(_$GetInformationModalImpl) then) =
+      __$$GetInformationModalImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetInformationModalImplCopyWithImpl<$Res>
+    extends _$InformationModalEventCopyWithImpl<$Res, _$GetInformationModalImpl>
+    implements _$$GetInformationModalImplCopyWith<$Res> {
+  __$$GetInformationModalImplCopyWithImpl(_$GetInformationModalImpl _value,
+      $Res Function(_$GetInformationModalImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$GetInformationModalImpl implements _GetInformationModal {
+  const _$GetInformationModalImpl();
+
+  @override
+  String toString() {
+    return 'InformationModalEvent.getDismissableModal()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetInformationModalImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getInformationModal,
+    required TResult Function() getDismissableModal,
+  }) {
+    return getDismissableModal();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getInformationModal,
+    TResult? Function()? getDismissableModal,
+  }) {
+    return getDismissableModal?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getInformationModal,
+    TResult Function()? getDismissableModal,
+    required TResult orElse(),
+  }) {
+    if (getDismissableModal != null) {
+      return getDismissableModal();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetInformationModal value) getInformationModal,
+    required TResult Function(_GetInformationModal value) getDismissableModal,
+  }) {
+    return getDismissableModal(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetInformationModal value)? getInformationModal,
+    TResult? Function(_GetInformationModal value)? getDismissableModal,
+  }) {
+    return getDismissableModal?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetInformationModal value)? getInformationModal,
+    TResult Function(_GetInformationModal value)? getDismissableModal,
+    required TResult orElse(),
+  }) {
+    if (getDismissableModal != null) {
+      return getDismissableModal(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetInformationModal implements InformationModalEvent {
+  const factory _GetInformationModal() = _$GetInformationModalImpl;
+}
+
+/// @nodoc
 mixin _$InformationModalState {
   SightWPDto? get modalInfo => throw _privateConstructorUsedError;
+  SightWPDto? get modalDismissableInfo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $InformationModalStateCopyWith<InformationModalState> get copyWith =>
@@ -181,7 +297,7 @@ abstract class $InformationModalStateCopyWith<$Res> {
           $Res Function(InformationModalState) then) =
       _$InformationModalStateCopyWithImpl<$Res, InformationModalState>;
   @useResult
-  $Res call({SightWPDto? modalInfo});
+  $Res call({SightWPDto? modalInfo, SightWPDto? modalDismissableInfo});
 }
 
 /// @nodoc
@@ -199,11 +315,16 @@ class _$InformationModalStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? modalInfo = freezed,
+    Object? modalDismissableInfo = freezed,
   }) {
     return _then(_value.copyWith(
       modalInfo: freezed == modalInfo
           ? _value.modalInfo
           : modalInfo // ignore: cast_nullable_to_non_nullable
+              as SightWPDto?,
+      modalDismissableInfo: freezed == modalDismissableInfo
+          ? _value.modalDismissableInfo
+          : modalDismissableInfo // ignore: cast_nullable_to_non_nullable
               as SightWPDto?,
     ) as $Val);
   }
@@ -218,7 +339,7 @@ abstract class _$$InformationModalStateImplCopyWith<$Res>
       __$$InformationModalStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({SightWPDto? modalInfo});
+  $Res call({SightWPDto? modalInfo, SightWPDto? modalDismissableInfo});
 }
 
 /// @nodoc
@@ -234,11 +355,16 @@ class __$$InformationModalStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? modalInfo = freezed,
+    Object? modalDismissableInfo = freezed,
   }) {
     return _then(_$InformationModalStateImpl(
       modalInfo: freezed == modalInfo
           ? _value.modalInfo
           : modalInfo // ignore: cast_nullable_to_non_nullable
+              as SightWPDto?,
+      modalDismissableInfo: freezed == modalDismissableInfo
+          ? _value.modalDismissableInfo
+          : modalDismissableInfo // ignore: cast_nullable_to_non_nullable
               as SightWPDto?,
     ));
   }
@@ -247,14 +373,17 @@ class __$$InformationModalStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InformationModalStateImpl implements _InformationModalState {
-  const _$InformationModalStateImpl({this.modalInfo});
+  const _$InformationModalStateImpl(
+      {this.modalInfo, this.modalDismissableInfo});
 
   @override
   final SightWPDto? modalInfo;
+  @override
+  final SightWPDto? modalDismissableInfo;
 
   @override
   String toString() {
-    return 'InformationModalState(modalInfo: $modalInfo)';
+    return 'InformationModalState(modalInfo: $modalInfo, modalDismissableInfo: $modalDismissableInfo)';
   }
 
   @override
@@ -263,11 +392,13 @@ class _$InformationModalStateImpl implements _InformationModalState {
         (other.runtimeType == runtimeType &&
             other is _$InformationModalStateImpl &&
             (identical(other.modalInfo, modalInfo) ||
-                other.modalInfo == modalInfo));
+                other.modalInfo == modalInfo) &&
+            (identical(other.modalDismissableInfo, modalDismissableInfo) ||
+                other.modalDismissableInfo == modalDismissableInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, modalInfo);
+  int get hashCode => Object.hash(runtimeType, modalInfo, modalDismissableInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -278,11 +409,14 @@ class _$InformationModalStateImpl implements _InformationModalState {
 }
 
 abstract class _InformationModalState implements InformationModalState {
-  const factory _InformationModalState({final SightWPDto? modalInfo}) =
-      _$InformationModalStateImpl;
+  const factory _InformationModalState(
+      {final SightWPDto? modalInfo,
+      final SightWPDto? modalDismissableInfo}) = _$InformationModalStateImpl;
 
   @override
   SightWPDto? get modalInfo;
+  @override
+  SightWPDto? get modalDismissableInfo;
   @override
   @JsonKey(ignore: true)
   _$$InformationModalStateImplCopyWith<_$InformationModalStateImpl>

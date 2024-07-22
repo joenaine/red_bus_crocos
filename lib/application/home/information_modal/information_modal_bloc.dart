@@ -12,9 +12,15 @@ class InformationModalBloc
   InformationModalBloc() : super(InformationModalState.initial()) {
     on<InformationModalEvent>((event, emit) async {
       await event.map(
-        getInformationModal: (value) async {
+        getInformationModal: (_) async {
           SightWPDto? modalInfo = await SightsWPRepository.fetchThisOne();
           if (modalInfo.acfData?.trigger == true) {
+            emit(state.copyWith(modalInfo: modalInfo));
+          }
+        },
+        getDismissableModal: (_) async {
+          SightWPDto? modalInfo = await SightsWPRepository.fetchModalMessage();
+          if (modalInfo.acfData?.trigger == false) {
             emit(state.copyWith(modalInfo: modalInfo));
           }
         },
