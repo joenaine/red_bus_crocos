@@ -59,7 +59,8 @@ class AppWidget extends StatelessWidget {
             create: (context) => getIt<SightsBloc>()..add(FetchSights())),
         BlocProvider<InformationModalBloc>(
             create: (context) => InformationModalBloc()
-              ..add(const InformationModalEvent.getInformationModal())),
+              ..add(const InformationModalEvent.getInformationModal())
+              ..add(const InformationModalEvent.getDismissableModal())),
         BlocProvider<LocaleBloc>(
           create: (context) => getIt<LocaleBloc>(),
         ),

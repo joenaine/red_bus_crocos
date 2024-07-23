@@ -27,4 +27,5 @@ class _Svg {
   final String userLocation = 'assets/icons/user_location.svg';
   final String redbus = 'assets/icons/redbus.svg';
   final String upleft = 'assets/icons/upleft.svg';
+  final String cancel = 'assets/icons/xmark.svg';
 }

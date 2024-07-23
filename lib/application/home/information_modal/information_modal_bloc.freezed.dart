@@ -38,19 +38,19 @@ mixin _$InformationModalEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetInformationModal value) getInformationModal,
-    required TResult Function(_GetInformationModal value) getDismissableModal,
+    required TResult Function(_GetDismissableModal value) getDismissableModal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetInformationModal value)? getInformationModal,
-    TResult? Function(_GetInformationModal value)? getDismissableModal,
+    TResult? Function(_GetDismissableModal value)? getDismissableModal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetInformationModal value)? getInformationModal,
-    TResult Function(_GetInformationModal value)? getDismissableModal,
+    TResult Function(_GetDismissableModal value)? getDismissableModal,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -146,7 +146,7 @@ class _$GetInformationModalImpl implements _GetInformationModal {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetInformationModal value) getInformationModal,
-    required TResult Function(_GetInformationModal value) getDismissableModal,
+    required TResult Function(_GetDismissableModal value) getDismissableModal,
   }) {
     return getInformationModal(this);
   }
@@ -155,7 +155,7 @@ class _$GetInformationModalImpl implements _GetInformationModal {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetInformationModal value)? getInformationModal,
-    TResult? Function(_GetInformationModal value)? getDismissableModal,
+    TResult? Function(_GetDismissableModal value)? getDismissableModal,
   }) {
     return getInformationModal?.call(this);
   }
@@ -164,7 +164,7 @@ class _$GetInformationModalImpl implements _GetInformationModal {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetInformationModal value)? getInformationModal,
-    TResult Function(_GetInformationModal value)? getDismissableModal,
+    TResult Function(_GetDismissableModal value)? getDismissableModal,
     required TResult orElse(),
   }) {
     if (getInformationModal != null) {
@@ -179,25 +179,25 @@ abstract class _GetInformationModal implements InformationModalEvent {
 }
 
 /// @nodoc
-abstract class _$$GetInformationModalImplCopyWith<$Res> {
-  factory _$$GetInformationModalImplCopyWith(_$GetInformationModalImpl value,
-          $Res Function(_$GetInformationModalImpl) then) =
-      __$$GetInformationModalImplCopyWithImpl<$Res>;
+abstract class _$$GetDismissableModalImplCopyWith<$Res> {
+  factory _$$GetDismissableModalImplCopyWith(_$GetDismissableModalImpl value,
+          $Res Function(_$GetDismissableModalImpl) then) =
+      __$$GetDismissableModalImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$GetInformationModalImplCopyWithImpl<$Res>
-    extends _$InformationModalEventCopyWithImpl<$Res, _$GetInformationModalImpl>
-    implements _$$GetInformationModalImplCopyWith<$Res> {
-  __$$GetInformationModalImplCopyWithImpl(_$GetInformationModalImpl _value,
-      $Res Function(_$GetInformationModalImpl) _then)
+class __$$GetDismissableModalImplCopyWithImpl<$Res>
+    extends _$InformationModalEventCopyWithImpl<$Res, _$GetDismissableModalImpl>
+    implements _$$GetDismissableModalImplCopyWith<$Res> {
+  __$$GetDismissableModalImplCopyWithImpl(_$GetDismissableModalImpl _value,
+      $Res Function(_$GetDismissableModalImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$GetInformationModalImpl implements _GetInformationModal {
-  const _$GetInformationModalImpl();
+class _$GetDismissableModalImpl implements _GetDismissableModal {
+  const _$GetDismissableModalImpl();
 
   @override
   String toString() {
@@ -208,7 +208,7 @@ class _$GetInformationModalImpl implements _GetInformationModal {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetInformationModalImpl);
+            other is _$GetDismissableModalImpl);
   }
 
   @override
@@ -249,7 +249,7 @@ class _$GetInformationModalImpl implements _GetInformationModal {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetInformationModal value) getInformationModal,
-    required TResult Function(_GetInformationModal value) getDismissableModal,
+    required TResult Function(_GetDismissableModal value) getDismissableModal,
   }) {
     return getDismissableModal(this);
   }
@@ -258,7 +258,7 @@ class _$GetInformationModalImpl implements _GetInformationModal {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetInformationModal value)? getInformationModal,
-    TResult? Function(_GetInformationModal value)? getDismissableModal,
+    TResult? Function(_GetDismissableModal value)? getDismissableModal,
   }) {
     return getDismissableModal?.call(this);
   }
@@ -267,7 +267,7 @@ class _$GetInformationModalImpl implements _GetInformationModal {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetInformationModal value)? getInformationModal,
-    TResult Function(_GetInformationModal value)? getDismissableModal,
+    TResult Function(_GetDismissableModal value)? getDismissableModal,
     required TResult orElse(),
   }) {
     if (getDismissableModal != null) {
@@ -277,8 +277,8 @@ class _$GetInformationModalImpl implements _GetInformationModal {
   }
 }
 
-abstract class _GetInformationModal implements InformationModalEvent {
-  const factory _GetInformationModal() = _$GetInformationModalImpl;
+abstract class _GetDismissableModal implements InformationModalEvent {
+  const factory _GetDismissableModal() = _$GetDismissableModalImpl;
 }
 
 /// @nodoc

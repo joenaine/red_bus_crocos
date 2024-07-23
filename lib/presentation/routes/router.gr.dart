@@ -28,6 +28,7 @@ abstract class _$AppRouter extends RootStackRouter {
         child: BusStopDetailPage(
           key: args.key,
           id: args.id,
+          index: args.index,
         ),
       );
     },
@@ -98,12 +99,14 @@ class BusStopDetailRoute extends PageRouteInfo<BusStopDetailRouteArgs> {
   BusStopDetailRoute({
     Key? key,
     required String id,
+    required int index,
     List<PageRouteInfo>? children,
   }) : super(
           BusStopDetailRoute.name,
           args: BusStopDetailRouteArgs(
             key: key,
             id: id,
+            index: index,
           ),
           initialChildren: children,
         );
@@ -118,15 +121,18 @@ class BusStopDetailRouteArgs {
   const BusStopDetailRouteArgs({
     this.key,
     required this.id,
+    required this.index,
   });
 
   final Key? key;
 
   final String id;
 
+  final int index;
+
   @override
   String toString() {
-    return 'BusStopDetailRouteArgs{key: $key, id: $id}';
+    return 'BusStopDetailRouteArgs{key: $key, id: $id, index: $index}';
   }
 }
 

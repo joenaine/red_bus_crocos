@@ -30,6 +30,8 @@ class TextSizes {
           style: TextStyle(
               fontSize: 14, color: color, fontWeight: FontWeight.w300),
           textAlign: textAlign);
-  static Widget s16w500(String text, {Color? color = Colors.white}) =>
-      Text(text, style: TextStyle(fontSize: 16, color: color));
+  static Widget s16w500(String text,
+          {Color? color = Colors.white, TextAlign? textAlign}) =>
+      Text(text,
+          style: TextStyle(fontSize: 16, color: color), textAlign: textAlign);
 }

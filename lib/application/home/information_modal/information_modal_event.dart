@@ -5,5 +5,5 @@ class InformationModalEvent with _$InformationModalEvent {
   const factory InformationModalEvent.getInformationModal() =
       _GetInformationModal;
   const factory InformationModalEvent.getDismissableModal() =
-      _GetInformationModal;
+      _GetDismissableModal;
 }

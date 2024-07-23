@@ -30,7 +30,7 @@ class SightsWPRepository {
 
       if (result.statusCode == 200) {
         // log(result.data[0].toString());
-        return SightWPDto.fromJson(result.data[0]);
+        return SightWPDto.fromJson(result.data);
       } else {
         throw Exception('Error on fetchCategories: ${result.statusCode}');
       }

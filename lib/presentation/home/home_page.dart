@@ -22,6 +22,7 @@ import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffo
 import 'package:red_bus_crocos_project/presentation/common_widgets/indents.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/text_sizes.dart';
 import 'package:red_bus_crocos_project/presentation/home/widgets/cupertino_dialog_alert.dart';
+import 'package:red_bus_crocos_project/presentation/home/widgets/modal_dialog.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
 @RoutePage()
@@ -59,9 +60,11 @@ class _HomePageState extends State<HomePage> {
         context
             .read<InformationModalBloc>()
             .add(const InformationModalEvent.getInformationModal());
-        context
-            .read<InformationModalBloc>()
-            .add(const InformationModalEvent.getDismissableModal());
+        if (counter == 0) {
+          context
+              .read<InformationModalBloc>()
+              .add(const InformationModalEvent.getDismissableModal());
+        }
       }
     });
 
@@ -82,7 +85,7 @@ class _HomePageState extends State<HomePage> {
     starIconCompleter.complete(starIcon);
 
     BitmapDescriptor busIcon =
-        await SvgPicture.asset(AppAssets.svg.upleft).toBitmapDescriptor();
+        await SvgPicture.asset(AppAssets.svg.busLocation).toBitmapDescriptor();
     busIconCompleter.complete(busIcon);
 
     BitmapDescriptor userIcon =
@@ -154,6 +157,7 @@ class _HomePageState extends State<HomePage> {
   bool trigger = false;
   SightWPDto? modalInfo;
   SightWPDto? modalDismissableInfo;
+  int counter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -255,6 +259,7 @@ class _HomePageState extends State<HomePage> {
           BlocListener<InformationModalBloc, InformationModalState>(
             listener: (context, state) {
               modalInfo = state.modalInfo;
+              modalDismissableInfo = state.modalDismissableInfo;
 
               //TODO: UNCOMMENT
               if (state.modalInfo?.acfData?.trigger == true) {
@@ -262,6 +267,12 @@ class _HomePageState extends State<HomePage> {
                 modalInfo = state.modalInfo;
               } else {
                 trigger = false;
+              }
+              if (state.modalDismissableInfo?.acfData?.trigger == true) {
+                ModalDialog.show(context,
+                    title: state.modalDismissableInfo?.title,
+                    content: state.modalDismissableInfo?.content);
+                counter++;
               }
               setState(() {});
             },

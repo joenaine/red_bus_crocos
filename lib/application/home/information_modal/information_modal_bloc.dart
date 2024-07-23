@@ -19,9 +19,10 @@ class InformationModalBloc
           }
         },
         getDismissableModal: (_) async {
-          SightWPDto? modalInfo = await SightsWPRepository.fetchModalMessage();
-          if (modalInfo.acfData?.trigger == false) {
-            emit(state.copyWith(modalInfo: modalInfo));
+          SightWPDto? modalDismissableInfo =
+              await SightsWPRepository.fetchModalMessage();
+          if (modalDismissableInfo.acfData?.trigger == false) {
+            emit(state.copyWith(modalDismissableInfo: modalDismissableInfo));
           }
         },
       );

@@ -14,9 +14,10 @@ import '../common_widgets/common_scaffold_widget.dart';
 
 @RoutePage()
 class BusStopDetailPage extends StatefulWidget {
-  const BusStopDetailPage({super.key, required this.id});
+  const BusStopDetailPage({super.key, required this.id, required this.index});
 
   final String id;
+  final int index;
 
   @override
   State<BusStopDetailPage> createState() => _BusStopDetailPageState();
@@ -76,10 +77,10 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
                                 decoration: BoxDecoration(
                                     color: AppColors.red,
                                     borderRadius: BorderRadius.circular(29)),
-                                child: const Center(
+                                child: Center(
                                   child: Text(
-                                    '1',
-                                    style: TextStyle(
+                                    widget.index.toString(),
+                                    style: const TextStyle(
                                         color: AppColors.white,
                                         fontSize: 24,
                                         height: 1.2),
@@ -223,6 +224,7 @@ class _BusStopDetailPageState extends State<BusStopDetailPage> {
                             //   ),
                             // ),
                             // const SizedBox(height: 25),
+                            // HtmlWidget(data.description ?? '')
                             Text(
                               data.description ?? '',
                               style: const TextStyle(
