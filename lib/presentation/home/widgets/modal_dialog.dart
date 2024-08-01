@@ -61,8 +61,23 @@ class ModalDialog {
           context: context,
           builder: (BuildContext context) {
             return CupertinoAlertDialog(
-              title: Text(title!),
-              content: Text(content ?? ''),
+              title: Column(
+                children: [
+                  Padding(
+                      padding: const EdgeInsets.only(left: 4.0),
+                      child: IconButton(
+                        // borderRadius: BorderRadius.circular(100),
+                        icon:
+                            SvgPicture.asset(AppAssets.svg.cancel, height: 44),
+                        onPressed: () {
+                          context.router.maybePop();
+                        },
+                      )),
+                  TextSizes.s24w500(title ?? '', color: AppColors.red),
+                ],
+              ),
+              content: TextSizes.s16w500(content ?? '',
+                  textAlign: TextAlign.center, color: AppColors.cardDark),
               actions: const <Widget>[
                 // if (!isRequired!)
                 //   CupertinoDialogAction(

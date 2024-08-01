@@ -17,15 +17,16 @@ class TicketDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * .8,
+      width: MediaQuery.of(context).size.width * .9,
       padding: const EdgeInsets.all(30),
       margin: const EdgeInsets.only(bottom: 12, left: 20, right: 20, top: 20),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.all(
+        border: Border.all(color: Colors.grey.shade300),
+        borderRadius: const BorderRadius.all(
           Radius.circular(20),
         ),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Color.fromRGBO(0, 0, 0, 0.05),
             offset: Offset(0, 4),
@@ -289,7 +290,13 @@ class PhotoHero extends StatelessWidget {
           body: Center(
             child: Hero(
               tag: photo.path,
-              child: Image.file(photo),
+              child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  child: Image.file(
+                    photo,
+                    fit: BoxFit.contain,
+                  )),
             ),
           ),
         ),
@@ -311,13 +318,18 @@ class PhotoHero extends StatelessWidget {
           body: Center(
             child: Hero(
               tag: photo,
-              child: CachedNetworkImage(
-                imageUrl: photo,
-                errorWidget: (context, object, stackTrace) {
-                  return Image.asset(
-                    'assets/images/placeholder.png',
-                  );
-                },
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.height * 0.8,
+                child: CachedNetworkImage(
+                  imageUrl: photo,
+                  fit: BoxFit.contain,
+                  errorWidget: (context, object, stackTrace) {
+                    return Image.asset(
+                      'assets/images/placeholder.png',
+                    );
+                  },
+                ),
               ),
             ),
           ),

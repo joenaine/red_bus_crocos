@@ -35,32 +35,27 @@ class BusStopsPage extends StatelessWidget {
               case SightsInitial():
                 return const BusStopsShimmerWidget();
               case SightsError():
-                return Center(
-                  child: Text(LocaleKeys.error.tr()),
-                );
+                return Center(child: Text(LocaleKeys.error.tr()));
               case SightsLoaded():
                 {
                   final List<SightModel> sights = state.data;
                   return ListView.separated(
-                    itemBuilder: (context, index) {
-                      final data = sights[index];
-                      return BusStopItemWidget(
-                          onTap: () {
-                            context.router.push(BusStopDetailRoute(
-                                id: data.obj_id!, index: index + 1));
-                          },
-                          index: index,
-                          title: data.object_name ?? '',
-                          imageUrl: data.obj_img ?? '',
-                          subTitle: data.popup_description ?? '');
-                    },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(
-                        height: 20,
-                      );
-                    },
-                    itemCount: sights.length,
-                  );
+                      itemBuilder: (context, index) {
+                        final data = sights[index];
+                        return BusStopItemWidget(
+                            onTap: () {
+                              context.router.push(BusStopDetailRoute(
+                                  id: data.obj_id!, index: index + 1));
+                            },
+                            index: index,
+                            title: data.object_name ?? '',
+                            imageUrl: data.obj_img ?? '',
+                            subTitle: data.popup_description ?? '');
+                      },
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(height: 20);
+                      },
+                      itemCount: sights.length);
                 }
             }
           },

@@ -80,19 +80,20 @@ class TicketBloc extends Bloc<TicketEvent, TicketState> {
     List<String> list = pref.getStringList('tickets') ?? [];
     List<Ticket> tickets =
         list.map((e) => Ticket.fromMap(jsonDecode(e))).toList();
+
+    // Remove expired tickets
     tickets.removeWhere((ticket) {
       if (ticket.finalDate != null) {
         DateTime dateTime =
             DateTime.parse(ticket.finalDate!.replaceAll(' ', 'T'));
-        if (dateTime.isBefore(DateTime.now())) {
-          return true;
-        }
+        return dateTime.isBefore(DateTime.now());
       }
       return false;
     });
+
     final client = Dio();
     for (Ticket t in tickets) {
-      Map map = {
+      Map<String, dynamic> map = {
         "api_key": "rTD6psMNcuMfewz8YAv825X",
         "project_id": 3,
         "lang": "ru",
@@ -124,8 +125,11 @@ class TicketBloc extends Bloc<TicketEvent, TicketState> {
             tickets.add(ticket);
           }
         }
-      } on Exception {}
+      } catch (e) {
+        log('Error fetching ticket details: $e');
+      }
     }
+
     list = tickets.map((e) => jsonEncode(e.toMap())).toList();
     pref.setStringList('tickets', list);
     emit(TicketLoaded(tickets));
@@ -133,15 +137,16 @@ class TicketBloc extends Bloc<TicketEvent, TicketState> {
 }
 
 class Ticket {
-  Ticket(
-      {required this.cardNumber,
-      required this.category,
-      required this.minLeft,
-      required this.qrLink,
-      required this.finalDate,
-      required this.used,
-      this.status,
-      this.duration});
+  Ticket({
+    required this.cardNumber,
+    required this.category,
+    required this.minLeft,
+    required this.qrLink,
+    required this.finalDate,
+    required this.used,
+    this.status,
+    this.duration,
+  });
 
   final String cardNumber;
   final String category;
@@ -165,20 +170,23 @@ class Ticket {
     };
   }
 
+  static Color midColor = const Color.fromRGBO(45, 192, 255, 1);
+
   String getStatus(String statusCode) {
     switch (statusCode) {
       case '0':
-        return LocaleKeys.ready_to_use.tr();
+        return LocaleKeys.ready_to_use
+            .tr(); // Replace with LocaleKeys.ready_to_use.tr();
       case '1':
-        return LocaleKeys.activated.tr();
+        return LocaleKeys.activated
+            .tr(); // Replace with LocaleKeys.activated.tr();
       case '2':
-        return LocaleKeys.expired.tr();
+        return LocaleKeys.activated
+            .tr(); // Replace with LocaleKeys.expired.tr();
       default:
-        return '-';
+        return LocaleKeys.ready_to_use.tr();
     }
   }
-
-  static Color midColor = const Color.fromRGBO(45, 192, 255, 1);
 
   Color getStatusColor(String statusCode) {
     switch (statusCode) {
@@ -189,12 +197,11 @@ class Ticket {
       case '2':
         return Colors.red;
       default:
-        return Colors.grey[600]!;
+        return midColor;
     }
   }
 
   factory Ticket.fromMap(Map<String, dynamic> map) {
-    print(map);
     return Ticket(
       cardNumber: map['cardNumber'],
       category: map['category'],

@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:red_bus_crocos_project/domain/sight/sight_wp_dto.dart';
+import 'package:red_bus_crocos_project/core/theme/theme_global_var.dart'
+    as global;
 
 class SightsWPRepository {
   static Future<SightWPDto> fetchThisOne() async {
@@ -24,9 +26,19 @@ class SightsWPRepository {
 
   static Future<SightWPDto> fetchModalMessage() async {
     try {
+      String lang() {
+        if (global.locale.languageCode == 'uk') {
+          return 'kz';
+        } else if (global.locale.languageCode == 'ru') {
+          return 'ru';
+        } else {
+          return 'en';
+        }
+      }
+
       final client = Dio();
-      final result = await client
-          .get('https://redbus.kz/ru/wp-json/wl/v1/posts/modalnoe-okno2');
+      final result = await client.get(
+          'https://redbus.kz/${lang()}/wp-json/wl/v1/posts/modalnoe-okno2');
 
       if (result.statusCode == 200) {
         // log(result.data[0].toString());

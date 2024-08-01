@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:math' as Math;
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,7 @@ import 'package:red_bus_crocos_project/infrastructure/sights/sights_local_data.d
 import 'package:red_bus_crocos_project/presentation/common_widgets/common_scaffold_widget.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/indents.dart';
 import 'package:red_bus_crocos_project/presentation/common_widgets/text_sizes.dart';
+import 'package:red_bus_crocos_project/presentation/home/helpers/custom_market.dart';
 import 'package:red_bus_crocos_project/presentation/home/widgets/cupertino_dialog_alert.dart';
 import 'package:red_bus_crocos_project/presentation/home/widgets/modal_dialog.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
@@ -84,8 +87,10 @@ class _HomePageState extends State<HomePage> {
         await SvgPicture.asset(AppAssets.svg.redStar).toBitmapDescriptor();
     starIconCompleter.complete(starIcon);
 
-    BitmapDescriptor busIcon =
-        await SvgPicture.asset(AppAssets.svg.busLocation).toBitmapDescriptor();
+    BitmapDescriptor busIcon = await CustomMarker.createCustomMarkerWithTitle(
+      AppAssets.svg.busLocation, // Your SVG asset path
+      'The Bus',
+    );
     busIconCompleter.complete(busIcon);
 
     BitmapDescriptor userIcon =
@@ -174,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                       selectionColor: Colors.white,
                     ),
                     background: Colors.green,
-                    duration: const Duration(seconds: 15));
+                    duration: const Duration(seconds: 10));
               }
             },
           ),
@@ -262,12 +267,14 @@ class _HomePageState extends State<HomePage> {
               modalDismissableInfo = state.modalDismissableInfo;
 
               //TODO: UNCOMMENT
-              if (state.modalInfo?.acfData?.trigger == true) {
+              if (state.modalInfo?.acfData?.trigger == true &&
+                  state.modalDismissableInfo?.acfData?.trigger == false) {
                 trigger = true;
                 modalInfo = state.modalInfo;
               } else {
                 trigger = false;
               }
+
               if (state.modalDismissableInfo?.acfData?.trigger == true) {
                 ModalDialog.show(context,
                     title: state.modalDismissableInfo?.title,
