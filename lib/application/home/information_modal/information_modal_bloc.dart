@@ -21,7 +21,7 @@ class InformationModalBloc
         getDismissableModal: (_) async {
           SightWPDto? modalDismissableInfo =
               await SightsWPRepository.fetchModalMessage();
-          if (modalDismissableInfo.acfData?.trigger == false) {
+          if (modalDismissableInfo.acfData?.trigger == true) {
             emit(state.copyWith(modalDismissableInfo: modalDismissableInfo));
           }
         },
