@@ -1,25 +1,33 @@
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:red_bus_crocos_project/app_widget.dart';
 import 'package:red_bus_crocos_project/core/theme/colors.dart';
 import 'package:red_bus_crocos_project/core/utils/translation.dart';
 import 'package:red_bus_crocos_project/domain/lat_lng/lat_lng_model.dart';
+import 'package:red_bus_crocos_project/firebase_options.dart';
 import 'package:red_bus_crocos_project/generated/codegen_loader.g.dart';
 import 'package:red_bus_crocos_project/injection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:red_bus_crocos_project/core/theme/theme_global_var.dart'
     as global;
 
+String? globalVersion;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform, name: 'redbus');
   await Hive.initFlutter();
   Hive.registerAdapter(LatLngDataAdapter());
   await configureInjection();
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  globalVersion = packageInfo.version;
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: AppColors.red,

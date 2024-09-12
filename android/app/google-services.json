@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "986883303887",
+    "project_id": "redbus-40748",
+    "storage_bucket": "redbus-40748.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986883303887:android:7358997ea08c20a12dcaba",
+        "android_client_info": {
+          "package_name": "com.crocos.redbustour"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbQWvM7e6UDaX3dYdNa-VFZ9jT35mOxJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

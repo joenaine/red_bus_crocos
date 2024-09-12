@@ -15,8 +15,8 @@ class CustomMarker {
 
     // Create an image from the SVG, scaling it to 150x150
     final ui.Picture picture =
-        svgDrawableRoot.toPicture(size: const Size(130, 130));
-    final ui.Image image = await picture.toImage(130, 130);
+        svgDrawableRoot.toPicture(size: const Size(120, 120));
+    final ui.Image image = await picture.toImage(120, 120);
 
     // Convert the image to bytes
     final ByteData? byteData =
@@ -27,7 +27,7 @@ class CustomMarker {
     final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
     final Canvas canvas = Canvas(pictureRecorder);
     final Paint paint = Paint()..color = Colors.white;
-    const double textOffset = 10.0;
+    const double textOffset = .0;
 
     // Draw the image
     final ui.Image markerImage = await decodeImageFromList(imageBytes);
@@ -40,7 +40,9 @@ class CustomMarker {
       text: TextSpan(
         text: title,
         style: const TextStyle(
-            fontSize: 40.0, color: Colors.black), // Adjust text size as needed
+            fontWeight: FontWeight.w700,
+            fontSize: 30.0,
+            color: Colors.black), // Adjust text size as needed
       ),
     );
     textPainter.layout();

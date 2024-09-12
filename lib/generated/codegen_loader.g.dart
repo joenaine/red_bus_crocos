@@ -60,7 +60,8 @@ class CodegenLoader extends AssetLoader{
   "Information_about_Citypass": "Информация о Citypass",
   "ready_to_use": "готова к использованию",
   "expired": "истекла",
-  "hours": "часов"
+  "hours": "часов",
+  "update": "Обновить"
 };
 static const Map<String,dynamic> uk = {
   "route": "Бағыт",
@@ -108,7 +109,8 @@ static const Map<String,dynamic> uk = {
   "Information_about_Citypass": "Информация о Citypass",
   "ready_to_use": "қолдануға дайын",
   "expired": "жарамсыз",
-  "hours": "сағат"
+  "hours": "сағат",
+  "update": "Жаңарту"
 };
 static const Map<String,dynamic> en = {
   "route": "Route",
@@ -123,7 +125,7 @@ static const Map<String,dynamic> en = {
   "travel_time": "Travel Time - 1 hour 55 minutes",
   "adult_ticket": "Adult Ticket",
   "discount_ticket": "Discount Ticket for Children, Students, and Pensioners",
-  "child_under_six": "Children under 6",
+  "child_under_six": "For children up to 3 years old (inclusive)",
   "free": "free",
   "tenge": "tenge",
   "no_internet_access": "No internet connection",
@@ -156,7 +158,8 @@ static const Map<String,dynamic> en = {
   "Information_about_Citypass": "Information about Citypass",
   "ready_to_use": "ready to use",
   "expired": "expired",
-  "hours": "hours"
+  "hours": "hours",
+  "update": "Update"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "uk": uk, "en": en};
 }

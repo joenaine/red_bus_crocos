@@ -12,6 +12,11 @@ flutter pub run easy_localization:generate -f keys -o locale_keys.g.dart -S "ass
 To update token 
 login to -> https://hosting.wialon.com/login.html
 
+login: ТОО_Crocos
+pass: As1234$$
+
 and take parameters after access_token
 
 then paste it to wordpress admin panel
+
+

@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.3+7
+version: 1.0.4+8
 
 environment:
   sdk: '>=3.3.3 <4.0.0'
@@ -14,6 +14,7 @@ dependencies:
   bloc: ^8.1.4
   bloc_concurrency: ^0.2.5
   cached_network_image: ^3.3.1
+  cloud_firestore: ^4.14.0
   connectivity_plus: ^5.0.2
   cupertino_icons: ^1.0.6
   dartz: ^0.10.1
@@ -21,6 +22,7 @@ dependencies:
   dio: ^5.4.3+1
   easy_localization: ^3.0.5
   fade_shimmer: ^2.2.0
+  firebase_core: ^2.8.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.5
@@ -38,6 +40,8 @@ dependencies:
   injectable: ^2.4.1
   insta_image_viewer: ^1.0.4
   overlay_support: ^2.1.0
+  package_info_plus: ^4.2.0
+  pub_semver: ^2.1.4
   restart_app: ^1.2.1
   shared_preferences: ^2.2.2
   shimmer: ^3.0.0

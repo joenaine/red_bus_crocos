@@ -6,6 +6,7 @@ import 'package:red_bus_crocos_project/core/constants/app_assets.dart';
 import 'package:red_bus_crocos_project/core/theme/colors.dart';
 import 'package:red_bus_crocos_project/core/theme/theme_global_var.dart'
     as global;
+import 'package:red_bus_crocos_project/infrastructure/app_version/check_update_version.dart';
 import 'package:red_bus_crocos_project/presentation/bottom_navigation/widget/bottom_nav_icon_widget.dart';
 import 'package:red_bus_crocos_project/presentation/bus_stops/bus_stops_page.dart';
 import 'package:red_bus_crocos_project/presentation/home/home_page.dart';
@@ -62,9 +63,15 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
       const HomePage(),
       const BusStopsPage(),
       const SchedulePage(),
-       TicketsPage(),
+      const TicketsPage(),
     ];
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    CheckUpdateVersion.getLatestVersion(context);
   }
 
   @override

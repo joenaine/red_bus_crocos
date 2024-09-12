@@ -47,5 +47,6 @@ abstract class  LocaleKeys {
   static const ready_to_use = 'ready_to_use';
   static const expired = 'expired';
   static const hours = 'hours';
+  static const update = 'update';
 
 }

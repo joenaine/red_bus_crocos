@@ -91,10 +91,13 @@ class _HomePageState extends State<HomePage> {
       AppAssets.svg.busLocation, // Your SVG asset path
       'The Bus',
     );
+    // BitmapDescriptor busIcon =
+    //     await SvgPicture.asset(AppAssets.svg.busLocation, height: 60)
+    //         .toBitmapDescriptor();
     busIconCompleter.complete(busIcon);
 
     BitmapDescriptor userIcon =
-        await SvgPicture.asset(AppAssets.svg.userLocation, height: 12)
+        await SvgPicture.asset(AppAssets.svg.userLocation, height: 60)
             .toBitmapDescriptor();
     userIconCompleter.complete(userIcon);
 

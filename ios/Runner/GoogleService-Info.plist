@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyCo_Jk2AihInZFErnu77xC6-lAQ55lqb60</string>
+	<string>AIzaSyCW9HTiDUnDrcWoJuxB2TDDOOpt9cUrtDM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>713085165445</string>
+	<string>986883303887</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.redBusCrocosProject</string>
+	<string>com.crocos.redbustour</string>
 	<key>PROJECT_ID</key>
-	<string>red-bus-crocos</string>
+	<string>redbus-40748</string>
 	<key>STORAGE_BUCKET</key>
-	<string>red-bus-crocos.appspot.com</string>
+	<string>redbus-40748.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:713085165445:ios:f41a0c092e310328126eec</string>
+	<string>1:986883303887:ios:cb4bc6b689f27e0a2dcaba</string>
 </dict>
 </plist>
