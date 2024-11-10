@@ -19,11 +19,11 @@ class StoreUpdateAlert {
       if (Platform.isAndroid) {
         return androidLink != null && androidLink.isNotEmpty
             ? androidLink
-            : 'https://play.google.com/store/apps/details?id=com.crocos.redbustour';
+            : 'https://play.google.com/store/apps/details?id=com.crocos.kaf';
       } else {
         return iosLink != null && iosLink.isNotEmpty
             ? iosLink
-            : 'https://apps.apple.com/kz/app/astana-redbus-tour/id6502908386';
+            : 'https://apps.apple.com/kz/app/kazagrofinance/id6477376284';
       }
     }
 
