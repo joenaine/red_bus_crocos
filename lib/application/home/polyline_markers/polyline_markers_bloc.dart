@@ -28,9 +28,9 @@ List<LatLng> polylineList = [
   const LatLng(51.085004, 71.411811), //Turar Ryskulov
   const LatLng(51.086471, 71.401699), //Kabanbay
   const LatLng(51.118439, 71.411918), //Almaty
-  const LatLng(51.109726, 71.463383), //Panfilova
-  const LatLng(51.127626, 71.470630), //Kowkarbaeva
-  const LatLng(51.124811, 71.437449), //Dostyk
+  // const LatLng(51.109726, 71.463383), //Panfilova
+  // const LatLng(51.127626, 71.470630), //Kowkarbaeva
+  // const LatLng(51.124811, 71.437449), //Dostyk
   const LatLng(51.127435, 71.430624), //Baiterek
 ];
 
@@ -61,7 +61,7 @@ class PolylineMarkersBloc
   late Box<LatLngData> _box;
 
   Future<void> _openBox() async {
-    _box = await Hive.openBox<LatLngData>('lat_lng_box');
+    _box = await Hive.openBox<LatLngData>('new_lat_lng_box');
   }
 
   void _saveData(List<LatLng> latLngList) {

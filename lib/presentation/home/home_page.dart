@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:math' as Math;
-import 'dart:typed_data';
-import 'dart:ui' as ui;
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
